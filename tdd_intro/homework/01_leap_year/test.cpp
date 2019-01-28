@@ -45,6 +45,8 @@ TEST(LeapYear, Not_a_leap_year)
     EXPECT_FALSE(IsLeapYear(2019));
     EXPECT_FALSE(IsLeapYear(1));
     EXPECT_FALSE(IsLeapYear(0));
+    EXPECT_FALSE(IsLeapYear(100));
+    EXPECT_FALSE(IsLeapYear(1900));
 }
 
 TEST(LeapYear, Is_Leap_Year)
