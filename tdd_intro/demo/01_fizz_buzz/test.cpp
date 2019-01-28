@@ -10,16 +10,20 @@
  * any other number = <nothing>
 */
 
+static const char* g_Fizz = "Fizz";
+static const char* g_Buzz = "Buzz";
+static const char* g_FizzBuzz = "FizzBuzz";
+
 std::string FizzBuzz(int number)
 {
     if(number % 3 == 0)
     {
-        return "Fizz";
+        return g_Fizz;
     }
 
     if(number % 5 == 0)
     {
-        return "Buzz";
+        return g_Buzz;
     }
 
     return "";
@@ -32,10 +36,10 @@ TEST(FizzBuzz, Any_number)
 
 TEST(FizzBuzz, Fizz_if_multiple_of_3)
 {
-    EXPECT_EQ("Fizz", FizzBuzz(3));
+    EXPECT_EQ(g_Fizz, FizzBuzz(3));
 }
 
 TEST(FizzBuzz, Buzz_if_multiple_of_5)
 {
-    EXPECT_EQ("Buzz", FizzBuzz(5));
+    EXPECT_EQ(g_Buzz, FizzBuzz(5));
 }
