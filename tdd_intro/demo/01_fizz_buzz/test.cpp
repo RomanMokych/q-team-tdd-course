@@ -19,3 +19,8 @@ TEST(FizzBuzz, Any_number)
 {
     EXPECT_EQ("", FizzBuzz(1));
 }
+
+TEST(FizzBuzz, Fizz_if_multiple_of_3)
+{
+    EXPECT_EQ("Fizz", FizzBuzz(3));
+}
