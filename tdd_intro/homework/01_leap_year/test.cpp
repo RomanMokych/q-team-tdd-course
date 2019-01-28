@@ -32,4 +32,7 @@ bool IsLeapYear(unsigned int year)
 TEST(LeapYear, Not_a_leap_year)
 {
     EXPECT_FALSE(IsLeapYear(1997));
+    EXPECT_FALSE(IsLeapYear(2019));
+    EXPECT_FALSE(IsLeapYear(1));
+    EXPECT_FALSE(IsLeapYear(0));
 }
