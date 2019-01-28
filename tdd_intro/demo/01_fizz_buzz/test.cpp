@@ -43,3 +43,8 @@ TEST(FizzBuzz, Buzz_if_multiple_of_5)
 {
     EXPECT_EQ(g_Buzz, FizzBuzz(5));
 }
+
+TEST(FizzBuzz, FizzBuzz_if_multiple_of_15)
+{
+    EXPECT_EQ(g_FizzBuzz, FizzBuzz(15));
+}
