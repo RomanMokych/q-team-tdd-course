@@ -34,7 +34,6 @@ std::string FizzBuzz(int number)
 TEST(FizzBuzz, Any_number)
 {
     EXPECT_EQ("", FizzBuzz(1));
-    EXPECT_EQ("", FizzBuzz(0));
     EXPECT_EQ("", FizzBuzz(2));
     EXPECT_EQ("", FizzBuzz(13));
 }
@@ -55,6 +54,7 @@ TEST(FizzBuzz, Buzz_if_multiple_of_5)
 
 TEST(FizzBuzz, FizzBuzz_if_multiple_of_15)
 {
+    EXPECT_EQ(g_FizzBuzz, FizzBuzz(0));
     EXPECT_EQ(g_FizzBuzz, FizzBuzz(15));
     EXPECT_EQ(g_FizzBuzz, FizzBuzz(30));
     EXPECT_EQ(g_FizzBuzz, FizzBuzz(120));
