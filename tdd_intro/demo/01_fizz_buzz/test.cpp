@@ -10,51 +10,52 @@
  * any other number = <nothing>
 */
 
-std::string FizzBuzz(size_t number)
+static const char* g_Fizz = "Fizz";
+static const char* g_Buzz = "Buzz";
+static const char* g_FizzBuzz = "FizzBuzz";
+
+std::string FizzBuzz(int number)
 {
-    std::string answer;
-    if (number % 3 == 0)
+    std::string result;
+
+    if(number % 3 == 0)
     {
-        answer += "Fizz";
+        result += g_Fizz;
     }
-    if (number % 5 == 0)
+
+    if(number % 5 == 0)
     {
-        answer += "Buzz";
+        result += g_Buzz;
     }
-    return answer;
+
+    return result;
 }
 
-TEST(FizzBuzzTest, Fizz)
+TEST(FizzBuzz, Any_number)
 {
-    EXPECT_STREQ("Fizz", FizzBuzz(3).c_str());
+    EXPECT_EQ("", FizzBuzz(1));
+    EXPECT_EQ("", FizzBuzz(2));
+    EXPECT_EQ("", FizzBuzz(13));
 }
 
-TEST(FizzBuzzTest, Buzz)
+TEST(FizzBuzz, Fizz_if_multiple_of_3)
 {
-    EXPECT_STREQ("Buzz", FizzBuzz(5).c_str());
+    EXPECT_EQ(g_Fizz, FizzBuzz(3));
+    EXPECT_EQ(g_Fizz, FizzBuzz(6));
+    EXPECT_EQ(g_Fizz, FizzBuzz(12));
 }
 
-TEST(FizzBuzzTest, Empty)
+TEST(FizzBuzz, Buzz_if_multiple_of_5)
 {
-    EXPECT_STREQ("", FizzBuzz(1).c_str());
+    EXPECT_EQ(g_Buzz, FizzBuzz(5));
+    EXPECT_EQ(g_Buzz, FizzBuzz(10));
+    EXPECT_EQ(g_Buzz, FizzBuzz(100));
 }
 
-TEST(FizzBuzzTest, FizzBuzz)
+TEST(FizzBuzz, FizzBuzz_if_multiple_of_15)
 {
-    EXPECT_STREQ("FizzBuzz", FizzBuzz(15).c_str());
-}
-
-TEST(FizzBuzzTest, Acceptance)
-{
-    EXPECT_STREQ("", FizzBuzz(2).c_str());
-    EXPECT_STREQ("", FizzBuzz(71).c_str());
-    EXPECT_STREQ("", FizzBuzz(1111).c_str());
-
-    EXPECT_STREQ("Fizz", FizzBuzz(6).c_str());
-    EXPECT_STREQ("Fizz", FizzBuzz(99).c_str());
-    EXPECT_STREQ("Fizz", FizzBuzz(363).c_str());
-
-    EXPECT_STREQ("FizzBuzz", FizzBuzz(30).c_str());
-    EXPECT_STREQ("FizzBuzz", FizzBuzz(120).c_str());
-    EXPECT_STREQ("FizzBuzz", FizzBuzz(3300).c_str());
+    EXPECT_EQ(g_FizzBuzz, FizzBuzz(0));
+    EXPECT_EQ(g_FizzBuzz, FizzBuzz(15));
+    EXPECT_EQ(g_FizzBuzz, FizzBuzz(30));
+    EXPECT_EQ(g_FizzBuzz, FizzBuzz(120));
 }
