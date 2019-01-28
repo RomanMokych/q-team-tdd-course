@@ -16,6 +16,11 @@ static const char* g_FizzBuzz = "FizzBuzz";
 
 std::string FizzBuzz(int number)
 {
+    if(number % 15 == 0)
+    {
+        return g_FizzBuzz;
+    }
+
     if(number % 3 == 0)
     {
         return g_Fizz;
