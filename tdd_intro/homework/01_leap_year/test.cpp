@@ -26,18 +26,16 @@ If your language provides a method in the standard library that does this look-u
 
 bool IsLeapYear(unsigned int year)
 {
+    // not so far...
     if(year == 0)
     {
         return false;
     }
 
-    if((year % 400 == 0) ||
-            ((year % 4 == 0) && (year % 100 != 0)))
-    {
-        return true;
-    }
+    bool is_leap_year = !(year % 400);
+    is_leap_year = is_leap_year ?: !(year % 4) && (year % 100);
 
-    return false;
+    return is_leap_year;
 }
 
 TEST(LeapYear, Not_a_leap_year)
