@@ -24,3 +24,8 @@ For example, 1997 is not a leap year, but 1996 is. 1900 is not a leap year, but 
 
 If your language provides a method in the standard library that does this look-up, pretend it doesn't exist and implement it yourself. */
 
+
+TEST(LeapYear, Not_a_leap_year)
+{
+    EXPECT_FALSE(IsLeapYear(1997));
+}
