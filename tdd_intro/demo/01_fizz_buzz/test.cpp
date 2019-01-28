@@ -16,22 +16,19 @@ static const char* g_FizzBuzz = "FizzBuzz";
 
 std::string FizzBuzz(int number)
 {
-    if(number % 15 == 0)
-    {
-        return g_FizzBuzz;
-    }
+    std::string result;
 
     if(number % 3 == 0)
     {
-        return g_Fizz;
+        result += g_Fizz;
     }
 
     if(number % 5 == 0)
     {
-        return g_Buzz;
+        result += g_Buzz;
     }
 
-    return "";
+    return result;
 }
 
 TEST(FizzBuzz, Any_number)
