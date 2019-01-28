@@ -50,4 +50,8 @@ TEST(LeapYear, Not_a_leap_year)
 TEST(LeapYear, Is_Leap_Year)
 {
     EXPECT_TRUE(IsLeapYear(4));
+    EXPECT_TRUE(IsLeapYear(8));
+    EXPECT_TRUE(IsLeapYear(2008));
+    EXPECT_TRUE(IsLeapYear(400));
+    EXPECT_TRUE(IsLeapYear(2000));
 }
