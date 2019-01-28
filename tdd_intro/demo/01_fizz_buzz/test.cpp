@@ -10,6 +10,11 @@
  * any other number = <nothing>
 */
 
+std::string FizzBuzz(int number)
+{
+    return "";
+}
+
 TEST(FizzBuzz, Any_number)
 {
     EXPECT_EQ("", FizzBuzz(1));
