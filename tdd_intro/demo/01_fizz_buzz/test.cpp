@@ -12,6 +12,7 @@
 
 static const char* s_Fizz = "Fizz";
 static const char* s_Buzz = "Buzz";
+static const char* s_FizzBuzz = "FizzBuzz";
 
 std::string FizzBuzz(int value)
 {
@@ -45,7 +46,7 @@ TEST(FizzBuzzTest, CheckMultiplyOf_5_ReturnBuzz)
     EXPECT_EQ(s_Buzz, FizzBuzz(5));
 }
 
-TEST(FizzBuzzTest, CheckMultiplyOf_15_ReturnBuzz)
+TEST(FizzBuzzTest, CheckMultiplyOf_15_ReturnFizzBuzz)
 {
-    EXPECT_EQ("FizzBuzz", FizzBuzz(15));
+    EXPECT_EQ(s_FizzBuzz, FizzBuzz(15));
 }
