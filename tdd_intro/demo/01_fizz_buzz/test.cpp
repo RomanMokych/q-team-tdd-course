@@ -18,6 +18,11 @@ std::string FizzBuzz(int value)
     {
         return s_Fizz;
     }
+    else if(!(value % 5))
+    {
+        return "Buzz";
+    }
+
     return "";
 }
 
