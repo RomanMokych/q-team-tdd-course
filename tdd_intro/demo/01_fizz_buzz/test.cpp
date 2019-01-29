@@ -9,3 +9,9 @@
  * a multiple of 15 = FizzBuzz
  * any other number = <nothing>
 */
+
+
+TEST(FizzBuzz, CheckAnyOtehrNubmer_ReturnNothing)
+{
+    EXPECT_EQ("", FizzBuzz(4));
+}
