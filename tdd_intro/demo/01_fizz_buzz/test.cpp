@@ -11,12 +11,12 @@
 */
 
 
-std::string FizzBuzz(int)
+std::string FizzBuzz(int /*value*/)
 {
     return "";
 }
 
-TEST(FizzBuzz, CheckAnyOtehrNubmer_ReturnNothing)
+TEST(FizzBuzzTest, CheckAnyOtehrNubmer_ReturnNothing)
 {
     EXPECT_EQ("", FizzBuzz(4));
 }
