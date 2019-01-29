@@ -20,3 +20,8 @@ TEST(FizzBuzzTest, CheckAnyOtehrNubmer_ReturnNothing)
 {
     EXPECT_EQ("", FizzBuzz(4));
 }
+
+TEST(FizzBuzzTest, CheckMultiplyOf_3_ReturnFizz)
+{
+    EXPECT_EQ("Fizz", FizzBuzz(3));
+}
