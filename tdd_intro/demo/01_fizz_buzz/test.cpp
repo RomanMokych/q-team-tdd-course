@@ -11,6 +11,7 @@
 */
 
 static const char* s_Fizz = "Fizz";
+static const char* s_Buzz = "Buzz";
 
 std::string FizzBuzz(int value)
 {
@@ -20,7 +21,7 @@ std::string FizzBuzz(int value)
     }
     else if(!(value % 5))
     {
-        return "Buzz";
+        return s_Buzz;
     }
 
     return "";
@@ -38,5 +39,5 @@ TEST(FizzBuzzTest, CheckMultiplyOf_3_ReturnFizz)
 
 TEST(FizzBuzzTest, CheckMultiplyOf_5_ReturnBuzz)
 {
-    EXPECT_EQ("Buzz", FizzBuzz(5));
+    EXPECT_EQ(s_Buzz, FizzBuzz(5));
 }
