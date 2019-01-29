@@ -13,3 +13,64 @@ If your language provides a method in the standard library that does this look-u
 */
 
 #include <gtest/gtest.h>
+
+bool IsLeapYear(int year)
+{
+    if(year <= 0)
+    {
+        throw std::invalid_argument("Year value must be greater than 0");
+    }
+
+    if(!(year % 4))
+    {
+        if(!(year % 400))
+        {
+            return true;
+        }
+
+        if(!(year % 100))
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    return false;
+
+}
+
+TEST(LeapYearTest, Check_IsLeapYear_2020_Return_true)
+{
+    EXPECT_TRUE(IsLeapYear(2020));
+}
+
+TEST(LeapYearTest, Check_IsLeapYear_Exclude_Every_100_years)
+{
+    EXPECT_FALSE(IsLeapYear(1900));
+}
+
+TEST(LeapYearTest, Check_IsLeapYear_Include_Every_400_years)
+{
+    EXPECT_TRUE(IsLeapYear(2000));
+}
+
+TEST(LeapYearTest, Check_IsLeapYear_1997_Return_false)
+{
+    EXPECT_FALSE(IsLeapYear(1997));
+}
+
+TEST(LeapYearTest, Check_IsLeapYear_1996_Return_true)
+{
+    EXPECT_TRUE(IsLeapYear(1996));
+}
+
+TEST(LeapYearTest, Throw_invalid_argument_exception_if_year_less_0)
+{
+    EXPECT_THROW(IsLeapYear(-1), std::invalid_argument);
+}
+
+TEST(LeapYearTest, Throw_invalid_argument_exception_if_year_eq_0)
+{
+    EXPECT_THROW(IsLeapYear(0), std::invalid_argument);
+}

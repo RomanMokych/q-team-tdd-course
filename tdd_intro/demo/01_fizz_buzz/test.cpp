@@ -10,51 +10,43 @@
  * any other number = <nothing>
 */
 
-std::string FizzBuzz(size_t number)
+static const char* s_Fizz = "Fizz";
+static const char* s_Buzz = "Buzz";
+static const char* s_FizzBuzz = "FizzBuzz";
+
+std::string FizzBuzz(int value)
 {
-    std::string answer;
-    if (number % 3 == 0)
+    std::string result("");
+
+    if(!(value % 3))
     {
-        answer += "Fizz";
+        result = s_Fizz;
     }
-    if (number % 5 == 0)
+
+    if(!(value % 5))
     {
-        answer += "Buzz";
+        result += s_Buzz;
     }
-    return answer;
+
+    return result;
 }
 
-TEST(FizzBuzzTest, Fizz)
+TEST(FizzBuzzTest, CheckAnyOtehrNubmer_ReturnNothing)
 {
-    EXPECT_STREQ("Fizz", FizzBuzz(3).c_str());
+    EXPECT_EQ("", FizzBuzz(4));
 }
 
-TEST(FizzBuzzTest, Buzz)
+TEST(FizzBuzzTest, CheckMultiplyOf_3_ReturnFizz)
 {
-    EXPECT_STREQ("Buzz", FizzBuzz(5).c_str());
+    EXPECT_EQ(s_Fizz, FizzBuzz(6));
 }
 
-TEST(FizzBuzzTest, Empty)
+TEST(FizzBuzzTest, CheckMultiplyOf_5_ReturnBuzz)
 {
-    EXPECT_STREQ("", FizzBuzz(1).c_str());
+    EXPECT_EQ(s_Buzz, FizzBuzz(5));
 }
 
-TEST(FizzBuzzTest, FizzBuzz)
+TEST(FizzBuzzTest, CheckMultiplyOf_15_ReturnFizzBuzz)
 {
-    EXPECT_STREQ("FizzBuzz", FizzBuzz(15).c_str());
-}
-
-TEST(FizzBuzzTest, Acceptance)
-{
-    EXPECT_STREQ("", FizzBuzz(2).c_str());
-    EXPECT_STREQ("", FizzBuzz(71).c_str());
-    EXPECT_STREQ("", FizzBuzz(1111).c_str());
-
-    EXPECT_STREQ("Fizz", FizzBuzz(6).c_str());
-    EXPECT_STREQ("Fizz", FizzBuzz(99).c_str());
-    EXPECT_STREQ("Fizz", FizzBuzz(363).c_str());
-
-    EXPECT_STREQ("FizzBuzz", FizzBuzz(30).c_str());
-    EXPECT_STREQ("FizzBuzz", FizzBuzz(120).c_str());
-    EXPECT_STREQ("FizzBuzz", FizzBuzz(3300).c_str());
+    EXPECT_EQ(s_FizzBuzz, FizzBuzz(15));
 }
