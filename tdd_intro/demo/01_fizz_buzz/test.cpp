@@ -11,8 +11,12 @@
 */
 
 
-std::string FizzBuzz(int /*value*/)
+std::string FizzBuzz(int value)
 {
+    if(!(value % 3))
+    {
+        return "Fizz";
+    }
     return "";
 }
 
@@ -23,5 +27,5 @@ TEST(FizzBuzzTest, CheckAnyOtehrNubmer_ReturnNothing)
 
 TEST(FizzBuzzTest, CheckMultiplyOf_3_ReturnFizz)
 {
-    EXPECT_EQ("Fizz", FizzBuzz(3));
+    EXPECT_EQ("Fizz", FizzBuzz(6));
 }
