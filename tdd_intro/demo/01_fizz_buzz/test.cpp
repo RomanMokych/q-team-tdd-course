@@ -30,3 +30,8 @@ TEST(FizzBuzzTest, CheckMultiplyOf_3_ReturnFizz)
 {
     EXPECT_EQ(s_Fizz, FizzBuzz(6));
 }
+
+TEST(FizzBuzzTest, CheckMultiplyOf_5_ReturnBuzz)
+{
+    EXPECT_EQ("Buzz", FizzBuzz(5));
+}
