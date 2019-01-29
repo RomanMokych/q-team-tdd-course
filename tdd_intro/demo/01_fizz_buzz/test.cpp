@@ -10,12 +10,13 @@
  * any other number = <nothing>
 */
 
+static const char* s_Fizz = "Fizz";
 
 std::string FizzBuzz(int value)
 {
     if(!(value % 3))
     {
-        return "Fizz";
+        return s_Fizz;
     }
     return "";
 }
@@ -27,5 +28,5 @@ TEST(FizzBuzzTest, CheckAnyOtehrNubmer_ReturnNothing)
 
 TEST(FizzBuzzTest, CheckMultiplyOf_3_ReturnFizz)
 {
-    EXPECT_EQ("Fizz", FizzBuzz(6));
+    EXPECT_EQ(s_Fizz, FizzBuzz(6));
 }
