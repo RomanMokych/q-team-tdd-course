@@ -28,9 +28,10 @@ bool IsLeapYear(int year)
             return false;
         }
 
+        return true;
     }
 
-    return true;
+    return false;
 
 }
 
