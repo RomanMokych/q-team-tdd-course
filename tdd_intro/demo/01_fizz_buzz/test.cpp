@@ -15,16 +15,19 @@ static const char* s_Buzz = "Buzz";
 
 std::string FizzBuzz(int value)
 {
+    std::string result("");
+
     if(!(value % 3))
     {
-        return s_Fizz;
-    }
-    else if(!(value % 5))
-    {
-        return s_Buzz;
+        result = s_Fizz;
     }
 
-    return "";
+    if(!(value % 5))
+    {
+        result += s_Buzz;
+    }
+
+    return result;
 }
 
 TEST(FizzBuzzTest, CheckAnyOtehrNubmer_ReturnNothing)
