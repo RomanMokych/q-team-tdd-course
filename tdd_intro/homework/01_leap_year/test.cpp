@@ -22,9 +22,10 @@ bool IsLeapYear(int year)
         {
             return false;
         }
+
     }
 
-    return false;
+    return true;
 
 }
 
@@ -36,4 +37,9 @@ TEST(LeapYearTest, Check_IsLeapYear_2000_Return_true)
 TEST(LeapYearTest, Check_IsLeapYear_Exclude_Every_100_years)
 {
     EXPECT_FALSE(IsLeapYear(1900));
+}
+
+TEST(LeapYearTest, Check_IsLeapYear_Include_Every_400_years)
+{
+    EXPECT_TRUE(IsLeapYear(2000));
 }
