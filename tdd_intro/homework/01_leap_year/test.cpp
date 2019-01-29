@@ -40,7 +40,7 @@ bool IsLeapYear(int year)
 
 }
 
-TEST(LeapYearTest, Check_IsLeapYear_2000_Return_true)
+TEST(LeapYearTest, Check_IsLeapYear_2020_Return_true)
 {
     EXPECT_TRUE(IsLeapYear(2020));
 }
