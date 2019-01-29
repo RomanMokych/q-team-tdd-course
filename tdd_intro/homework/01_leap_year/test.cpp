@@ -49,3 +49,14 @@ TEST(LeapYearTest, Check_IsLeapYear_Include_Every_400_years)
 {
     EXPECT_TRUE(IsLeapYear(2000));
 }
+
+TEST(LeapYearTest, Check_IsLeapYear_1997_Return_false)
+{
+    EXPECT_FALSE(IsLeapYear(1997));
+}
+
+TEST(LeapYearTest, Check_IsLeapYear_1996_Return_true)
+{
+    EXPECT_TRUE(IsLeapYear(1996));
+}
+
