@@ -14,14 +14,25 @@ If your language provides a method in the standard library that does this look-u
 
 #include <gtest/gtest.h>
 
-bool IsLeapYear(int)
+bool IsLeapYear(int year)
 {
-    return true;
+    if(!(year % 4))
+    {
+        if(!(year % 100))
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    return false;
+
 }
 
 TEST(LeapYearTest, Check_IsLeapYear_2000_Return_true)
 {
-    EXPECT_TRUE(IsLeapYear(2000));
+    EXPECT_TRUE(IsLeapYear(2020));
 }
 
 TEST(LeapYearTest, Check_IsLeapYear_Exclude_Every_100_years)
