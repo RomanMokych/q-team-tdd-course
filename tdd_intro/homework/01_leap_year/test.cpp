@@ -23,3 +23,8 @@ TEST(LeapYearTest, Check_IsLeapYear_2000_Return_true)
 {
     EXPECT_TRUE(IsLeapYear(2000));
 }
+
+TEST(LeapYearTest, Check_IsLeapYear_Exclude_Every_100_years)
+{
+    EXPECT_FALSE(IsLeapYear(1900));
+}
