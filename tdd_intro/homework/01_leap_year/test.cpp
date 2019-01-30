@@ -23,3 +23,8 @@ TEST(LeapYear, 4_is_leap_year)
 {
     EXPECT_TRUE(is_leap_year(4));
 }
+
+TEST(LeapYear, 5_is_not_leap_year)
+{
+    EXPECT_FALSE(is_leap_year(5));
+}
