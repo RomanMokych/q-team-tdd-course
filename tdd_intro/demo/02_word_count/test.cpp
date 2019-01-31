@@ -17,3 +17,12 @@ such: 1
 #include <string>
 #include <map>
 
+std::string GetOccurrences(std::string phrase)
+{
+    return "1";
+}
+
+TEST(OccurrencesTest, Input_empty_str_return_empty_str)
+{
+    EXPECT_EQ("", GetOccurrences(""));
+}
