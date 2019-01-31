@@ -19,7 +19,7 @@ such: 1
 
 std::string GetOccurrences(std::string phrase)
 {
-    return "1";
+    return "";
 }
 
 TEST(OccurrencesTest, Input_empty_str_return_empty_str)
