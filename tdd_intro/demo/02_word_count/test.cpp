@@ -17,12 +17,40 @@ such: 1
 #include <string>
 #include <map>
 
-std::string GetPhraseOccurrences(std::string /*phrase*/)
+struct Occurrences
 {
-    return "";
+    int cout;
+    std::string word;
+    constexpr bool operator == (const Occurrences &rhs) const
+    {
+        return cout == rhs.cout;
+    }
+
+};
+
+std::vector<Occurrences> GetPhraseOccurrences(std::string phrase)
+{
+    std::vector<Occurrences> result;
+    Occurrences result2;
+
+    if(phrase.empty())
+    {
+        return result;
+    }
+    return result;
 }
 
 TEST(PhraseOccurrencesTest, Input_empty_str_return_empty_str)
 {
-    EXPECT_EQ("", GetPhraseOccurrences(""));
+    std::vector<Occurrences> result;
+    EXPECT_EQ(result, (GetPhraseOccurrences("")));
+}
+
+TEST(PhraseOccurrencesTest, Input_2_word__return_1_occurrences)
+{
+    std::vector<Occurrences> result;
+    Occurrences testData = {1, "test"};
+    result.push_back(testData);
+
+    EXPECT_EQ(result, GetPhraseOccurrences("test test"));
 }
