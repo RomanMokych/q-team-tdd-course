@@ -85,3 +85,12 @@ TEST(PhraseOccurrencesTest, Input_2_word__return_1_occurrences)
 
     EXPECT_EQ(result, GetPhraseOccurrences("test test"));
 }
+
+TEST(PhraseOccurrencesTest, Input_2_word__return_0_occurrences)
+{
+    std::vector<Occurrences> result;
+    Occurrences testData = {0, ""};
+    result.push_back(testData);
+
+    EXPECT_EQ(result, GetPhraseOccurrences("test test2"));
+}
