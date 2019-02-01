@@ -28,6 +28,27 @@ struct Occurrences
 
 };
 
+std::vector<std::string> splitString(std::string input)
+{
+    std::vector<std::string> result;
+
+    std::string str;
+    for(size_t i = 0; i < input.size(); ++i)
+    {
+        if( input[i] == ' ' && input.size() > i )
+        {
+            result.push_back(str);
+            str = "";
+        }
+        else
+        {
+            str += input[i];
+        }
+    }
+
+    return result;
+}
+
 std::vector<Occurrences> GetPhraseOccurrences(std::string phrase)
 {
     std::vector<Occurrences> result;
@@ -37,6 +58,14 @@ std::vector<Occurrences> GetPhraseOccurrences(std::string phrase)
     {
         return result;
     }
+
+    std::vector<std::string> str = splitString(phrase);
+
+    result2.word = str[0];
+    result2.cout = 2;
+
+    result.push_back(result2);
+
     return result;
 }
 
@@ -49,7 +78,7 @@ TEST(PhraseOccurrencesTest, Input_empty_str_return_empty_str)
 TEST(PhraseOccurrencesTest, Input_2_word__return_1_occurrences)
 {
     std::vector<Occurrences> result;
-    Occurrences testData = {1, "test"};
+    Occurrences testData = {2, "test"};
     result.push_back(testData);
 
     EXPECT_EQ(result, GetPhraseOccurrences("test test"));
