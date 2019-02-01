@@ -21,50 +21,52 @@ struct Occurrences
 {
     int cout;
     std::string word;
+
     constexpr bool operator == (const Occurrences &rhs) const
     {
-        return cout == rhs.cout;
+        return this->cout == rhs.cout;
     }
 
 };
 
-std::vector<std::string> splitString(std::string input)
+std::vector<std::string> splitString(const std::string& input)
 {
     std::vector<std::string> result;
+    std::string word;
 
-    std::string str;
     for(size_t i = 0; i < input.size(); ++i)
     {
         if( input[i] == ' ' && input.size() > i )
         {
-            result.push_back(str);
-            str = "";
+            result.push_back(word);
+            word = "";
         }
         else
         {
-            str += input[i];
+            word += input[i];
         }
     }
 
     return result;
 }
 
-std::vector<Occurrences> GetPhraseOccurrences(std::string phrase)
+std::vector<Occurrences> GetPhraseOccurrences(const std::string& phrase)
 {
     std::vector<Occurrences> result;
-    Occurrences result2;
 
     if(phrase.empty())
     {
         return result;
     }
 
+    Occurrences occurrence;
+
     std::vector<std::string> str = splitString(phrase);
 
-    result2.word = str[0];
-    result2.cout = 2;
+    occurrence.word = str[0];
+    occurrence.cout = 2;
 
-    result.push_back(result2);
+    result.push_back(occurrence);
 
     return result;
 }
