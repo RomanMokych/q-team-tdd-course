@@ -54,3 +54,11 @@ TEST(word_count, two_same_words_in_string_devided_by_spaces)
     ASSERT_EQ(1, result.size());
     EXPECT_EQ(2, result.at("one"));
 }
+
+TEST(word_count, two_different_words_in_string_devided_by_spaces)
+{
+    auto result = count_words("one another");
+    ASSERT_EQ(2, result.size());
+    EXPECT_EQ(1, result.at("one"));
+    EXPECT_EQ(1, result.at("another"));
+}
