@@ -39,3 +39,10 @@ TEST(word_count, another_one_word_in_string)
     ASSERT_EQ(1, result.size());
     EXPECT_EQ(1, result.at("another"));
 }
+
+TEST(word_count, two_same_words_in_string)
+{
+    auto result = count_words("one one");
+    ASSERT_EQ(1, result.size());
+    EXPECT_EQ(2, result.at("one"));
+}
