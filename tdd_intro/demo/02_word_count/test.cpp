@@ -17,3 +17,14 @@ such: 1
 #include <string>
 #include <map>
 
+std::map <std::string, int> count_words(std::string str)
+{
+    return std::map<std::string, int>();
+}
+
+TEST(word_count, one_word_in_string)
+{
+    auto result = count_words("one");
+    ASSERT_EQ(1, result.size());
+    EXPECT_EQ(1, result.at("one"));
+}
