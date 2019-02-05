@@ -91,3 +91,9 @@ TEST(word_count, a_lot_of_words_different_deviders)
     EXPECT_EQ(1, result.at("manner"));
     EXPECT_EQ(1, result.at("such"));
 }
+
+TEST(word_count, empty_string)
+{
+    auto result = count_words("");
+    ASSERT_EQ(0, result.size());
+}
