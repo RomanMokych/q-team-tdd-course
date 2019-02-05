@@ -16,19 +16,24 @@ such: 1
 #include <gtest/gtest.h>
 #include <string>
 #include <map>
+#include <regex>
 
 using namespace std;
 
 map<string, int> count_words(const string &str)
 {
     map<string, int> result;
-    std::istringstream istream(str);
-    string word;
 
-    while(getline(istream, word, ' '))
+    regex rgx("\\b\\w+\\b", regex::ECMAScript);
+
+    smatch word;
+
+    string::const_iterator searchStart(str.cbegin());
+    while(regex_search(searchStart, str.cend(), word, rgx))
     {
-        auto it = result.emplace(word, 0);
+        auto it = result.emplace(word[0], 0);
         it.first->second++;
+        searchStart = word.suffix().first;
     }
 
     return result;
