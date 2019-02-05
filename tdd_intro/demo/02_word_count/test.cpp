@@ -75,3 +75,19 @@ TEST(word_count, foo_and_bar_devided_by_comma)
     EXPECT_EQ(1, result.at("foo"));
     EXPECT_EQ(1, result.at("bar"));
 }
+
+TEST(word_count, a_lot_of_words_different_deviders)
+{
+    auto result = count_words("olly olly in:come free please.please  let ..it be? in such,:?! manner olly");
+    ASSERT_EQ(10, result.size());
+    EXPECT_EQ(3, result.at("olly"));
+    EXPECT_EQ(2, result.at("in"));
+    EXPECT_EQ(1, result.at("come"));
+    EXPECT_EQ(1, result.at("free"));
+    EXPECT_EQ(2, result.at("please"));
+    EXPECT_EQ(1, result.at("let"));
+    EXPECT_EQ(1, result.at("it"));
+    EXPECT_EQ(1, result.at("be"));
+    EXPECT_EQ(1, result.at("manner"));
+    EXPECT_EQ(1, result.at("such"));
+}
