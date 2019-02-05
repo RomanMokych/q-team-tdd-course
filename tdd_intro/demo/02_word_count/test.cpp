@@ -22,7 +22,13 @@ using namespace std;
 map<string, int> count_words(const string &str)
 {
     map<string, int> result;
-    result.insert({str, 1});
+    std::istringstream istream(str);
+    string word;
+    while(getline(istream, word, ' '))
+    {
+        auto it = result.emplace(word, 0);
+        it.first->second++;
+    }
     return result;
 }
 
