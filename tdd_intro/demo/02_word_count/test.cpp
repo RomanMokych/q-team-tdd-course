@@ -24,11 +24,13 @@ map<string, int> count_words(const string &str)
     map<string, int> result;
     std::istringstream istream(str);
     string word;
+
     while(getline(istream, word, ' '))
     {
         auto it = result.emplace(word, 0);
         it.first->second++;
     }
+
     return result;
 }
 
@@ -46,7 +48,7 @@ TEST(word_count, another_one_word_in_string)
     EXPECT_EQ(1, result.at("another"));
 }
 
-TEST(word_count, two_same_words_in_string)
+TEST(word_count, two_same_words_in_string_devided_by_spaces)
 {
     auto result = count_words("one one");
     ASSERT_EQ(1, result.size());
