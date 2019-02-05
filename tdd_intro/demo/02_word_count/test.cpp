@@ -19,7 +19,9 @@ such: 1
 
 std::map <std::string, int> count_words(std::string str)
 {
-    return std::map<std::string, int>();
+    std::map<std::string, int> result;
+    result.insert({str, 1});
+    return result;
 }
 
 TEST(word_count, one_word_in_string)
