@@ -17,9 +17,11 @@ such: 1
 #include <string>
 #include <map>
 
-std::map <std::string, int> count_words(std::string str)
+using namespace std;
+
+map<string, int> count_words(const string &str)
 {
-    std::map<std::string, int> result;
+    map<string, int> result;
     result.insert({str, 1});
     return result;
 }
