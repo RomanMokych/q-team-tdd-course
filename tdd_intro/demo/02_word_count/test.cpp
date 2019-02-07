@@ -23,6 +23,7 @@ class PhraseOccurrences
 
 public:
     PhraseOccurrences(const std::string& phrase)
+        : word(phrase), count(1)
     {
 
     }
@@ -38,10 +39,16 @@ public:
 //    }
 
 private:
+
+    std::string word;
+    int count;
+
+    friend bool operator==(const PhraseOccurrences& lhs, const PhraseOccurrences& rhs);
+
 };
 bool operator==(const PhraseOccurrences& lhs, const PhraseOccurrences& rhs)
 {
-    return false;
+    return lhs.word == rhs.word && lhs.count == rhs.count;
 }
 
 PhraseOccurrences GetPhraseOccurrences(const std::string& phrase)
@@ -51,6 +58,6 @@ PhraseOccurrences GetPhraseOccurrences(const std::string& phrase)
 
 TEST(PhraseOccurrencesTest, Test_1_word)
 {
-    PhraseOccurrences result("");
+    PhraseOccurrences result("test");
     EXPECT_EQ(result, GetPhraseOccurrences("test"));
 }
