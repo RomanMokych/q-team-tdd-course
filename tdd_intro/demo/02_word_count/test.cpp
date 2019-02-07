@@ -20,10 +20,11 @@ such: 1
 
 class PhraseOccurrences
 {
+    friend bool operator==(const PhraseOccurrences& lhs, const PhraseOccurrences& rhs);
 
 public:
     PhraseOccurrences(const std::string& phrase)
-        : word(phrase), count(1)
+        : m_word(phrase), m_count(1)
     {
 
     }
@@ -33,22 +34,18 @@ public:
 
     }
 
-//    bool operator==(const PhraseOccurrences& other)
-//    {
-//        return true;
-//    }
-
 private:
 
-    std::string word;
-    int count;
-
-    friend bool operator==(const PhraseOccurrences& lhs, const PhraseOccurrences& rhs);
-
+    std::string phrase;
+    std::string m_word;
+    int m_count;
 };
+
 bool operator==(const PhraseOccurrences& lhs, const PhraseOccurrences& rhs)
 {
-    return lhs.word == rhs.word && lhs.count == rhs.count;
+    return (lhs.m_word == rhs.m_word)
+            &&
+            (lhs.m_count == rhs.m_count);
 }
 
 PhraseOccurrences GetPhraseOccurrences(const std::string& phrase)
@@ -58,6 +55,6 @@ PhraseOccurrences GetPhraseOccurrences(const std::string& phrase)
 
 TEST(PhraseOccurrencesTest, Test_1_word)
 {
-    PhraseOccurrences result("test");
-    EXPECT_EQ(result, GetPhraseOccurrences("test"));
+    PhraseOccurrences result("word");
+    EXPECT_EQ(result, GetPhraseOccurrences("word"));
 }
