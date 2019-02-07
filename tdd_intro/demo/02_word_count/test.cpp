@@ -16,81 +16,41 @@ such: 1
 #include <gtest/gtest.h>
 #include <string>
 #include <map>
+#include <algorithm>
 
-struct Occurrences
+class PhraseOccurrences
 {
-    int cout;
-    std::string word;
 
-    constexpr bool operator == (const Occurrences &rhs) const
+public:
+    PhraseOccurrences(const std::string& phrase)
     {
-        return this->cout == rhs.cout;
+
     }
 
+    PhraseOccurrences(const PhraseOccurrences& other)
+    {
+
+    }
+
+//    bool operator==(const PhraseOccurrences& other)
+//    {
+//        return true;
+//    }
+
+private:
 };
-
-std::vector<std::string> splitString(const std::string& input)
+bool operator==(const PhraseOccurrences& lhs, const PhraseOccurrences& rhs)
 {
-    std::vector<std::string> result;
-    std::string word;
-
-    for(size_t i = 0; i < input.size(); ++i)
-    {
-        if( input[i] == ' ' && input.size() > i )
-        {
-            result.push_back(word);
-            word = "";
-        }
-        else
-        {
-            word += input[i];
-        }
-    }
-
-    return result;
+    return false;
 }
 
-std::vector<Occurrences> GetPhraseOccurrences(const std::string& phrase)
+PhraseOccurrences GetPhraseOccurrences(const std::string& phrase)
 {
-    std::vector<Occurrences> result;
-
-    if(phrase.empty())
-    {
-        return result;
-    }
-
-    Occurrences occurrence;
-
-    std::vector<std::string> str = splitString(phrase);
-
-    occurrence.word = str[0];
-    occurrence.cout = 2;
-
-    result.push_back(occurrence);
-
-    return result;
+    return PhraseOccurrences(phrase);
 }
 
-TEST(PhraseOccurrencesTest, Input_empty_str_return_empty_str)
+TEST(PhraseOccurrencesTest, Test_1_word)
 {
-    std::vector<Occurrences> result;
-    EXPECT_EQ(result, (GetPhraseOccurrences("")));
-}
-
-TEST(PhraseOccurrencesTest, Input_2_word__return_1_occurrences)
-{
-    std::vector<Occurrences> result;
-    Occurrences testData = {2, "test"};
-    result.push_back(testData);
-
-    EXPECT_EQ(result, GetPhraseOccurrences("test test"));
-}
-
-TEST(PhraseOccurrencesTest, Input_2_word__return_0_occurrences)
-{
-    std::vector<Occurrences> result;
-    Occurrences testData = {0, ""};
-    result.push_back(testData);
-
-    EXPECT_EQ(result, GetPhraseOccurrences("test test2"));
+    PhraseOccurrences result("");
+    EXPECT_EQ(result, GetPhraseOccurrences("test"));
 }
