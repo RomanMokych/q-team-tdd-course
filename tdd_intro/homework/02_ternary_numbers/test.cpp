@@ -18,14 +18,19 @@ If your language provides a method in the standard library to perform the conver
 */
 
 
-int TernaryToDec(std::string str)
+int TernaryToDec(const std::string& str)
 {
-    int number = std::stoi(str);
+    int resutl = 0;
+    for(size_t i = 0; i < str.size(); ++i )
+    {
+        resutl += std::pow(3, i) * (str[str.size() - i - 1]- 48);
+    }
 
-    return std::pow(number * 3, 0) ;
+    return resutl;
 }
 
-TEST(TernaryToDecDDD, 1_to_dec)
+TEST(TernaryToDecDDD, 1_to_dec_is_1)
 {
+    int c = std::pow(3, 0);
     EXPECT_EQ(1, TernaryToDec("1"));
 }
