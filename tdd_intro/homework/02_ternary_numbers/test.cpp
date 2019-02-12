@@ -23,7 +23,7 @@ int TernaryToDec(std::string str)
     return 1;
 }
 
-TEST(TernaryToDecTest, 1_to_dec)
+TEST(TernaryToDecDDD, 1_to_dec)
 {
     EXPECT_EQ(3, TernaryToDec("1"));
 }
