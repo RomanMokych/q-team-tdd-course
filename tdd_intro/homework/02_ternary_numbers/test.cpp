@@ -20,10 +20,12 @@ If your language provides a method in the standard library to perform the conver
 
 int TernaryToDec(std::string str)
 {
-    return 1;
+    int number = std::stoi(str);
+
+    return std::pow(number * 3, 0) ;
 }
 
 TEST(TernaryToDecDDD, 1_to_dec)
 {
-    EXPECT_EQ(3, TernaryToDec("1"));
+    EXPECT_EQ(1, TernaryToDec("1"));
 }
