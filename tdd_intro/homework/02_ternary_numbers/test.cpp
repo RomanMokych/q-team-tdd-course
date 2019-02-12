@@ -42,3 +42,8 @@ TEST(ternary_converter, 10_is_3)
 {
     EXPECT_EQ(3, ter_to_dec("10"));
 }
+
+TEST(ternary_converter, 102012_is_302)
+{
+    EXPECT_EQ(302, ter_to_dec("102012"));
+}
