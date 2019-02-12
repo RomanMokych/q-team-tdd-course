@@ -16,3 +16,42 @@ The last place in a ternary number is the 1's place. The second to last is the 3
 
 If your language provides a method in the standard library to perform the conversion, pretend it doesn't exist and implement it yourself.
 */
+
+
+int TernaryToDec(const std::string& str)
+{
+    int resutl = 0;
+    for(size_t i = 0; i < str.size(); ++i )
+    {
+        int number = (str[str.size() - i - 1]- 48);
+        if(number < 0 || number > 3)
+        {
+            return 0;
+        }
+        resutl += std::pow(3, i) * number;
+    }
+
+    return resutl;
+}
+
+TEST(TernaryToDecDDD, 1_to_dec_is_1)
+{
+    EXPECT_EQ(1, TernaryToDec("1"));
+}
+
+
+TEST(TernaryToDecDDD, 11_to_dec_is_4)
+{
+    EXPECT_EQ(4, TernaryToDec("11"));
+}
+
+
+TEST(TernaryToDecDDD, 102012_to_dec_is_302)
+{
+    EXPECT_EQ(302, TernaryToDec("102012"));
+}
+
+TEST(TernaryToDecDDD, bad_case_to_dec)
+{
+    EXPECT_EQ(0, TernaryToDec("802012"));
+}
