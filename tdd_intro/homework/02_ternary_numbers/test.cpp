@@ -17,9 +17,11 @@ The last place in a ternary number is the 1's place. The second to last is the 3
 If your language provides a method in the standard library to perform the conversion, pretend it doesn't exist and implement it yourself.
 */
 
-int ter_to_dec(std::string ternary_number)
+using namespace std;
+
+int ter_to_dec(const string &ternary_number)
 {
-    return std::stoi(ternary_number);
+    return stoi(ternary_number);
 }
 
 TEST(ternary_converter, 1_is_1)
