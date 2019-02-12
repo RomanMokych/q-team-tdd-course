@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-
+#include <math.h>
 /*
 Convert a ternary number, represented as a string (e.g. '102012'), to its decimal equivalent using first principles.
 
@@ -16,3 +16,34 @@ The last place in a ternary number is the 1's place. The second to last is the 3
 
 If your language provides a method in the standard library to perform the conversion, pretend it doesn't exist and implement it yourself.
 */
+
+using namespace std;
+
+int ter_to_dec(const string &ternary_number)
+{
+    int result = 0;
+
+    for(int i = 0; i < ternary_number.size(); i++)
+    {
+        int power = ternary_number.size() - i - 1;
+        char digit = ternary_number.at(i);
+        result += atoi(&digit) * pow(3, power);
+    }
+
+    return result;
+}
+
+TEST(ternary_converter, 1_is_1)
+{
+    EXPECT_EQ(1, ter_to_dec("1"));
+}
+
+TEST(ternary_converter, 10_is_3)
+{
+    EXPECT_EQ(3, ter_to_dec("10"));
+}
+
+TEST(ternary_converter, 102012_is_302)
+{
+    EXPECT_EQ(302, ter_to_dec("102012"));
+}
