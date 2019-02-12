@@ -39,39 +39,39 @@ map<string, int> count_words(const string &str)
     return result;
 }
 
-TEST(word_count, one_word_in_string)
+TEST(word_count, one_foo)
 {
-    auto result = count_words("one");
+    auto result = count_words("foo");
     ASSERT_EQ(1, result.size());
-    EXPECT_EQ(1, result.at("one"));
+    EXPECT_EQ(1, result.at("foo"));
 }
 
-TEST(word_count, another_one_word_in_string)
+TEST(word_count, one_bar)
 {
-    auto result = count_words("another");
+    auto result = count_words("bar");
     ASSERT_EQ(1, result.size());
-    EXPECT_EQ(1, result.at("another"));
+    EXPECT_EQ(1, result.at("bar"));
 }
 
-TEST(word_count, two_same_words_in_string_devided_by_spaces)
+TEST(word_count, two_foo_devided_by_space)
 {
-    auto result = count_words("one one");
+    auto result = count_words("foo foo");
     ASSERT_EQ(1, result.size());
-    EXPECT_EQ(2, result.at("one"));
+    EXPECT_EQ(2, result.at("foo"));
 }
 
-TEST(word_count, two_different_words_in_string_devided_by_spaces)
+TEST(word_count, foo_and_bar_devided_by_space)
 {
-    auto result = count_words("one another");
+    auto result = count_words("foo bar");
     ASSERT_EQ(2, result.size());
-    EXPECT_EQ(1, result.at("one"));
-    EXPECT_EQ(1, result.at("another"));
+    EXPECT_EQ(1, result.at("foo"));
+    EXPECT_EQ(1, result.at("bar"));
 }
 
-TEST(word_count, two_different_words_in_string_devided_by_commas)
+TEST(word_count, foo_and_bar_devided_by_comma)
 {
-    auto result = count_words("one,another");
+    auto result = count_words("foo,bar");
     ASSERT_EQ(2, result.size());
-    EXPECT_EQ(1, result.at("one"));
-    EXPECT_EQ(1, result.at("another"));
+    EXPECT_EQ(1, result.at("foo"));
+    EXPECT_EQ(1, result.at("bar"));
 }
