@@ -28,3 +28,8 @@ TEST(ternary_converter, 1_is_1)
 {
     EXPECT_EQ(1, ter_to_dec("1"));
 }
+
+TEST(ternary_converter, 10_is_3)
+{
+    EXPECT_EQ(3, ter_to_dec("10"));
+}
