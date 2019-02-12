@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-
+#include <math.h>
 /*
 Convert a ternary number, represented as a string (e.g. '102012'), to its decimal equivalent using first principles.
 
@@ -21,7 +21,13 @@ using namespace std;
 
 int ter_to_dec(const string &ternary_number)
 {
-    return stoi(ternary_number);
+    int result = 0;
+    for(int i = 0; i < ternary_number.size(); i++)
+    {
+        char val = ternary_number.at(i);
+        result += atoi(&val) * pow(3, ternary_number.size() - i - 1);
+    }
+    return result;
 }
 
 TEST(ternary_converter, 1_is_1)
