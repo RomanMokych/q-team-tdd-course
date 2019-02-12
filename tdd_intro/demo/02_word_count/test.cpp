@@ -74,3 +74,8 @@ TEST(PhraseOccurrencesTest, Test_2_word2)
     EXPECT_EQ(result, GetPhraseOccurrences("word word"));
 }
 
+TEST(PhraseOccurrencesTest, Test_3_word_occurrences1)
+{
+    PhraseOccurrences result({"word1", 1}, {"word2", 1});
+    EXPECT_EQ(result, GetPhraseOccurrences("word1 word2"));
+}
