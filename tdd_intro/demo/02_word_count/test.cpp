@@ -23,13 +23,13 @@ class PhraseOccurrences
     friend bool operator==(const PhraseOccurrences& lhs, const PhraseOccurrences& rhs);
 
 public:
-    explicit PhraseOccurrences(std::map<std::string, int> phrase )
+    explicit PhraseOccurrences(const std::map<std::string, int>& phrase )
     {
         m_occurrences.insert(phrase.begin(), phrase.end());
     }
 
-    explicit PhraseOccurrences(const std::string& str)
-        : m_Phrase(str)
+    explicit PhraseOccurrences(const std::string& phrase)
+        : m_Phrase(phrase)
     {
         Process();
     }
@@ -74,7 +74,7 @@ PhraseOccurrences GetPhraseOccurrences(const std::string& phrase)
     return PhraseOccurrences(phrase);
 }
 
-TEST(PhraseOccurrencesTest, Test_1_word)
+TEST(PhraseOccurrencesTest, Test_1_word__1_occurrences)
 {
     PhraseOccurrences result(
                 {{"word", 1}}
@@ -86,13 +86,13 @@ TEST(PhraseOccurrencesTest, Test_1_word)
     EXPECT_EQ(result, GetPhraseOccurrences("word"));
 }
 
-TEST(PhraseOccurrencesTest, Test_2_word2)
+TEST(PhraseOccurrencesTest, Test_1_word__2_occurrences)
 {
     PhraseOccurrences result({{"word", 2}});
     EXPECT_EQ(result, GetPhraseOccurrences("word word"));
 }
 
-TEST(PhraseOccurrencesTest, Test_3_word_occurrences1)
+TEST(PhraseOccurrencesTest, Test_2_word__1_occurrences)
 {
     PhraseOccurrences result({
                                  {"word1", 1},
@@ -101,7 +101,7 @@ TEST(PhraseOccurrencesTest, Test_3_word_occurrences1)
     EXPECT_EQ(result, GetPhraseOccurrences("word1 word2"));
 }
 
-TEST(PhraseOccurrencesTest, Test_3_word_occurrences2)
+TEST(PhraseOccurrencesTest, Test_2_word___1_and_2_occurrences)
 {
     PhraseOccurrences result({
                                  {"word1", 1},
@@ -109,3 +109,10 @@ TEST(PhraseOccurrencesTest, Test_3_word_occurrences2)
                              });
     EXPECT_EQ(result, GetPhraseOccurrences("word1 word2 word2"));
 }
+
+TEST(PhraseOccurrencesTest, Test_empty_input)
+{
+    PhraseOccurrences result("");
+    EXPECT_EQ(result, GetPhraseOccurrences(""));
+}
+
