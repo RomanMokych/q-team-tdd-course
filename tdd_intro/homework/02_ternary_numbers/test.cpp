@@ -22,11 +22,14 @@ using namespace std;
 int ter_to_dec(const string &ternary_number)
 {
     int result = 0;
+
     for(int i = 0; i < ternary_number.size(); i++)
     {
-        char val = ternary_number.at(i);
-        result += atoi(&val) * pow(3, ternary_number.size() - i - 1);
+        int power = ternary_number.size() - i - 1;
+        char digit = ternary_number.at(i);
+        result += atoi(&digit) * pow(3, power);
     }
+
     return result;
 }
 
