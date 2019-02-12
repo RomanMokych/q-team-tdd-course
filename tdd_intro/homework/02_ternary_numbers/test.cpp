@@ -19,7 +19,7 @@ If your language provides a method in the standard library to perform the conver
 
 int ter_to_dec(std::string ternary_number)
 {
-    return 0;
+    return std::stoi(ternary_number);
 }
 
 TEST(ternary_converter, 1_is_1)
