@@ -41,3 +41,12 @@ TEST(TernaryToDecDDD, 11_to_dec_is_4)
     int c = std::pow(3, 0);
     EXPECT_EQ(4, TernaryToDec("11"));
 }
+
+
+TEST(TernaryToDecDDD, 102012_to_dec_is_302)
+{
+    int c = std::pow(3, 0);
+    EXPECT_EQ(302, TernaryToDec("102012"));
+}
+
+
