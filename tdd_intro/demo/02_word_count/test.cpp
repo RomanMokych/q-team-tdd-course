@@ -23,34 +23,43 @@ class PhraseOccurrences
     friend bool operator==(const PhraseOccurrences& lhs, const PhraseOccurrences& rhs);
 
 public:
-    PhraseOccurrences(const std::string& word, int count)
-        : m_word(word), m_count(count)
+    PhraseOccurrences(const std::string& word, int cout)
     {
-
+        m_occurrences[word] = cout;
     }
 
-    PhraseOccurrences(const PhraseOccurrences& other)
+    PhraseOccurrences(const std::string& str)
+        : m_Phrase(str)
     {
+        Process();
+    }
 
+
+private:
+    void Process()
+    {
+        std::istringstream stringStream(m_Phrase);
+        std::string str;
+        while(stringStream>>str)
+        {
+            m_occurrences[str]++;
+        }
     }
 
 private:
 
-    std::string phrase;
-    std::string m_word;
-    int m_count;
+    std::string m_Phrase;
+    std::map<std::string, int> m_occurrences;
 };
 
 bool operator==(const PhraseOccurrences& lhs, const PhraseOccurrences& rhs)
 {
-    return (lhs.m_word == rhs.m_word)
-            &&
-            (lhs.m_count == rhs.m_count);
+    return (lhs.m_occurrences == rhs.m_occurrences);
 }
 
 PhraseOccurrences GetPhraseOccurrences(const std::string& phrase)
 {
-    return PhraseOccurrences(phrase, 1);
+    return PhraseOccurrences(phrase);
 }
 
 TEST(PhraseOccurrencesTest, Test_1_word)
