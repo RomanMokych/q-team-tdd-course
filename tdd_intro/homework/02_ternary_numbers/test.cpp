@@ -23,6 +23,7 @@ int TernaryToDec(const std::string& str)
     int resutl = 0;
     for(size_t i = 0; i < str.size(); ++i )
     {
+
         resutl += std::pow(3, i) * (str[str.size() - i - 1]- 48);
     }
 
@@ -31,22 +32,22 @@ int TernaryToDec(const std::string& str)
 
 TEST(TernaryToDecDDD, 1_to_dec_is_1)
 {
-    int c = std::pow(3, 0);
     EXPECT_EQ(1, TernaryToDec("1"));
 }
 
 
 TEST(TernaryToDecDDD, 11_to_dec_is_4)
 {
-    int c = std::pow(3, 0);
     EXPECT_EQ(4, TernaryToDec("11"));
 }
 
 
 TEST(TernaryToDecDDD, 102012_to_dec_is_302)
 {
-    int c = std::pow(3, 0);
     EXPECT_EQ(302, TernaryToDec("102012"));
 }
 
-
+TEST(TernaryToDecDDD, bad_case_to_dec)
+{
+    EXPECT_EQ(0, TernaryToDec("802012"));
+}
