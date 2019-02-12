@@ -23,8 +23,12 @@ int TernaryToDec(const std::string& str)
     int resutl = 0;
     for(size_t i = 0; i < str.size(); ++i )
     {
-
-        resutl += std::pow(3, i) * (str[str.size() - i - 1]- 48);
+        int number = (str[str.size() - i - 1]- 48);
+        if(number < 0 || number > 3)
+        {
+            return 0;
+        }
+        resutl += std::pow(3, i) * number;
     }
 
     return resutl;
