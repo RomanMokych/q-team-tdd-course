@@ -19,13 +19,20 @@ In Roman numerals 1990 is MCMXC:
 
 #include <gtest/gtest.h>
 
+std::map<char, int> g_RomanToDecTable = {
+    {'I', 1},
+    {'V', 5},
+    {'X', 10},
+};
+
 int RemanToDec(std::string romanStr)
 {
-    if("I" == romanStr)
+    int result = 0;
+    for(char c: romanStr)
     {
-        return 1;
+        result += g_RomanToDecTable[c];
     }
-    return 0;
+    return result;
 }
 
 TEST(RomanToDecTest, I_is_1)
