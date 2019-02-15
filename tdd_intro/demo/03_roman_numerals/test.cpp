@@ -23,6 +23,10 @@ static std::map<char, int> g_RomanToDecTable = {
     {'I', 1},
     {'V', 5},
     {'X', 10},
+    {'L', 50},
+    {'C', 100},
+    {'D', 500},
+    {'M', 1000},
 };
 
 int RemanToDec(std::string romanStr)
@@ -66,3 +70,10 @@ TEST(RomanToDecTest, XIV_is_14)
 {
     EXPECT_EQ(14, RemanToDec("XIV"));
 }
+
+TEST(RomanToDecTest, MCMXCVIII_is_1998)
+{
+    EXPECT_EQ(1998, RemanToDec("MCMXCVIII"));
+}
+
+
