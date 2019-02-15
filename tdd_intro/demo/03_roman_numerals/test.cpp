@@ -18,3 +18,13 @@ In Roman numerals 1990 is MCMXC:
 */
 
 #include <gtest/gtest.h>
+
+int RemanToDec(std::string romanStr)
+{
+    return 0;
+}
+
+TEST(RomanToDecTest, I_is_1)
+{
+    EXPECT_EQ(1, RemanToDec("I"));
+}
