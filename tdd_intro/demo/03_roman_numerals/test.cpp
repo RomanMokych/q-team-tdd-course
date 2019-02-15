@@ -25,12 +25,19 @@ static std::map<char, int> g_RomanToDecTable = {
     {'X', 10},
 };
 
-int RemanToDec(const std::string& romanStr)
+int RemanToDec(std::string romanStr)
 {
     int result = 0;
-    for(char c: romanStr)
+    while(romanStr.size())
     {
-        result += g_RomanToDecTable[c];
+        int val = g_RomanToDecTable[romanStr.front()];
+        romanStr.erase(romanStr.begin(),romanStr.begin() + 1);
+        if(romanStr.empty())
+        {
+            result += val;
+            break;
+        }
+        result += val * (g_RomanToDecTable[*romanStr.begin()] > val ? -1 : 1);
     }
     return result;
 }
