@@ -61,3 +61,8 @@ TEST(RomanToDecTest, IV_is_4)
 {
     EXPECT_EQ(4, RemanToDec("IV"));
 }
+
+TEST(RomanToDecTest, XIV_is_14)
+{
+    EXPECT_EQ(14, RemanToDec("XIV"));
+}
