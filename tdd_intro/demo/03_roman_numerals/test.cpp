@@ -19,13 +19,13 @@ In Roman numerals 1990 is MCMXC:
 
 #include <gtest/gtest.h>
 
-std::map<char, int> g_RomanToDecTable = {
+static std::map<char, int> g_RomanToDecTable = {
     {'I', 1},
     {'V', 5},
     {'X', 10},
 };
 
-int RemanToDec(std::string romanStr)
+int RemanToDec(const std::string& romanStr)
 {
     int result = 0;
     for(char c: romanStr)
