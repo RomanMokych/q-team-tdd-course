@@ -32,3 +32,8 @@ TEST(RomanToDecTest, I_is_1)
 {
     EXPECT_EQ(1, RemanToDec("I"));
 }
+
+TEST(RomanToDecTest, II_is_2)
+{
+    EXPECT_EQ(2, RemanToDec("II"));
+}
