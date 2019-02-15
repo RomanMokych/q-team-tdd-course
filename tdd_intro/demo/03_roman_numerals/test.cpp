@@ -21,6 +21,10 @@ In Roman numerals 1990 is MCMXC:
 
 int RemanToDec(std::string romanStr)
 {
+    if("I" == romanStr)
+    {
+        return 1;
+    }
     return 0;
 }
 
