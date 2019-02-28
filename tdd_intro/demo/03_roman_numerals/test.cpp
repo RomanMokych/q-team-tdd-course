@@ -18,3 +18,62 @@ In Roman numerals 1990 is MCMXC:
 */
 
 #include <gtest/gtest.h>
+
+static std::map<char, int> g_RomanToDecTable = {
+    {'I', 1},
+    {'V', 5},
+    {'X', 10},
+    {'L', 50},
+    {'C', 100},
+    {'D', 500},
+    {'M', 1000},
+};
+
+int RemanToDec(std::string romanStr)
+{
+    int result = 0;
+    while(romanStr.size())
+    {
+        int val = g_RomanToDecTable[romanStr.front()];
+        romanStr.erase(romanStr.begin(),romanStr.begin() + 1);
+        if(romanStr.empty())
+        {
+            result += val;
+            break;
+        }
+        result += val * (g_RomanToDecTable[*romanStr.begin()] > val ? -1 : 1);
+    }
+    return result;
+}
+
+TEST(RomanToDecTest, I_is_1)
+{
+    EXPECT_EQ(1, RemanToDec("I"));
+}
+
+TEST(RomanToDecTest, II_is_2)
+{
+    EXPECT_EQ(2, RemanToDec("II"));
+}
+
+TEST(RomanToDecTest, VII_is_7)
+{
+    EXPECT_EQ(7, RemanToDec("VII"));
+}
+
+TEST(RomanToDecTest, IV_is_4)
+{
+    EXPECT_EQ(4, RemanToDec("IV"));
+}
+
+TEST(RomanToDecTest, XIV_is_14)
+{
+    EXPECT_EQ(14, RemanToDec("XIV"));
+}
+
+TEST(RomanToDecTest, MCMXCVIII_is_1998)
+{
+    EXPECT_EQ(1998, RemanToDec("MCMXCVIII"));
+}
+
+
