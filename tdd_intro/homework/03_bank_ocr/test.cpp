@@ -86,6 +86,7 @@ Example input and output
 */
 #include <gtest/gtest.h>
 #include <string>
+#include <map>
 
 const unsigned short g_digitLen = 3;
 const unsigned short g_linesInDigit = 3;
@@ -196,13 +197,43 @@ const Display s_display123456789 = { "    _  _     _  _  _  _  _ ",
                                      "  ||_  _|  | _||_|  ||_| _|"
 };
 
+std::map<int, int> g_DigitsTable;
+std::map<int, Digit> g_ImagesTable;
+
+bool operator == (const Digit& left, const Digit& right)
+{
+    for(int i = 0; i< g_linesInDigit; ++i)
+    {
+        if(left.lines[i] != right.lines[i])
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+
+
+void BuildDigitsTable()
+{
+     g_ImagesTable[1] = s_digit1;
+}
+
 std::string Image2Number(const Digit& image)
 {
+    for(auto pair : g_ImagesTable)
+    {
+        if(pair.second == image)
+        {
+            return std::to_string(pair.first);
+        }
+    }
     return "0";
 }
 
 
 TEST(BankOCRTest, one_Digit_is_one_number)
 {
+    BuildDigitsTable();
     EXPECT_EQ("1", Image2Number(s_digit1));
 }
