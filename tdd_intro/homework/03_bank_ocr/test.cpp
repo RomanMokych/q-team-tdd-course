@@ -197,6 +197,11 @@ const Display s_display123456789 = { "    _  _     _  _  _  _  _ ",
                                      "  ||_  _|  | _||_|  ||_| _|"
 };
 
+const Digit s_displayAll01 = {   " _    ",
+                                 "| |  |",
+                                 "|_|  |"
+};
+
 std::map<int, int> g_DigitsTable;
 std::map<int, Digit> g_ImagesTable;
 
@@ -243,4 +248,10 @@ TEST(BankOCRTest, one_Digit_is_one_number)
 {
     BuildDigitsTable();
     EXPECT_EQ("1", Image2Number(s_digit1));
+}
+
+TEST(BankOCRTest, zero_one_Digit_is_zero_one_number)
+{
+    BuildDigitsTable();
+    EXPECT_EQ("01", Image2Number(s_displayAll01));
 }
