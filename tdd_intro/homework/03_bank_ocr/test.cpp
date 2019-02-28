@@ -255,16 +255,17 @@ std::string Image2Number(const Digit& display)
     std::string result = "";
     for(size_t i = 0; i < display.lines->size(); i+=g_linesInDigit)
     {
+        const int checkSum = getCheckSum(display.lines, i, g_linesInDigit);
+
         for(auto pair : g_ImagesTable)
         {
-            if(pair.second == getCheckSum(display.lines, i, g_linesInDigit))
+            if(pair.second == checkSum)
             {
                 result +=  std::to_string(pair.first);
                 break;
             }
         }
     }
-
 
     return result;
 }
