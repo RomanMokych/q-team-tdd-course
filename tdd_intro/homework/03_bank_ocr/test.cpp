@@ -195,3 +195,14 @@ const Display s_display123456789 = { "    _  _     _  _  _  _  _ ",
                                      "  | _| _||_||_ |_   ||_||_|",
                                      "  ||_  _|  | _||_|  ||_| _|"
 };
+
+std::string Image2Number(const Digit& image)
+{
+    return "0";
+}
+
+
+TEST(BankOCRTest, one_Digit_is_one_number)
+{
+    EXPECT_EQ("1", Image2Number(s_digit1));
+}
