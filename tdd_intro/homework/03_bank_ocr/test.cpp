@@ -197,13 +197,13 @@ const Display s_display123456789 = { "    _  _     _  _  _  _  _ ",
                                      "  ||_  _|  | _||_|  ||_| _|"
 };
 
-const Digit s_displayAll01 = {   " _    ",
+const Digit s_displayAll01 =   { " _    ",
                                  "| |  |",
                                  "|_|  |"
 };
 
 std::map<int, int> g_DigitsTable;
-std::map<int, Digit> g_ImagesTable;
+
 
 bool operator == (const Digit& left, const Digit& right)
 {
@@ -217,24 +217,50 @@ bool operator == (const Digit& left, const Digit& right)
     return true;
 }
 
+std::map<int, int> g_ImagesTable;
 
+int getCheckSum(const std::string digit[], int startPos = 0, int length = g_linesInDigit)
+{
+    int res = 0;
+
+    for(int i = 0; i<length; ++i)
+    {
+        for(int j = startPos; j< startPos + length; ++j)
+        {
+            int val = digit[i][j] == ' ' ? 0 : 1;
+            res += std::pow(i+1, j+1-startPos)*val;
+        }
+    }
+
+    return res;
+}
 
 void BuildDigitsTable()
 {
-     g_ImagesTable[0] = s_digit0;
-     g_ImagesTable[1] = s_digit1;
+    g_ImagesTable[0] = getCheckSum(s_digit0.lines);
+    g_ImagesTable[1] = getCheckSum(s_digit1.lines);
+
 }
 
-std::string Image2Number(const Digit& image)
+std::string Image2Number(const Digit& display)
 {
-    for(auto pair : g_ImagesTable)
+
+    std::string result = "";
+    for(size_t i = 0; i < display.lines->size(); i+=g_linesInDigit)
     {
-        if(pair.second == image)
+        for(auto pair : g_ImagesTable)
         {
-            return std::to_string(pair.first);
+            if(pair.second == getCheckSum(display.lines, i, g_linesInDigit))
+            {
+                result +=  std::to_string(pair.first);
+                break;
+            }
         }
     }
-    return "0";
+
+
+
+    return result;
 }
 
 TEST(BankOCRTest, zero_Digit_is_zero_number)
