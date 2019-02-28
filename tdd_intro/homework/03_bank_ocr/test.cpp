@@ -216,6 +216,7 @@ bool operator == (const Digit& left, const Digit& right)
 
 void BuildDigitsTable()
 {
+     g_ImagesTable[0] = s_digit0;
      g_ImagesTable[1] = s_digit1;
 }
 
@@ -229,6 +230,12 @@ std::string Image2Number(const Digit& image)
         }
     }
     return "0";
+}
+
+TEST(BankOCRTest, zero_Digit_is_zero_number)
+{
+    BuildDigitsTable();
+    EXPECT_EQ("0", Image2Number(s_digit0));
 }
 
 
