@@ -192,7 +192,7 @@ const Display s_displayAll9 = { " _  _  _  _  _  _  _  _  _ ",
                                 " _| _| _| _| _| _| _| _| _|"
 };
 
-const Display s_display123456789 = { "    _  _     _  _  _  _  _ ",
+const Digit s_display123456789 = {   "    _  _     _  _  _  _  _ ",
                                      "  | _| _||_||_ |_   ||_||_|",
                                      "  ||_  _|  | _||_|  ||_| _|"
 };
@@ -239,7 +239,14 @@ void BuildDigitsTable()
 {
     g_ImagesTable[0] = getCheckSum(s_digit0.lines);
     g_ImagesTable[1] = getCheckSum(s_digit1.lines);
-
+    g_ImagesTable[2] = getCheckSum(s_digit2.lines);
+    g_ImagesTable[3] = getCheckSum(s_digit3.lines);
+    g_ImagesTable[4] = getCheckSum(s_digit4.lines);
+    g_ImagesTable[5] = getCheckSum(s_digit5.lines);
+    g_ImagesTable[6] = getCheckSum(s_digit6.lines);
+    g_ImagesTable[7] = getCheckSum(s_digit7.lines);
+    g_ImagesTable[8] = getCheckSum(s_digit8.lines);
+    g_ImagesTable[9] = getCheckSum(s_digit9.lines);
 }
 
 std::string Image2Number(const Digit& display)
@@ -257,7 +264,6 @@ std::string Image2Number(const Digit& display)
             }
         }
     }
-
 
 
     return result;
@@ -280,4 +286,10 @@ TEST(BankOCRTest, zero_one_Digit_is_zero_one_number)
 {
     BuildDigitsTable();
     EXPECT_EQ("01", Image2Number(s_displayAll01));
+}
+
+TEST(BankOCRTest, full_test_Digit_is_123456789_number)
+{
+    BuildDigitsTable();
+    EXPECT_EQ("123456789", Image2Number(s_display123456789));
 }
