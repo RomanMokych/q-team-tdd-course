@@ -248,6 +248,11 @@ int parse_one_digit(std::string str)
     return 0;
 }
 
+int parse_display(std:: string string)
+{
+    return 0;
+}
+
 TEST(Split, abc_splitted_to_a_b_c)
 {
     std::vector<std::string> result = {"a", "b", "c"};
@@ -314,4 +319,9 @@ TEST(ParseDigit, parse9)
 TEST(ParseDigit, parse0)
 {
     EXPECT_EQ(0, parse_one_digit(s_string0));
+}
+
+TEST(ParseDisplay, parse1)
+{
+    EXPECT_EQ(1, parse_display(s_string1));
 }
