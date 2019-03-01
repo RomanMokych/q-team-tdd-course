@@ -212,6 +212,10 @@ int parse(std::string str)
     {
         return 1;
     }
+    if(str == s_string2)
+    {
+        return 2;
+    }
 }
 
 TEST(Split, abc_splitted_to_a_b_c)
