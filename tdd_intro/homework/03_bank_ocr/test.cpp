@@ -283,3 +283,8 @@ TEST(Parse, parse6)
 {
     EXPECT_EQ(6, parse(s_string6));
 }
+
+TEST(Parse, parse7)
+{
+    EXPECT_EQ(7, parse(s_string7));
+}
