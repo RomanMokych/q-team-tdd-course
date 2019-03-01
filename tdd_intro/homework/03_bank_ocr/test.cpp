@@ -232,6 +232,10 @@ int parse(std::string str)
     {
         return 6;
     }
+    else if(str == s_string7)
+    {
+        return 7;
+    }
 
     return 0;
 }
