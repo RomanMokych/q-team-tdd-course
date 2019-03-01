@@ -228,6 +228,10 @@ int parse(std::string str)
     {
         return 5;
     }
+    else if(str == s_string6)
+    {
+        return 6;
+    }
 
     return 0;
 }
