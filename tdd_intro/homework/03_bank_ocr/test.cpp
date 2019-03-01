@@ -201,7 +201,14 @@ const Display s_display123456789 = { "    _  _     _  _  _  _  _ ",
 
 std::vector<std::string> split_to_3_strings(std::string str)
 {
-    return {};
+    std::vector<std::string> result;
+    for(auto letter : str)
+    {
+        std::string letter_string;
+        letter_string += letter;
+        result.push_back(letter_string);
+    }
+    return result;
 }
 
 TEST(Split, abc_splited_to_a_b_c)
