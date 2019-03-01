@@ -1,6 +1,7 @@
 /*### Bank OCR
 
-Your manager has recently purchased a machine that assists in reading letters and faxes sent in by branch offices. The machine scans the paper documents, and produces a file with a number of entries. You will write a program to parse this file.
+Your manager has recently purchased a machine that assists in reading letters and faxes sent in by branch offices.
+The machine scans the paper documents, and produces a file with a number of entries. You will write a program to parse this file.
 
 #### Specification
 #### User Story 1
@@ -11,9 +12,11 @@ The following format is created by the machine:
   | _| _||_||_ |_   ||_||_|
   ||_  _|  | _||_|  ||_| _|
 ```
-Each entry is 3 lines long, and each line has 27 characters. 3 lines of each entry contain an account number written using pipes and underscores.
+Each entry is 3 lines long, and each line has 27 characters.
+3 lines of each entry contain an account number written using pipes and underscores.
 
-Each account number should have 9 digits, all of which should be in the range 0-9. A normal file contains around 500 entries.
+Each account number should have 9 digits, all of which should be in the range 0-9.
+A normal file contains around 500 entries.
 
 Write a program that can take this file and parse it into actual account numbers.
 
@@ -87,111 +90,232 @@ Example input and output
 #include <gtest/gtest.h>
 #include <string>
 
-const unsigned short g_digitLen = 3;
-const unsigned short g_linesInDigit = 3;
-struct Digit
+const std::string s_string0 = { " _ "
+                                "| |"
+                                "|_|"
+                              };
+const std::string s_string1 = { "   "
+                                "  |"
+                                "  |"
+                              };
+const std::string s_string2 = { " _ "
+                                " _|"
+                                "|_ "
+                              };
+const std::string s_string3 = { " _ "
+                                " _|"
+                                " _|"
+                              };
+const std::string s_string4 = { "   "
+                                "|_|"
+                                "  |"
+                              };
+const std::string s_string5 = { " _ "
+                                "|_ "
+                                " _|"
+                              };
+const std::string s_string6 = { " _ "
+                                "|_ "
+                                "|_|"
+                              };
+const std::string s_string7 = { " _ "
+                                "  |"
+                                "  |"
+                              };
+const std::string s_string8 = { " _ "
+                                "|_|"
+                                "|_|"
+                              };
+const std::string s_string9 = { " _ "
+                                "|_|"
+                                " _|"
+                              };
+
+const std::string s_stringTwo1 = { "      "
+                                   "  |  |"
+                                   "  |  |"
+                                 };
+
+const std::string s_string123456789 = { "    _  _     _  _  _  _  _ "
+                                        "  | _| _||_||_ |_   ||_||_|"
+                                        "  ||_  _|  | _||_|  ||_| _|"
+                                      };
+
+const std::string s_string123456780 = { "    _  _     _  _  _  _  _ "
+                                        "  | _| _||_||_ |_   ||_|| |"
+                                        "  ||_  _|  | _||_|  ||_||_|"
+                                      };
+const int s_digit_width = 3;
+
+std::vector<std::string> split_to_3_strings(std::string str)
 {
-    std::string lines[g_linesInDigit];
-};
+    std::vector<std::string> result;
+    int substring_size = str.length() / 3;
+    result.push_back(str.substr(0, substring_size));
+    result.push_back(str.substr(substring_size, substring_size));
+    result.push_back(str.substr(2 * substring_size, substring_size));
+    return result;
+}
 
-const unsigned short g_digitsOnDisplay = 9;
-struct Display
+std::string merge_strings(std::vector<std::string> strings)
 {
-    std::string lines[g_linesInDigit];
-};
+    std::string result;
+    for(const auto str : strings)
+    {
+        result.append(str);
+    }
+    return result;
+}
 
-const Digit s_digit0 = { " _ ",
-                         "| |",
-                         "|_|"
-                       };
-const Digit s_digit1 = { "   ",
-                         "  |",
-                         "  |"
-                       };
-const Digit s_digit2 = { " _ ",
-                         " _|",
-                         "|_ "
-                       };
-const Digit s_digit3 = { " _ ",
-                         " _|",
-                         " _|"
-                       };
-const Digit s_digit4 = { "   ",
-                         "|_|",
-                         "  |"
-                       };
-const Digit s_digit5 = { " _ ",
-                         "|_ ",
-                         " _|"
-                       };
-const Digit s_digit6 = { " _ ",
-                         "|_ ",
-                         "|_|"
-                       };
-const Digit s_digit7 = { " _ ",
-                         "  |",
-                         "  |"
-                       };
-const Digit s_digit8 = { " _ ",
-                         "|_|",
-                         "|_|"
-                       };
-const Digit s_digit9 = { " _ ",
-                         "|_|",
-                         " _|"
-                       };
+int parse_one_digit(std::string str)
+{
+    if(str == s_string1)
+    {
+        return 1;
+    }
+    else if(str == s_string2)
+    {
+        return 2;
+    }
+    else if(str == s_string3)
+    {
+        return 3;
+    }
+    else if(str == s_string4)
+    {
+        return 4;
+    }
+    else if(str == s_string5)
+    {
+        return 5;
+    }
+    else if(str == s_string6)
+    {
+        return 6;
+    }
+    else if(str == s_string7)
+    {
+        return 7;
+    }
+    else if(str == s_string8)
+    {
+        return 8;
+    }
+    else if(str == s_string9)
+    {
+        return 9;
+    }
 
-const Display s_displayAll0 = { " _  _  _  _  _  _  _  _  _ ",
-                                "| || || || || || || || || |",
-                                "|_||_||_||_||_||_||_||_||_|"
-};
+    return 0;
+}
 
-const Display s_displayAll1 = { "                           ",
-                                "  |  |  |  |  |  |  |  |  |",
-                                "  |  |  |  |  |  |  |  |  |"
-};
+int parse_display(std::string string)
+{
+    std::vector<std::string> lines = split_to_3_strings(string);
 
-const Display s_displayAll2 = {  " _  _  _  _  _  _  _  _  _ ",
-                                 " _| _| _| _| _| _| _| _| _|",
-                                 "|_ |_ |_ |_ |_ |_ |_ |_ |_ "
-};
+    int digit_count = lines[0].size() / s_digit_width;
+    int pow_val = pow(10, digit_count - 1);
+    int result = 0;
 
-const Display s_displayAll3 = { " _  _  _  _  _  _  _  _  _ ",
-                                " _| _| _| _| _| _| _| _| _|",
-                                " _| _| _| _| _| _| _| _| _|"
-};
+    for(int digit = 0; digit < digit_count; pow_val = pow_val/10, digit++)
+    {
+        std::string digit_str = merge_strings({lines[0].substr(digit*3, s_digit_width),
+                                               lines[1].substr(digit*3, s_digit_width),
+                                               lines[2].substr(digit*3, s_digit_width)});
+        result += parse_one_digit(digit_str) * pow_val;
+    }
+    return result;
+}
 
-const Display s_displayAll4 = { "                           ",
-                                "|_||_||_||_||_||_||_||_||_|",
-                                "  |  |  |  |  |  |  |  |  |"
-};
+TEST(Split, abc_splitted_to_a_b_c)
+{
+    std::vector<std::string> result = {"a", "b", "c"};
+    EXPECT_EQ(result, split_to_3_strings("abc"));
+}
 
-const Display s_displayAll5 = { " _  _  _  _  _  _  _  _  _ ",
-                                "|_ |_ |_ |_ |_ |_ |_ |_ |_ ",
-                                " _| _| _| _| _| _| _| _| _|"
-};
+TEST(Split, abcabc_splitted_to_ab_ca_bc)
+{
+    std::vector<std::string> result = {"ab", "ca", "bc"};
+    EXPECT_EQ(result, split_to_3_strings("abcabc"));
+}
 
-const Display s_displayAll6 = { " _  _  _  _  _  _  _  _  _ ",
-                                "|_ |_ |_ |_ |_ |_ |_ |_ |_ ",
-                                "|_||_||_||_||_||_||_||_||_|"
-};
+TEST(Merge, a_b_c_merged_into_abc)
+{
+    std::string result = "abc";
+    EXPECT_EQ(result, merge_strings({"a", "b", "c"}));
+}
 
-const Display s_displayAll7 = { " _  _  _  _  _  _  _  _  _ ",
-                                "  |  |  |  |  |  |  |  |  |",
-                                "  |  |  |  |  |  |  |  |  |"
-};
+TEST(ParseDigit, parse1)
+{
+    EXPECT_EQ(1, parse_one_digit(s_string1));
+}
 
-const Display s_displayAll8 = { " _  _  _  _  _  _  _  _  _ ",
-                                "|_||_||_||_||_||_||_||_||_|",
-                                "|_||_||_||_||_||_||_||_||_|"
-};
+TEST(ParseDigit, parse2)
+{
+    EXPECT_EQ(2, parse_one_digit(s_string2));
+}
 
-const Display s_displayAll9 = { " _  _  _  _  _  _  _  _  _ ",
-                                "|_||_||_||_||_||_||_||_||_|",
-                                " _| _| _| _| _| _| _| _| _|"
-};
+TEST(ParseDigit, parse3)
+{
+    EXPECT_EQ(3, parse_one_digit(s_string3));
+}
 
-const Display s_display123456789 = { "    _  _     _  _  _  _  _ ",
-                                     "  | _| _||_||_ |_   ||_||_|",
-                                     "  ||_  _|  | _||_|  ||_| _|"
-};
+TEST(ParseDigit, parse4)
+{
+    EXPECT_EQ(4, parse_one_digit(s_string4));
+}
+
+TEST(ParseDigit, parse5)
+{
+    EXPECT_EQ(5, parse_one_digit(s_string5));
+}
+
+TEST(ParseDigit, parse6)
+{
+    EXPECT_EQ(6, parse_one_digit(s_string6));
+}
+
+TEST(ParseDigit, parse7)
+{
+    EXPECT_EQ(7, parse_one_digit(s_string7));
+}
+
+TEST(ParseDigit, parse8)
+{
+    EXPECT_EQ(8, parse_one_digit(s_string8));
+}
+
+TEST(ParseDigit, parse9)
+{
+    EXPECT_EQ(9, parse_one_digit(s_string9));
+}
+
+TEST(ParseDigit, parse0)
+{
+    EXPECT_EQ(0, parse_one_digit(s_string0));
+}
+
+TEST(ParseDisplay, parse1)
+{
+    EXPECT_EQ(1, parse_display(s_string1));
+}
+
+TEST(ParseDisplay, parse11)
+{
+    EXPECT_EQ(11, parse_display(s_stringTwo1));
+}
+
+TEST(ParseDisplay, parse111)
+{
+    EXPECT_EQ(11, parse_display(s_stringTwo1));
+}
+
+TEST(ParseDisplay, parse123456789)
+{
+    EXPECT_EQ(123456789, parse_display(s_string123456789));
+}
+
+TEST(ParseDisplay, parse123456780)
+{
+    EXPECT_EQ(123456780, parse_display(s_string123456780));
+}
