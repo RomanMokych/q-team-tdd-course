@@ -220,6 +220,10 @@ int parse(std::string str)
     {
         return 3;
     }
+    else if(str == s_string4)
+    {
+        return 4;
+    }
 
     return 0;
 }
