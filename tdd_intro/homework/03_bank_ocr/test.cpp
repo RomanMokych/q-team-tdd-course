@@ -240,6 +240,10 @@ int parse(std::string str)
     {
         return 8;
     }
+    else if(str == s_string9)
+    {
+        return 9;
+    }
 
     return 0;
 }
