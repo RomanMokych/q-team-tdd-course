@@ -206,9 +206,10 @@ std::string merge_strings(std::vector<std::string> strings)
     return result;
 }
 
-int parse(std::string)
+int parse(std::string str)
 {
-    return 0;
+    if(str == s_string1)
+        return 1;
 }
 
 TEST(Split, abc_splitted_to_a_b_c)
