@@ -190,6 +190,11 @@ const std::string s_string123456789 = { "    _  _     _  _  _  _  _ "
                                         "  | _| _||_||_ |_   ||_||_|"
                                         "  ||_  _|  | _||_|  ||_| _|"
                                       };
+
+const std::string s_string123456780 = { "    _  _     _  _  _  _  _ "
+                                        "  | _| _||_||_ |_   ||_|| |"
+                                        "  ||_  _|  | _||_|  ||_||_|"
+                                      };
 const int s_digit_width = 3;
 
 std::vector<std::string> split_to_3_strings(std::string str)
@@ -358,4 +363,9 @@ TEST(ParseDisplay, parse111)
 TEST(ParseDisplay, parse123456789)
 {
     EXPECT_EQ(123456789, parse_display(s_string123456789));
+}
+
+TEST(ParseDisplay, parse123456780)
+{
+    EXPECT_EQ(123456780, parse_display(s_string123456780));
 }
