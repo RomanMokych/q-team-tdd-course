@@ -141,6 +141,11 @@ const std::string s_stringAll1 = { "                           "
                                    "  |  |  |  |  |  |  |  |  |"
                                  };
 
+const std::string s_stringTwo1 = { "      "
+                                   "  |  |"
+                                   "  |  |"
+                                 };
+
 const std::string s_stringAll2 = {  " _  _  _  _  _  _  _  _  _ "
                                     " _| _| _| _| _| _| _| _| _|"
                                     "|_ |_ |_ |_ |_ |_ |_ |_ |_ "
@@ -324,4 +329,9 @@ TEST(ParseDigit, parse0)
 TEST(ParseDisplay, parse1)
 {
     EXPECT_EQ(1, parse_display(s_string1));
+}
+
+TEST(ParseDisplay, parse11)
+{
+    EXPECT_EQ(11, parse_display(s_stringTwo1));
 }
