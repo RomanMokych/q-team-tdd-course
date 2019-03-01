@@ -250,7 +250,7 @@ int parse_one_digit(std::string str)
 
 int parse_display(std:: string string)
 {
-    return 0;
+    return parse_one_digit(string);
 }
 
 TEST(Split, abc_splitted_to_a_b_c)
