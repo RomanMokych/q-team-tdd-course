@@ -224,6 +224,10 @@ int parse(std::string str)
     {
         return 4;
     }
+    else if(str == s_string5)
+    {
+        return 5;
+    }
 
     return 0;
 }
