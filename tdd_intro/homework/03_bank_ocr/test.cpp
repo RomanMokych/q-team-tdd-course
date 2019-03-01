@@ -90,114 +90,101 @@ Example input and output
 #include <gtest/gtest.h>
 #include <string>
 
-const unsigned short g_digitLen = 3;
-const unsigned short g_linesInDigit = 3;
-struct Digit
-{
-    std::string lines[g_linesInDigit];
-};
+const std::string s_string0 = { " _ "
+                                "| |"
+                                "|_|"
+                              };
+const std::string s_string1 = { "   "
+                                "  |"
+                                "  |"
+                              };
+const std::string s_string2 = { " _ "
+                                " _|"
+                                "|_ "
+                              };
+const std::string s_string3 = { " _ "
+                                " _|"
+                                " _|"
+                              };
+const std::string s_string4 = { "   "
+                                "|_|"
+                                "  |"
+                              };
+const std::string s_string5 = { " _ "
+                                "|_ "
+                                " _|"
+                              };
+const std::string s_string6 = { " _ "
+                                "|_ "
+                                "|_|"
+                              };
+const std::string s_string7 = { " _ "
+                                "  |"
+                                "  |"
+                              };
+const std::string s_string8 = { " _ "
+                                "|_|"
+                                "|_|"
+                              };
+const std::string s_string9 = { " _ "
+                                "|_|"
+                                " _|"
+                              };
 
-const unsigned short g_digitsOnDisplay = 9;
-struct Display
-{
-    std::string lines[g_linesInDigit];
-};
+const std::string s_stringAll0 = { " _  _  _  _  _  _  _  _  _ "
+                                   "| || || || || || || || || |"
+                                   "|_||_||_||_||_||_||_||_||_|"
+                                 };
 
-const Digit s_digit0 = { " _ ",
-                         "| |",
-                         "|_|"
-                       };
-const Digit s_digit1 = { "   ",
-                         "  |",
-                         "  |"
-                       };
-const Digit s_digit2 = { " _ ",
-                         " _|",
-                         "|_ "
-                       };
-const Digit s_digit3 = { " _ ",
-                         " _|",
-                         " _|"
-                       };
-const Digit s_digit4 = { "   ",
-                         "|_|",
-                         "  |"
-                       };
-const Digit s_digit5 = { " _ ",
-                         "|_ ",
-                         " _|"
-                       };
-const Digit s_digit6 = { " _ ",
-                         "|_ ",
-                         "|_|"
-                       };
-const Digit s_digit7 = { " _ ",
-                         "  |",
-                         "  |"
-                       };
-const Digit s_digit8 = { " _ ",
-                         "|_|",
-                         "|_|"
-                       };
-const Digit s_digit9 = { " _ ",
-                         "|_|",
-                         " _|"
-                       };
+const std::string s_stringAll1 = { "                           "
+                                   "  |  |  |  |  |  |  |  |  |"
+                                   "  |  |  |  |  |  |  |  |  |"
+                                 };
 
-const Display s_displayAll0 = { " _  _  _  _  _  _  _  _  _ ",
-                                "| || || || || || || || || |",
-                                "|_||_||_||_||_||_||_||_||_|"
-};
+const std::string s_stringAll2 = {  " _  _  _  _  _  _  _  _  _ "
+                                    " _| _| _| _| _| _| _| _| _|"
+                                    "|_ |_ |_ |_ |_ |_ |_ |_ |_ "
+                                 };
 
-const Display s_displayAll1 = { "                           ",
-                                "  |  |  |  |  |  |  |  |  |",
-                                "  |  |  |  |  |  |  |  |  |"
-};
+const std::string s_stringAll3 = { " _  _  _  _  _  _  _  _  _ "
+                                   " _| _| _| _| _| _| _| _| _|"
+                                   " _| _| _| _| _| _| _| _| _|"
+                                 };
 
-const Display s_displayAll2 = {  " _  _  _  _  _  _  _  _  _ ",
-                                 " _| _| _| _| _| _| _| _| _|",
-                                 "|_ |_ |_ |_ |_ |_ |_ |_ |_ "
-};
+const std::string s_stringAll4 = { "                           "
+                                   "|_||_||_||_||_||_||_||_||_|"
+                                   "  |  |  |  |  |  |  |  |  |"
+                                 };
 
-const Display s_displayAll3 = { " _  _  _  _  _  _  _  _  _ ",
-                                " _| _| _| _| _| _| _| _| _|",
-                                " _| _| _| _| _| _| _| _| _|"
-};
+const std::string s_stringAll5 = { " _  _  _  _  _  _  _  _  _ "
+                                   "|_ |_ |_ |_ |_ |_ |_ |_ |_ "
+                                   " _| _| _| _| _| _| _| _| _|"
+                                 };
 
-const Display s_displayAll4 = { "                           ",
-                                "|_||_||_||_||_||_||_||_||_|",
-                                "  |  |  |  |  |  |  |  |  |"
-};
+const std::string s_stringAll6 = { " _  _  _  _  _  _  _  _  _ "
+                                   "|_ |_ |_ |_ |_ |_ |_ |_ |_ "
+                                   "|_||_||_||_||_||_||_||_||_|"
+                                 };
 
-const Display s_displayAll5 = { " _  _  _  _  _  _  _  _  _ ",
-                                "|_ |_ |_ |_ |_ |_ |_ |_ |_ ",
-                                " _| _| _| _| _| _| _| _| _|"
-};
+const std::string s_stringAll7 = { " _  _  _  _  _  _  _  _  _ "
+                                   "  |  |  |  |  |  |  |  |  |"
+                                   "  |  |  |  |  |  |  |  |  |"
+                                 };
 
-const Display s_displayAll6 = { " _  _  _  _  _  _  _  _  _ ",
-                                "|_ |_ |_ |_ |_ |_ |_ |_ |_ ",
-                                "|_||_||_||_||_||_||_||_||_|"
-};
+const std::string s_stringAll8 = { " _  _  _  _  _  _  _  _  _ "
+                                   "|_||_||_||_||_||_||_||_||_|"
+                                   "|_||_||_||_||_||_||_||_||_|"
+                                 };
 
-const Display s_displayAll7 = { " _  _  _  _  _  _  _  _  _ ",
-                                "  |  |  |  |  |  |  |  |  |",
-                                "  |  |  |  |  |  |  |  |  |"
-};
+const std::string s_stringAll9 = { " _  _  _  _  _  _  _  _  _ "
+                                   "|_||_||_||_||_||_||_||_||_|"
+                                   " _| _| _| _| _| _| _| _| _|"
+                                 };
 
-const Display s_displayAll8 = { " _  _  _  _  _  _  _  _  _ ",
-                                "|_||_||_||_||_||_||_||_||_|",
-                                "|_||_||_||_||_||_||_||_||_|"
-};
-
-const Display s_displayAll9 = { " _  _  _  _  _  _  _  _  _ ",
-                                "|_||_||_||_||_||_||_||_||_|",
-                                " _| _| _| _| _| _| _| _| _|"
-};
-
-const Display s_display123456789 = { "    _  _     _  _  _  _  _ ",
-                                     "  | _| _||_||_ |_   ||_||_|",
-                                     "  ||_  _|  | _||_|  ||_| _|"
-};
+const std::string s_string123456789 = { "    _  _     _  _  _  _  _ "
+                                        "  | _| _||_||_ |_   ||_||_|"
+                                        "  ||_  _|  | _||_|  ||_| _|"
+                                      };
 
 std::vector<std::string> split_to_3_strings(std::string str)
 {
