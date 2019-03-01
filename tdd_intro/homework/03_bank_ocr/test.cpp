@@ -354,3 +354,8 @@ TEST(ParseDisplay, parse111)
 {
     EXPECT_EQ(11, parse_display(s_stringTwo1));
 }
+
+TEST(ParseDisplay, parse123456789)
+{
+    EXPECT_EQ(123456789, parse_display(s_string123456789));
+}
