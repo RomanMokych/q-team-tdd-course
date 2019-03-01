@@ -190,6 +190,7 @@ const std::string s_string123456789 = { "    _  _     _  _  _  _  _ "
                                         "  | _| _||_||_ |_   ||_||_|"
                                         "  ||_  _|  | _||_|  ||_| _|"
                                       };
+const int s_digit_width = 3;
 
 std::vector<std::string> split_to_3_strings(std::string str)
 {
@@ -263,10 +264,14 @@ int parse_display(std::string string)
         return parse_one_digit(string);
     }
 
-    std::string digit_str = merge_strings({lines[0].substr(0, 3),lines[1].substr(0, 3),lines[2].substr(0, 3)});
+    std::string digit_str = merge_strings({lines[0].substr(0, s_digit_width),
+                                           lines[1].substr(0, s_digit_width),
+                                           lines[2].substr(0, s_digit_width)});
     result += parse_one_digit(digit_str) * 10;
 
-    digit_str = merge_strings({lines[0].substr(3, 3),lines[1].substr(3, 3),lines[2].substr(3, 3)});
+    digit_str = merge_strings({lines[0].substr(s_digit_width, s_digit_width),
+                               lines[1].substr(s_digit_width, s_digit_width),
+                               lines[2].substr(s_digit_width, s_digit_width)});
     result += parse_one_digit(digit_str);
 
     return result;
