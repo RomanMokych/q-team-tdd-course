@@ -216,3 +216,9 @@ TEST(Split, abc_splitted_to_a_b_c)
     std::vector<std::string> result = {"a", "b", "c"};
     EXPECT_EQ(result, split_to_3_strings("abc"));
 }
+
+TEST(Split, abcabc_splitted_to_ab_ca_bc)
+{
+    std::vector<std::string> result = {"ab", "ca", "bc"};
+    EXPECT_EQ(result, split_to_3_strings("abcabc"));
+}
