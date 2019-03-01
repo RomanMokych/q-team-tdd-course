@@ -202,12 +202,10 @@ const Display s_display123456789 = { "    _  _     _  _  _  _  _ ",
 std::vector<std::string> split_to_3_strings(std::string str)
 {
     std::vector<std::string> result;
-    for(auto letter : str)
-    {
-        std::string letter_string;
-        letter_string += letter;
-        result.push_back(letter_string);
-    }
+    int substring_size = str.length() / 3;
+    result.push_back(str.substr(0, substring_size));
+    result.push_back(str.substr(substring_size, substring_size));
+    result.push_back(str.substr(2 * substring_size, substring_size));
     return result;
 }
 
