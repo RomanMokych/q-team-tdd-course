@@ -206,7 +206,7 @@ std::string merge_strings(std::vector<std::string> strings)
     return result;
 }
 
-int parse(std::string str)
+int parse_one_digit(std::string str)
 {
     if(str == s_string1)
     {
@@ -266,52 +266,52 @@ TEST(Merge, a_b_c_merged_into_abc)
     EXPECT_EQ(result, merge_strings({"a", "b", "c"}));
 }
 
-TEST(Parse, parse1)
+TEST(ParseDigit, parse1)
 {
-    EXPECT_EQ(1, parse(s_string1));
+    EXPECT_EQ(1, parse_one_digit(s_string1));
 }
 
-TEST(Parse, parse2)
+TEST(ParseDigit, parse2)
 {
-    EXPECT_EQ(2, parse(s_string2));
+    EXPECT_EQ(2, parse_one_digit(s_string2));
 }
 
-TEST(Parse, parse3)
+TEST(ParseDigit, parse3)
 {
-    EXPECT_EQ(3, parse(s_string3));
+    EXPECT_EQ(3, parse_one_digit(s_string3));
 }
 
-TEST(Parse, parse4)
+TEST(ParseDigit, parse4)
 {
-    EXPECT_EQ(4, parse(s_string4));
+    EXPECT_EQ(4, parse_one_digit(s_string4));
 }
 
-TEST(Parse, parse5)
+TEST(ParseDigit, parse5)
 {
-    EXPECT_EQ(5, parse(s_string5));
+    EXPECT_EQ(5, parse_one_digit(s_string5));
 }
 
-TEST(Parse, parse6)
+TEST(ParseDigit, parse6)
 {
-    EXPECT_EQ(6, parse(s_string6));
+    EXPECT_EQ(6, parse_one_digit(s_string6));
 }
 
-TEST(Parse, parse7)
+TEST(ParseDigit, parse7)
 {
-    EXPECT_EQ(7, parse(s_string7));
+    EXPECT_EQ(7, parse_one_digit(s_string7));
 }
 
-TEST(Parse, parse8)
+TEST(ParseDigit, parse8)
 {
-    EXPECT_EQ(8, parse(s_string8));
+    EXPECT_EQ(8, parse_one_digit(s_string8));
 }
 
-TEST(Parse, parse9)
+TEST(ParseDigit, parse9)
 {
-    EXPECT_EQ(9, parse(s_string9));
+    EXPECT_EQ(9, parse_one_digit(s_string9));
 }
 
-TEST(Parse, parse0)
+TEST(ParseDigit, parse0)
 {
-    EXPECT_EQ(0, parse(s_string0));
+    EXPECT_EQ(0, parse_one_digit(s_string0));
 }
