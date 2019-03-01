@@ -209,9 +209,14 @@ std::vector<std::string> split_to_3_strings(std::string str)
     return result;
 }
 
-std::string merge_strings(std::vector<std::string>)
+std::string merge_strings(std::vector<std::string> strings)
 {
-    return "";
+    std::string result;
+    for(const auto str : strings)
+    {
+        result.append(str);
+    }
+    return result;
 }
 
 TEST(Split, abc_splitted_to_a_b_c)
