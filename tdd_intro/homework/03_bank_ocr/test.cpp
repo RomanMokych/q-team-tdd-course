@@ -258,22 +258,17 @@ int parse_display(std::string string)
 {
     std::vector<std::string> lines = split_to_3_strings(string);
 
+    int digit_count = lines[0].size() / s_digit_width;
+    int pow_val = pow(10, digit_count - 1);
     int result = 0;
-    if(string.size() == 9)
+
+    for(int digit = 0; digit < digit_count; pow_val = pow_val/10, digit++)
     {
-        return parse_one_digit(string);
+        std::string digit_str = merge_strings({lines[0].substr(digit*3, s_digit_width),
+                                               lines[1].substr(digit*3, s_digit_width),
+                                               lines[2].substr(digit*3, s_digit_width)});
+        result += parse_one_digit(digit_str) * pow_val;
     }
-
-    std::string digit_str = merge_strings({lines[0].substr(0, s_digit_width),
-                                           lines[1].substr(0, s_digit_width),
-                                           lines[2].substr(0, s_digit_width)});
-    result += parse_one_digit(digit_str) * 10;
-
-    digit_str = merge_strings({lines[0].substr(s_digit_width, s_digit_width),
-                               lines[1].substr(s_digit_width, s_digit_width),
-                               lines[2].substr(s_digit_width, s_digit_width)});
-    result += parse_one_digit(digit_str);
-
     return result;
 }
 
