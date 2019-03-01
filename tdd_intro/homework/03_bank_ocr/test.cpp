@@ -253,9 +253,23 @@ int parse_one_digit(std::string str)
     return 0;
 }
 
-int parse_display(std:: string string)
+int parse_display(std::string string)
 {
-    return parse_one_digit(string);
+    std::vector<std::string> lines = split_to_3_strings(string);
+
+    int result = 0;
+    if(string.size() == 9)
+    {
+        return parse_one_digit(string);
+    }
+
+    std::string digit_str = merge_strings({lines[0].substr(0, 3),lines[1].substr(0, 3),lines[2].substr(0, 3)});
+    result += parse_one_digit(digit_str) * 10;
+
+    digit_str = merge_strings({lines[0].substr(3, 3),lines[1].substr(3, 3),lines[2].substr(3, 3)});
+    result += parse_one_digit(digit_str);
+
+    return result;
 }
 
 TEST(Split, abc_splitted_to_a_b_c)
