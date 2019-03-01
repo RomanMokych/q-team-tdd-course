@@ -206,6 +206,11 @@ std::string merge_strings(std::vector<std::string> strings)
     return result;
 }
 
+int parse(std::string)
+{
+    return 0;
+}
+
 TEST(Split, abc_splitted_to_a_b_c)
 {
     std::vector<std::string> result = {"a", "b", "c"};
@@ -222,4 +227,9 @@ TEST(Merge, a_b_c_merged_into_abc)
 {
     std::string result = "abc";
     EXPECT_EQ(result, merge_strings({"a", "b", "c"}));
+}
+
+TEST(Parse, parse0)
+{
+    EXPECT_EQ(1, parse(s_string1));
 }
