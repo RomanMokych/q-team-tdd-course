@@ -209,7 +209,9 @@ std::string merge_strings(std::vector<std::string> strings)
 int parse(std::string str)
 {
     if(str == s_string1)
+    {
         return 1;
+    }
 }
 
 TEST(Split, abc_splitted_to_a_b_c)
@@ -230,7 +232,7 @@ TEST(Merge, a_b_c_merged_into_abc)
     EXPECT_EQ(result, merge_strings({"a", "b", "c"}));
 }
 
-TEST(Parse, parse0)
+TEST(Parse, parse1)
 {
     EXPECT_EQ(1, parse(s_string1));
 }
