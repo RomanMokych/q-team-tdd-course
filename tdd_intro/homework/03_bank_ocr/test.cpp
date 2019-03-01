@@ -301,3 +301,8 @@ TEST(Parse, parse8)
 {
     EXPECT_EQ(8, parse(s_string8));
 }
+
+TEST(Parse, parse9)
+{
+    EXPECT_EQ(9, parse(s_string9));
+}
