@@ -209,6 +209,11 @@ std::vector<std::string> split_to_3_strings(std::string str)
     return result;
 }
 
+std::string merge_strings(std::vector<std::string>)
+{
+    return "";
+}
+
 TEST(Split, abc_splitted_to_a_b_c)
 {
     std::vector<std::string> result = {"a", "b", "c"};
@@ -219,4 +224,10 @@ TEST(Split, abcabc_splitted_to_ab_ca_bc)
 {
     std::vector<std::string> result = {"ab", "ca", "bc"};
     EXPECT_EQ(result, split_to_3_strings("abcabc"));
+}
+
+TEST(Merge, a_b_c_merged_into_abc)
+{
+    std::string result = "abc";
+    EXPECT_EQ(result, merge_strings({"a", "b", "c"}));
 }
