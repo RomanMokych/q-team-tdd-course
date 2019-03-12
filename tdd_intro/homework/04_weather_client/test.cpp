@@ -66,3 +66,15 @@ public:
     virtual double GetAverageWindDirection(IWeatherServer& server, const std::string& date) = 0;
     virtual double GetMaximumWindSpeed(IWeatherServer& server, const std::string& date) = 0;
 };
+
+/*
+ * Steps:
+ *  Create fake client and wather server
+ *  Test for empy request
+ *  Simple test "31.08.2018;03:00" : "20;181;5.1" with hardcode strings
+ *  Parsing request: get day, time
+ *  Check valid request
+ *  Save data to wather server
+ *  Add several client's requests
+ *
+ */
