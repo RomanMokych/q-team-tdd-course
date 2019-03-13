@@ -118,16 +118,16 @@ public:
 private:
     bool isTimeValid(const std::string& request)
     {
-        if(request[11] == '1' && request[12] == '0')
+        int hours = atoi(request.substr(11, 2).c_str());
+        if(hours == 3 ||
+                hours == 9 ||
+                hours == 15 ||
+                hours == 21)
         {
-            return false;
-        }
-        else if(request[11] == '1' && request[12] == '1')
-        {
-            return false;
+            return true;
         }
 
-        return true;
+        return false;
     }
 };
 
