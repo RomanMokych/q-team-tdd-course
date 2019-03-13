@@ -405,3 +405,15 @@ TEST(WatherServerTest, AverageTemperature_for_date_01_09_2018__expected_21)
 
     EXPECT_EQ(client.GetAverageTemperature(server, date), response);
 }
+
+TEST(WatherServerTest, AverageWindDirection_for_date_31_08_2018__is__189_25)
+{
+    FakeWatherServer server;
+    FakeWatherClient client;
+
+    const std::string date("31.09.2018" );
+    const double response = 189.25;
+
+    EXPECT_EQ(client.GetAverageWindDirection(server, date), response);
+}
+
