@@ -119,6 +119,32 @@ public:
     virtual double GetMaximumWindSpeed(IWeatherServer& server, const std::string& date) = 0;
 };
 
+class WeatherClient : public IWeatherClient
+{
+public:
+    virtual ~WeatherClient() { }
+    virtual double GetAverageTemperature(IWeatherServer& server, const std::string& date)
+    {
+        return 0;
+    }
+    virtual double GetMinimumTemperature(IWeatherServer& server, const std::string& date)
+    {
+        return 0;
+    }
+    virtual double GetMaximumTemperature(IWeatherServer& server, const std::string& date)
+    {
+        return 0;
+    }
+    virtual double GetAverageWindDirection(IWeatherServer& server, const std::string& date)
+    {
+        return 0;
+    }
+    virtual double GetMaximumWindSpeed(IWeatherServer& server, const std::string& date)
+    {
+        return 0;
+    }
+};
+
 class WeatherRetriever
 {
 public:
@@ -163,4 +189,12 @@ TEST(WeatherRetriever, retrieve_weather_for_31_08)
     OneDayWeather expected {{20, 181, 5.1}, {23, 204, 4.9}, {33, 193, 4.3}, {26,179,4.5}};
     OneDayWeather actual = WeatherRetriever::getOneDayWeather(server, day);
     EXPECT_EQ(expected, actual);
+}
+
+TEST(WeatherClient, av_for_31_08_is25_point_5)
+{
+    std::string day = "31.08.2018";
+    WeatherServer server;
+    WeatherClient client;
+    EXPECT_EQ(25.5, client.GetAverageTemperature(server, day));
 }
