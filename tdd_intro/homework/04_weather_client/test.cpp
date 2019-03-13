@@ -195,7 +195,12 @@ public:
     }
     virtual double GetAverageWindDirection(IWeatherServer& server, const std::string& date)
     {
-        return 0;
+        OneDayWeather allDayWeather = WeatherRetriever::getOneDayWeather(server, date);
+        double averageWindDirection= (allDayWeather.morningWeather.windDirection +
+                                     allDayWeather.dayWeather.windDirection +
+                                     allDayWeather.eveningWeather.windDirection +
+                                     allDayWeather.nightWeather.windDirection) / 4;
+        return averageWindDirection;
     }
     virtual double GetMaximumWindSpeed(IWeatherServer& server, const std::string& date)
     {
