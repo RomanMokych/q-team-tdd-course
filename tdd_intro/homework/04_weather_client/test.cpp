@@ -333,3 +333,14 @@ TEST(WatherServerTest, wather_client_request_MaximumTemp_for_date_31_08_2018__ex
 
     EXPECT_EQ(client.GetMaximumTemperature(server, date), response);
 }
+
+TEST(WatherServerTest, wather_client_request_MaximumTemp_for_date_01_09_2018__expected_31)
+{
+    FakeWatherServer server;
+    FakeWatherClient client;
+
+    const std::string date("01.09.2018" );
+    const double response = 31;
+
+    EXPECT_EQ(client.GetMaximumTemperature(server, date), response);
+}
