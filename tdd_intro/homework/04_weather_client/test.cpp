@@ -235,3 +235,11 @@ TEST(WeatherClient, max_temp_for_02_09_is_34)
     WeatherClient client;
     EXPECT_EQ(34, client.GetMaximumTemperature(server, day));
 }
+
+TEST(WeatherClient, av_wind_direction_for_01_09_is_34)
+{
+    std::string day = "01.09.2018";
+    WeatherServer server;
+    WeatherClient client;
+    EXPECT_EQ(135.75, client.GetAverageWindDirection(server, day));
+}
