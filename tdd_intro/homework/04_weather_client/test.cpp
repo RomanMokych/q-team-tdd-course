@@ -126,14 +126,15 @@ TEST(WeatherServerStub, Responses_with_stub_data)
     WeatherServerStub stubServer;
 
     std::string expectedResponse_1 = "some_weather";
-    std::string weatherDate_1 = "30.09.1992";
+    std::string weatherRequest_1 = "some_request";
     std::string expectedResponse_2 = "some_weather_2";
-    std::string weatherDate_2 = "12.05.1993";
+    std::string weatherRequest_2 = "some_request_2";
 
-    stubServer.SetWeatherForDate(expectedResponse_1, weatherDate_1);
-    stubServer.SetWeatherForDate(expectedResponse_2, weatherDate_2);
+    stubServer.SetWeatherForDate(expectedResponse_1, weatherRequest_1);
+    stubServer.SetWeatherForDate(expectedResponse_2, weatherRequest_2);
 
-    EXPECT_EQ(expectedResponse_1, stubServer.GetWeather(weatherDate_1));
-    EXPECT_EQ(expectedResponse_2, stubServer.GetWeather(weatherDate_2));
+    EXPECT_EQ(expectedResponse_1, stubServer.GetWeather(weatherRequest_1));
+    EXPECT_EQ(expectedResponse_2, stubServer.GetWeather(weatherRequest_2));
     EXPECT_EQ("", stubServer.GetWeather("not_stub_request"));
 }
+
