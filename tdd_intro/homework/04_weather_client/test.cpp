@@ -168,7 +168,18 @@ public:
     }
     virtual double GetMaximumTemperature(IWeatherServer& server, const std::string& date)
     {
-        return 0.0;
+        auto dayData = getAllDataForDay(server, date);
+        double maxValue = 0.0;
+        for(auto it : dayData)
+        {
+            double value = parseTemperature(it);
+            if(maxValue < value)
+            {
+                maxValue = value;
+            }
+        }
+
+        return maxValue;
     }
     virtual double GetAverageWindDirection(IWeatherServer& server, const std::string& date)
     {
@@ -195,6 +206,11 @@ private:
     double parseWindSpeed(const std::string& response)
     {
         return atof(response.substr(7, 3).c_str());
+    }
+
+    double parseTemperature(const std::string& response)
+    {
+        return atof(response.substr(0, 2).c_str());
     }
 
     std::vector<std::string> getAllDataForDay(IWeatherServer& server, const std::string& date)
