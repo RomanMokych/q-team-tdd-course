@@ -176,15 +176,32 @@ public:
     }
     virtual double GetMaximumWindSpeed(IWeatherServer& server, const std::string& date)
     {
-        std::string request = date;
-        std::string response1 =  server.GetWeather(date + ";03:00");
-        std::string response2 =  server.GetWeather(date + ";21:00");
-        double value1 = atof(response1.substr(7, 3).c_str());
-        double value2 = atof(response2.substr(7, 3).c_str());
+        auto dayData = getAllDataForDay(server, date);
+        double maxValue = 0.0;
+        for(auto it : dayData)
+        {
+            double value = atof(it.substr(7, 3).c_str());
+            if(maxValue < value)
+            {
+                maxValue = value;
+            }
+        }
 
-        return std::max(value1, value2);
+        return maxValue;
     }
 
+private:
+    std::vector<std::string> getAllDataForDay(IWeatherServer& server, const std::string& date)
+    {
+        const std::string timePoint1 = "03:00";
+        const std::string timePoint2 = "21:00";
+
+        std::vector<std::string> result;
+        result.push_back(server.GetWeather(date + ";" + timePoint1));
+        result.push_back(server.GetWeather(date + ";" + timePoint2));
+
+        return result;
+    }
 };
 TEST(WatherServerTest, wather_server_empty_request_emtpy_response)
 {
