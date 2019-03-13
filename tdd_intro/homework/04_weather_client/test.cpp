@@ -58,15 +58,19 @@ public:
 class WeatherServerStub : public IWeatherServer
 {
 public:
-    void SetWeatherForDate(const std::string& whather, const std::string& date)
+    void SetWeatherForDate(const std::string& weather, const std::string& date)
     {
-
+        m_stubResponses[date] = weather;
     }
 
     virtual std::string GetWeather(const std::string& request)
     {
-        return "";
+        std::map<std::string, std::string>::iterator it = m_stubResponses.find(request);
+        return it->second;
     }
+
+private:
+    std::map<std::string, std::string> m_stubResponses;
 };
 
 // Implement this interface
@@ -119,6 +123,6 @@ TEST(WeatherServerStub, Responses_with_stub_data)
     std::string expectedResponse = "some_weather";
     std::string weatherDate = "30.09.1992";
 
-    stubServer.SetWeatherForDate(expectedResponse, "30.09.1992");
+    stubServer.SetWeatherForDate(expectedResponse, weatherDate);
     EXPECT_EQ(expectedResponse, stubServer.GetWeather(weatherDate));
 }
