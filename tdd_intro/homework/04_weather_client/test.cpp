@@ -219,3 +219,11 @@ TEST(WeatherClient, min_temp_for_01_09_is_19)
     WeatherClient client;
     EXPECT_EQ(19, client.GetMinimumTemperature(server, day));
 }
+
+TEST(WeatherClient, max_temp_for_02_09_is_34)
+{
+    std::string day = "02.09.2018";
+    WeatherServer server;
+    WeatherClient client;
+    EXPECT_EQ(34, client.GetMaximumTemperature(server, day));
+}
