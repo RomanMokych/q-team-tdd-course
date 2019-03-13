@@ -46,6 +46,20 @@ IMPORTANT:
 
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
+#include <map>
+
+const static std::map<std::string, std::string> s_weatherMap = {{"31.08.2018;03:00","20;181;5.1"},
+                                                                {"31.08.2018;09:00","23;204;4.9"},
+                                                                {"31.08.2018;15:00","33;193;4.3"},
+                                                                {"31.08.2018;21:00","26;179;4.5"},
+                                                                {"01.09.2018;03:00","19;176;4.2"},
+                                                                {"01.09.2018;09:00","22;131;4.1"},
+                                                                {"01.09.2018;15:00","31;109;4.0"},
+                                                                {"01.09.2018;21:00","24;127;4.1"},
+                                                                {"02.09.2018;03:00","21;158;3.8"},
+                                                                {"02.09.2018;09:00","25;201;3.5"},
+                                                                {"02.09.2018;15:00","34;258;3.7"},
+                                                                {"02.09.2018;21:00","27;299;4.0"}};
 
 struct Weather
 {
@@ -57,7 +71,7 @@ bool operator==(const Weather& left , const Weather& right)
 {
     return left.temperature == right.temperature &&
             left.windDirection == right.windDirection &&
-            left.windSpeed == right.windSpeed;
+            std::abs(left.windSpeed - right.windSpeed) < 0.01;
 }
 
 struct OneDayWeather
@@ -89,7 +103,7 @@ public:
     virtual ~WeatherServer() { }
     virtual std::string GetWeather(const std::string& request)
     {
-        return "";
+        return s_weatherMap.at(request);
     }
 };
 
@@ -110,7 +124,43 @@ class WeatherRetriever
 public:
     static OneDayWeather getOneDayWeather(IWeatherServer& server, std::string& date)
     {
-        return {};
+        OneDayWeather result;
+        std::string nightWeatherRequest = date;
+        nightWeatherRequest.append(";03:00");
+        std::string nightWeather = server.GetWeather(nightWeatherRequest);
+        result.nightWeather.temperature = std::stod(nightWeather.substr(0, nightWeather.find(';')));
+        nightWeather = nightWeather.substr(nightWeather.find(';') + 1);
+        result.nightWeather.windDirection = std::stod(nightWeather.substr(0, nightWeather.find(';')));
+        nightWeather = nightWeather.substr(nightWeather.find(';') + 1);
+        result.nightWeather.windSpeed = std::stod(nightWeather);
+
+        std::string morningWeatherRequest = date;
+        morningWeatherRequest.append(";09:00");
+        std::string morningWeather = server.GetWeather(morningWeatherRequest);
+        result.morningWeather.temperature = std::stod(morningWeather.substr(0, morningWeather.find(';')));
+        morningWeather = morningWeather.substr(morningWeather.find(';') + 1);
+        result.morningWeather.windDirection = std::stod(morningWeather.substr(0, morningWeather.find(';')));
+        morningWeather = morningWeather.substr(morningWeather.find(';') + 1);
+        result.morningWeather.windSpeed = std::stod(morningWeather);
+
+        std::string dayWeatherRequest = date;
+        dayWeatherRequest.append(";15:00");
+        std::string dayWeather = server.GetWeather(dayWeatherRequest);
+        result.dayWeather.temperature = std::stod(dayWeather.substr(0, dayWeather.find(';')));
+        dayWeather = dayWeather.substr(dayWeather.find(';') + 1);
+        result.dayWeather.windDirection = std::stod(dayWeather.substr(0, dayWeather.find(';')));
+        dayWeather = dayWeather.substr(dayWeather.find(';') + 1);
+        result.dayWeather.windSpeed = std::stod(dayWeather);
+
+        std::string eveningWeatherRequest = date;
+        eveningWeatherRequest.append(";21:00");
+        std::string eveningWeather = server.GetWeather(eveningWeatherRequest);
+        result.eveningWeather.temperature = std::stod(eveningWeather.substr(0, eveningWeather.find(';')));
+        eveningWeather = eveningWeather.substr(eveningWeather.find(';') + 1);
+        result.eveningWeather.windDirection = std::stod(eveningWeather.substr(0, eveningWeather.find(';')));
+        eveningWeather = eveningWeather.substr(eveningWeather.find(';') + 1);
+        result.eveningWeather.windSpeed = std::stod(eveningWeather);
+        return result;
     }
 };
 
