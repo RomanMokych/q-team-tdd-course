@@ -166,7 +166,7 @@ public:
         }
     }
 
-private:
+public:
     short temperature;
     unsigned short windDirection;
     double windSpeed;
@@ -202,6 +202,11 @@ TEST(WeatherResponseParser, Validate_response)
 
     // validate wind direction range
     EXPECT_THROW(WeatherResponseParser parser("20;700;20.5"), std::invalid_argument);
+
+    WeatherResponseParser parser("-5;90;13.5");
+    EXPECT_EQ(-5, parser.temperature);
+    EXPECT_EQ(90, parser.windDirection);
+    EXPECT_EQ(13.5, parser.windSpeed);
 }
 
 TEST(Utils, Split_strings_by_separator)
