@@ -180,7 +180,7 @@ public:
         double maxValue = 0.0;
         for(auto it : dayData)
         {
-            double value = atof(it.substr(7, 3).c_str());
+            double value = parseWindSpeed(it);
             if(maxValue < value)
             {
                 maxValue = value;
@@ -191,6 +191,12 @@ public:
     }
 
 private:
+
+    double parseWindSpeed(const std::string& response)
+    {
+        return atof(response.substr(7, 3).c_str());
+    }
+
     std::vector<std::string> getAllDataForDay(IWeatherServer& server, const std::string& date)
     {
         const std::string timePoint1 = "03:00";
