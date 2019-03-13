@@ -129,9 +129,11 @@ public:
         windDirection(0),
         windSpeed(0)
     {
-
-
-        throw std::runtime_error("Invalid response format.");
+        std::vector<std::string> responseComponents;
+        if(responseComponents.size() != 3)
+        {
+            throw std::runtime_error("Invalid response format.");
+        }
     }
 
 private:
@@ -195,7 +197,6 @@ TEST(Utils, Split_strings_by_separator)
     splitStringsBySeparator("", ";", actualResult);
     expectedResult = {};
     EXPECT_EQ(expectedResult, actualResult);
-
 }
 
 
