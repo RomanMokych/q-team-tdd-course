@@ -101,3 +101,14 @@ TEST(WatherServerTest, wather_server_empty_request_emtpy_response)
 
     EXPECT_EQ(server.GetWeather(request), response);
 }
+
+TEST(WatherServerTest, wather_server_check_valid_request_format)
+{
+    FakeWatherServer server;
+
+    const std::string request("02.09.2018;03:00");
+    const std::string response("20;181;5.1");
+
+
+    EXPECT_EQ(server.GetWeather(request), response);
+}
