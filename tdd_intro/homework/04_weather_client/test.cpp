@@ -66,6 +66,11 @@ public:
     virtual std::string GetWeather(const std::string& request)
     {
         std::map<std::string, std::string>::iterator it = m_stubResponses.find(request);
+        if(it == m_stubResponses.end())
+        {
+            return "";
+        }
+
         return it->second;
     }
 
