@@ -150,7 +150,17 @@ class WeatherClient : public IWeatherClient
 public:
     virtual double GetAverageTemperature(IWeatherServer& server, const std::string& date)
     {
-        return 0.0;
+        double temperatureSum = 0.0;
+
+        for(auto time : kAvailableWeatherTime)
+        {
+            std::string weatherResponse = server.GetWeather(date + ";" + time);
+            WeatherResponseParser responseParser(weatherResponse);
+            temperatureSum += responseParser.temperature;
+
+        }
+
+         return temperatureSum / kAvailableWeatherTime.size();
     }
 
     virtual double GetMinimumTemperature(IWeatherServer& server, const std::string& date)
@@ -274,6 +284,18 @@ TEST(WeatherClient, GetMaximumTemperature)
 
     WeatherClient client;
     EXPECT_EQ(50, client.GetMaximumTemperature(stubServer, "02.09.2018"));
+}
+
+TEST(WeatherClient, GetAverageTemperature)
+{
+    WeatherServerStub stubServer;
+    stubServer.SetWeatherForDate("50;0;0", "02.09.2018;03:00");
+    stubServer.SetWeatherForDate("-20;0;0", "02.09.2018;09:00");
+    stubServer.SetWeatherForDate("0;0;0", "02.09.2018;15:00");
+    stubServer.SetWeatherForDate("10;0;0", "02.09.2018;21:00");
+
+    WeatherClient client;
+    EXPECT_EQ(10, client.GetAverageTemperature(stubServer, "02.09.2018"));
 }
 
 TEST(WeatherClient, GetMaximumWindSpeed)
