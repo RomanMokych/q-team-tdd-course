@@ -185,7 +185,11 @@ public:
     virtual double GetMaximumTemperature(IWeatherServer& server, const std::string& date)
     {
         auto dayData = getAllDataForDay(server, date);
-        double maxValue = 0.0;
+        double maxValue = 0;
+        if(dayData.size())
+        {
+            maxValue = parseTemperature(*dayData.begin());
+        }
         for(auto it : dayData)
         {
             double value = parseTemperature(it);
