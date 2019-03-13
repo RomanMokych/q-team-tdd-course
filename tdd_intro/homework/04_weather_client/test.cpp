@@ -95,10 +95,9 @@ TEST(WatherServerTest, wather_server_empty_request_emtpy_response)
 {
     FakeWatherServer server;
 
-
     const std::string request("");
-    const std::string responce("");
+    const std::string response("");
 
 
-    EXPECT_EQ(server.GetWeather(request), responce);
+    EXPECT_EQ(server.GetWeather(request), response);
 }
