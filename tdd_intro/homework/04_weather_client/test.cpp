@@ -160,7 +160,15 @@ public:
     virtual ~FakeWatherClient() { }
     virtual double GetAverageTemperature(IWeatherServer& server, const std::string& date)
     {
-        return 0.0;
+        auto dayData = getAllDataForDay(server, date);
+        double sum = 0;
+
+        for(auto it : dayData)
+        {
+            sum += parseTemperature(it);
+        }
+
+        return sum > 0 ? sum/dayData.size() : 0;
     }
     virtual double GetMinimumTemperature(IWeatherServer& server, const std::string& date)
     {
