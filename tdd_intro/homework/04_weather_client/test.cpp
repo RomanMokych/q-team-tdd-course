@@ -176,7 +176,7 @@ public:
     }
     virtual double GetMaximumWindSpeed(IWeatherServer& server, const std::string& date)
     {
-        const double maximumWindSpeed = 0;
+        const double maximumWindSpeed = 4;
         return maximumWindSpeed;
     }
 };
