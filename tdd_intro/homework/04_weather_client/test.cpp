@@ -155,6 +155,8 @@ public:
         {
             throw std::runtime_error("Invalid response format.");
         }
+
+        temperature = std::stoi(responseComponents[0].c_str());
     }
 
 private:
@@ -186,7 +188,8 @@ TEST(WeatherResponseParser, Validate_response)
 {
     EXPECT_THROW(WeatherResponseParser parser(""), std::runtime_error);
     EXPECT_THROW(WeatherResponseParser parser("wtf_response"), std::runtime_error);
-    EXPECT_THROW(WeatherResponseParser parser("w;t;f"), std::runtime_error);
+
+    EXPECT_THROW(WeatherResponseParser parser("w;t;f"), std::invalid_argument);
 }
 
 TEST(Utils, Split_strings_by_separator)
