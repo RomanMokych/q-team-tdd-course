@@ -251,4 +251,16 @@ TEST(WatherServerTest, wather_client_request_MaximumWindSpeed_for_date_02_09_201
     EXPECT_EQ(client.GetMaximumWindSpeed(server, date), response);
 }
 
+TEST(WatherServerTest, wather_client_request_MaximumWindSpeed_for_date_31_08_2018__expected_5_1)
+{
+    FakeWatherServer server;
+    FakeWatherClient client;
+
+    const std::string date("31.08.2018" );
+    const double response = 5.1;
+
+    EXPECT_EQ(client.GetMaximumWindSpeed(server, date), response);
+}
+
+
 
