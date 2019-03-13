@@ -169,17 +169,17 @@ public:
     virtual double GetMaximumTemperature(IWeatherServer& server, const std::string& date)
     {
         return 0.0;
-    };
+    }
     virtual double GetAverageWindDirection(IWeatherServer& server, const std::string& date)
     {
         return 0.0;
-    };
+    }
     virtual double GetMaximumWindSpeed(IWeatherServer& server, const std::string& date)
     {
         std::string response = server.GetWeather(date);
         const double maximumWindSpeed = atof(response.substr(7, 3).c_str());
         return maximumWindSpeed;
-    };
+    }
 };
 TEST(WatherServerTest, wather_server_empty_request_emtpy_response)
 {
@@ -241,7 +241,7 @@ TEST(WatherServerTest, wather_server_request_bad_request_length)
     EXPECT_EQ(server.GetWeather(request), s_invalid_request);
 }
 
-TEST(WatherServerTest, wather_client_request_MaximumWindSpeed)
+TEST(WatherServerTest, wather_client_request_MaximumWindSpeed_for_date_02_09_2018__expected_4)
 {
     FakeWatherServer server;
     FakeWatherClient client;
