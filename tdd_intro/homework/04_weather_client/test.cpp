@@ -119,6 +119,15 @@ public:
     }
 };
 
+class WeatherResponseParser
+{
+public:
+    WeatherResponseParser(std::string weatherResponse)
+    {
+
+    }
+};
+
 // Tests and todo list:
 
 TEST(WeatherServerStub, Responses_with_stub_data)
@@ -137,4 +146,10 @@ TEST(WeatherServerStub, Responses_with_stub_data)
     EXPECT_EQ(expectedResponse_2, stubServer.GetWeather(weatherRequest_2));
     EXPECT_EQ("", stubServer.GetWeather("not_stub_request"));
 }
+
+TEST(WeatherResponseParser, Invalid_response_throws_exception)
+{
+    EXPECT_THROW(WeatherResponseParser parser("wtf_response"), std::runtime_error);
+}
+
 
