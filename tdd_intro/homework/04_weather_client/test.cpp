@@ -188,7 +188,16 @@ public:
 
     virtual double GetMaximumWindSpeed(IWeatherServer& server, const std::string& date)
     {
-        return 0.0;
+        std::vector<double> windSpeedForDay(kAvailableWeatherTime.size());
+
+        for(auto time : kAvailableWeatherTime)
+        {
+            std::string weatherResponse = server.GetWeather(date + ";" + time);
+            WeatherResponseParser responseParser(weatherResponse);
+            windSpeedForDay.push_back(responseParser.windSpeed);
+        }
+
+         return *(std::max_element(windSpeedForDay.begin(), windSpeedForDay.end()));
     }
 };
 
