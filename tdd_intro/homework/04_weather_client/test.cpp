@@ -103,7 +103,10 @@ public:
     virtual ~WeatherServer() { }
     virtual std::string GetWeather(const std::string& request)
     {
-        return s_weatherMap.at(request);
+        if(s_weatherMap.find(request) != s_weatherMap.end())
+            return s_weatherMap.at(request);
+        else
+            return "";
     }
 };
 
@@ -135,6 +138,8 @@ private:
     {
         Weather weather;
         std::string weatherString = server.GetWeather(weatherRequest);
+        if(weatherString.empty())
+            return {};
         weather.temperature = std::stod(weatherString.substr(0, weatherString.find(';')));
         weatherString = weatherString.substr(weatherString.find(';') + 1);
         weather.windDirection = std::stod(weatherString.substr(0, weatherString.find(';')));
