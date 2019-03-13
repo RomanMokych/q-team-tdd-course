@@ -116,6 +116,10 @@ public:
         {
             return "23;204;4.9";
         }
+        else if(request == "02.09.2018;21:00")
+        {
+            return  "27;299;4.0";
+        }
 
         return request;
     }
@@ -158,7 +162,9 @@ public:
     };
     virtual double GetMaximumWindSpeed(IWeatherServer& server, const std::string& date)
     {
-        return 0.0;
+        std::string response = server.GetWeather(date);
+        const double maximumWindSpeed = atof(response.substr(7, 3).c_str());
+        return maximumWindSpeed;
     };
 };
 TEST(WatherServerTest, wather_server_empty_request_emtpy_response)
@@ -226,8 +232,8 @@ TEST(WatherServerTest, wather_client_request_MaximumWindSpeed)
     FakeWatherServer server;
     FakeWatherClient client;
 
-    const std::string date("31.08.2018;11:00");
-    const double response = 5.1;
+    const std::string date("02.09.2018;21:00" );
+    const double response = 4.0;
 
     EXPECT_EQ(client.GetMaximumWindSpeed(server, date), response);
 }
