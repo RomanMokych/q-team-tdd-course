@@ -81,8 +81,11 @@ public:
  *
  */
 
+const static std::string s_invalid_request = "invalid request";
+
 class FakeWatherServer : public IWeatherServer
 {
+
 public:
     virtual ~FakeWatherServer() { }
 
@@ -106,7 +109,7 @@ public:
 
         if(!isTimeValid(request))
         {
-            return "invalid request";
+            return s_invalid_request;
         }
 
         return request;
@@ -163,8 +166,6 @@ TEST(WatherServerTest, wather_server_request_bad_time_10_00)
     FakeWatherServer server;
 
     const std::string request("31.08.2018;10:00");
-    const std::string response("invalid request");
 
-
-    EXPECT_EQ(server.GetWeather(request), response);
+    EXPECT_EQ(server.GetWeather(request), s_invalid_request);
 }
