@@ -90,6 +90,10 @@ public:
         {
             return "20;181;5.1";
         }
+        else if(request == "31.08.2018;09:00")
+        {
+            return "23;204;4.9";
+        }
         return request;
     }
 };
