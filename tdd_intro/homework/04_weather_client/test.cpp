@@ -191,6 +191,20 @@ TEST(WeatherServerStub, Responses_with_stub_data)
     EXPECT_EQ("", stubServer.GetWeather("not_stub_request"));
 }
 
+TEST(Utils, Split_strings_by_separator)
+{
+    std::vector<std::string> actualResult;
+
+    splitStringsBySeparator("1;2;3", ";", actualResult);
+    std::vector<std::string> expectedResult = {"1", "2", "3"};
+    EXPECT_EQ(expectedResult, actualResult);
+
+    actualResult = {};
+    splitStringsBySeparator("", ";", actualResult);
+    expectedResult = {};
+    EXPECT_EQ(expectedResult, actualResult);
+}
+
 TEST(WeatherResponseParser, Validate_response)
 {
     EXPECT_THROW(WeatherResponseParser parser(""), std::runtime_error);
@@ -209,18 +223,14 @@ TEST(WeatherResponseParser, Validate_response)
     EXPECT_EQ(13.5, parser.windSpeed);
 }
 
-TEST(Utils, Split_strings_by_separator)
+TEST(WeatherClient, GetMinimumTemperature)
 {
-    std::vector<std::string> actualResult;
+    WeatherServerStub stubServer;
+    stubServer.SetWeatherForDate("50;0;0", "02.09.2018;03:00");
+    stubServer.SetWeatherForDate("-20;0;0", "02.09.2018;09:00");
+    stubServer.SetWeatherForDate("0;0;0", "02.09.2018;15:00");
+    stubServer.SetWeatherForDate("10;0;0", "02.09.2018;21:00");
 
-    splitStringsBySeparator("1;2;3", ";", actualResult);
-    std::vector<std::string> expectedResult = {"1", "2", "3"};
-    EXPECT_EQ(expectedResult, actualResult);
-
-    actualResult = {};
-    splitStringsBySeparator("", ";", actualResult);
-    expectedResult = {};
-    EXPECT_EQ(expectedResult, actualResult);
+    WeatherClient client;
+    EXPECT_EQ(-20, client.GetMinimumTemperature(stubServer, "02.09.2018"));
 }
-
-
