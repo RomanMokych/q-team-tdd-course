@@ -47,12 +47,50 @@ IMPORTANT:
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
+struct Weather
+{
+    double temperature;
+    double windDirection;
+    double windSpeed;
+};
+bool operator==(const Weather& left , const Weather& right)
+{
+    return left.temperature == right.temperature &&
+            left.windDirection == right.windDirection &&
+            left.windSpeed == right.windSpeed;
+}
+
+struct OneDayWeather
+{
+    Weather nightWeather;
+    Weather morningWeather;
+    Weather dayWeather;
+    Weather eveningWeather;
+};
+bool operator==(const OneDayWeather& left, const OneDayWeather& right)
+{
+    return left.nightWeather == right.nightWeather &&
+            left.morningWeather == right.morningWeather &&
+            left.dayWeather == right.dayWeather &&
+            left.eveningWeather == right.eveningWeather;
+}
+
 class IWeatherServer
 {
 public:
     virtual ~IWeatherServer() { }
     // Returns raw response with weather for the given day and time in request
     virtual std::string GetWeather(const std::string& request) = 0;
+};
+
+class WeatherServer : public IWeatherServer
+{
+public:
+    virtual ~WeatherServer() { }
+    virtual std::string GetWeather(const std::string& request)
+    {
+        return "";
+    }
 };
 
 // Implement this interface
@@ -66,3 +104,21 @@ public:
     virtual double GetAverageWindDirection(IWeatherServer& server, const std::string& date) = 0;
     virtual double GetMaximumWindSpeed(IWeatherServer& server, const std::string& date) = 0;
 };
+
+class WeatherRetriever
+{
+public:
+    static OneDayWeather getOneDayWeather(IWeatherServer& server, std::string& date)
+    {
+        return {};
+    }
+};
+
+TEST(WeatherRetriever, retrieve_weather_for_31_08)
+{
+    std::string day = "31.08.2018";
+    WeatherServer server;
+    OneDayWeather expected {{20, 181, 5.1}, {23, 204, 4.9}, {33, 193, 4.3}, {26,179,4.5}};
+    OneDayWeather actual = WeatherRetriever::getOneDayWeather(server, day);
+    EXPECT_EQ(expected, actual);
+}
