@@ -55,6 +55,14 @@ public:
     virtual std::string GetWeather(const std::string& request) = 0;
 };
 
+class WeatherServerStub : public IWeatherServer
+{
+    virtual std::string GetWeather(const std::string& request)
+    {
+        return "";
+    }
+};
+
 // Implement this interface
 class IWeatherClient
 {
@@ -66,3 +74,33 @@ public:
     virtual double GetAverageWindDirection(IWeatherServer& server, const std::string& date) = 0;
     virtual double GetMaximumWindSpeed(IWeatherServer& server, const std::string& date) = 0;
 };
+
+class WeatherClient : public IWeatherClient
+{
+    virtual double GetAverageTemperature(IWeatherServer& server, const std::string& date)
+    {
+        return 0.0;
+    }
+
+    virtual double GetMinimumTemperature(IWeatherServer& server, const std::string& date)
+    {
+        return 0.0;
+    }
+
+    virtual double GetMaximumTemperature(IWeatherServer& server, const std::string& date)
+    {
+        return 0.0;
+    }
+
+    virtual double GetAverageWindDirection(IWeatherServer& server, const std::string& date)
+    {
+        return 0.0;
+    }
+
+    virtual double GetMaximumWindSpeed(IWeatherServer& server, const std::string& date)
+    {
+        return 0.0;
+    }
+};
+
+// Tests and todo list:
