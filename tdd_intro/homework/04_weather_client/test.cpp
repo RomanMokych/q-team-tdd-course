@@ -92,35 +92,6 @@ public:
     virtual double GetMaximumWindSpeed(IWeatherServer& server, const std::string& date) = 0;
 };
 
-class WeatherClient : public IWeatherClient
-{
-public:
-    virtual double GetAverageTemperature(IWeatherServer& server, const std::string& date)
-    {
-        return 0.0;
-    }
-
-    virtual double GetMinimumTemperature(IWeatherServer& server, const std::string& date)
-    {
-        return 0.0;
-    }
-
-    virtual double GetMaximumTemperature(IWeatherServer& server, const std::string& date)
-    {
-        return 0.0;
-    }
-
-    virtual double GetAverageWindDirection(IWeatherServer& server, const std::string& date)
-    {
-        return 0.0;
-    }
-
-    virtual double GetMaximumWindSpeed(IWeatherServer& server, const std::string& date)
-    {
-        return 0.0;
-    }
-};
-
 void splitStringsBySeparator(const std::string& targetString, const std::string& separator, std::vector<std::string>& components)
 {
     if(targetString.empty())
@@ -170,6 +141,46 @@ public:
     short temperature;
     unsigned short windDirection;
     double windSpeed;
+};
+
+const std::vector<std::string> kAvailableWeatherTime = {"03:00", "09:00", "15:00", "21:00"};
+
+class WeatherClient : public IWeatherClient
+{
+public:
+    virtual double GetAverageTemperature(IWeatherServer& server, const std::string& date)
+    {
+        return 0.0;
+    }
+
+    virtual double GetMinimumTemperature(IWeatherServer& server, const std::string& date)
+    {
+        std::vector<short> temperatureForDay(kAvailableWeatherTime.size());
+
+        for(auto time : kAvailableWeatherTime)
+        {
+            std::string weatherResponse = server.GetWeather(date + ";" + time);
+            WeatherResponseParser responseParser(weatherResponse);
+            temperatureForDay.push_back(responseParser.temperature);
+        }
+
+         return *(std::min_element(temperatureForDay.begin(), temperatureForDay.end()));
+    }
+
+    virtual double GetMaximumTemperature(IWeatherServer& server, const std::string& date)
+    {
+        return 0.0;
+    }
+
+    virtual double GetAverageWindDirection(IWeatherServer& server, const std::string& date)
+    {
+        return 0.0;
+    }
+
+    virtual double GetMaximumWindSpeed(IWeatherServer& server, const std::string& date)
+    {
+        return 0.0;
+    }
 };
 
 // Tests and todo list:
