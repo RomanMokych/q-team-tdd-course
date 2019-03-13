@@ -164,7 +164,23 @@ public:
     }
     virtual double GetMinimumTemperature(IWeatherServer& server, const std::string& date)
     {
-        return 0.0;
+        auto dayData = getAllDataForDay(server, date);
+        double minValue = 0;
+        if(dayData.size())
+        {
+            minValue = parseTemperature(*dayData.begin());
+        }
+
+        for(auto it : dayData)
+        {
+            double value = parseTemperature(it);
+            if(minValue > value)
+            {
+                minValue = value;
+            }
+        }
+
+        return minValue;
     }
     virtual double GetMaximumTemperature(IWeatherServer& server, const std::string& date)
     {
