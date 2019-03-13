@@ -203,3 +203,11 @@ TEST(WeatherClient, av_temp_for_31_08_is25_point_5)
     WeatherClient client;
     EXPECT_EQ(25.5, client.GetAverageTemperature(server, day));
 }
+
+TEST(WeatherClient, min_temp_for_01_09_is_19)
+{
+    std::string day = "01.09.2018";
+    WeatherServer server;
+    WeatherClient client;
+    EXPECT_EQ(19, client.GetMinimumTemperature(server, day));
+}
