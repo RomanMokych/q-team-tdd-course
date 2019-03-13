@@ -158,6 +158,7 @@ public:
 
         temperature = std::stoi(responseComponents[0].c_str());
         windDirection = std::stoi(responseComponents[1].c_str());
+        windSpeed = std::stod(responseComponents[2].c_str());
     }
 
 private:
@@ -193,6 +194,8 @@ TEST(WeatherResponseParser, Validate_response)
     EXPECT_THROW(WeatherResponseParser parser("w;t;f"), std::invalid_argument);
     EXPECT_THROW(WeatherResponseParser parser("20;t;f"), std::invalid_argument);
     EXPECT_THROW(WeatherResponseParser parser("20;180;f"), std::invalid_argument);
+
+
 }
 
 TEST(Utils, Split_strings_by_separator)
