@@ -182,6 +182,7 @@ TEST(WeatherServerStub, Responses_with_stub_data)
 
 TEST(WeatherResponseParser, Validate_response)
 {
+    EXPECT_THROW(WeatherResponseParser parser(""), std::runtime_error);
     EXPECT_THROW(WeatherResponseParser parser("wtf_response"), std::runtime_error);
 }
 
