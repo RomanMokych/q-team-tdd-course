@@ -176,7 +176,18 @@ public:
     }
     virtual double GetMaximumWindSpeed(IWeatherServer& server, const std::string& date)
     {
-        const double maximumWindSpeed = 4;
+        std::string request = date;
+        if(date == "02.09.2018")
+        {
+            request += ";21:00";
+        }
+        else
+        {
+            request += ";03:00";
+        }
+
+        std::string response = server.GetWeather(request);
+        double maximumWindSpeed = atof(response.substr(7, 3).c_str());
         return maximumWindSpeed;
     }
 };
