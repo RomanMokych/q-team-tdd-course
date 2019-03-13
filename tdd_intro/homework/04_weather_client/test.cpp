@@ -130,4 +130,5 @@ TEST(WeatherServerStub, Responses_with_stub_data)
 
     EXPECT_EQ(expectedResponse_1, stubServer.GetWeather(weatherDate_1));
     EXPECT_EQ(expectedResponse_2, stubServer.GetWeather(weatherDate_2));
+    EXPECT_EQ("", stubServer.GetWeather("not_stub_request"));
 }
