@@ -371,3 +371,14 @@ TEST(WatherServerTest, wather_client_request_MinTemp_for_date_01_09_2018__expect
 
     EXPECT_EQ(client.GetMinimumTemperature(server, date), response);
 }
+
+TEST(WatherServerTest, wather_client_request_MinTemp_for_date_02_09_2018__expected_21)
+{
+    FakeWatherServer server;
+    FakeWatherClient client;
+
+    const std::string date("02.09.2018" );
+    const double response = 21;
+
+    EXPECT_EQ(client.GetMinimumTemperature(server, date), response);
+}
