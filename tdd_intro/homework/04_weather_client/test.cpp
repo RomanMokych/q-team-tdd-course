@@ -181,10 +181,16 @@ TEST(WeatherResponseParser, Validate_response)
 TEST(Utils, Split_strings_by_separator)
 {
     std::vector<std::string> actualResult;
+
     splitStringsBySeparator("1;2;3", ";", actualResult);
     std::vector<std::string> expectedResult = {"1", "2", "3"};
-
     EXPECT_EQ(expectedResult, actualResult);
+
+    actualResult = {};
+    splitStringsBySeparator("", ";", actualResult);
+    expectedResult = {};
+    EXPECT_EQ(expectedResult, actualResult);
+
 }
 
 
