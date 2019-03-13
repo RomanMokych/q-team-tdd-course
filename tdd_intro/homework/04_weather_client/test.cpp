@@ -169,7 +169,16 @@ public:
 
     virtual double GetMaximumTemperature(IWeatherServer& server, const std::string& date)
     {
-        return 0.0;
+        std::vector<short> temperatureForDay(kAvailableWeatherTime.size());
+
+        for(auto time : kAvailableWeatherTime)
+        {
+            std::string weatherResponse = server.GetWeather(date + ";" + time);
+            WeatherResponseParser responseParser(weatherResponse);
+            temperatureForDay.push_back(responseParser.temperature);
+        }
+
+         return *(std::max_element(temperatureForDay.begin(), temperatureForDay.end()));
     }
 
     virtual double GetAverageWindDirection(IWeatherServer& server, const std::string& date)
