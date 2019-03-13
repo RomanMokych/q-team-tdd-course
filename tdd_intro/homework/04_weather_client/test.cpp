@@ -127,40 +127,32 @@ public:
         OneDayWeather result;
         std::string nightWeatherRequest = date;
         nightWeatherRequest.append(";03:00");
-        std::string nightWeather = server.GetWeather(nightWeatherRequest);
-        result.nightWeather.temperature = std::stod(nightWeather.substr(0, nightWeather.find(';')));
-        nightWeather = nightWeather.substr(nightWeather.find(';') + 1);
-        result.nightWeather.windDirection = std::stod(nightWeather.substr(0, nightWeather.find(';')));
-        nightWeather = nightWeather.substr(nightWeather.find(';') + 1);
-        result.nightWeather.windSpeed = std::stod(nightWeather);
+        result.nightWeather = retrieveWeather(server, nightWeatherRequest);
 
         std::string morningWeatherRequest = date;
         morningWeatherRequest.append(";09:00");
-        std::string morningWeather = server.GetWeather(morningWeatherRequest);
-        result.morningWeather.temperature = std::stod(morningWeather.substr(0, morningWeather.find(';')));
-        morningWeather = morningWeather.substr(morningWeather.find(';') + 1);
-        result.morningWeather.windDirection = std::stod(morningWeather.substr(0, morningWeather.find(';')));
-        morningWeather = morningWeather.substr(morningWeather.find(';') + 1);
-        result.morningWeather.windSpeed = std::stod(morningWeather);
+        result.morningWeather = retrieveWeather(server, morningWeatherRequest);
 
         std::string dayWeatherRequest = date;
         dayWeatherRequest.append(";15:00");
-        std::string dayWeather = server.GetWeather(dayWeatherRequest);
-        result.dayWeather.temperature = std::stod(dayWeather.substr(0, dayWeather.find(';')));
-        dayWeather = dayWeather.substr(dayWeather.find(';') + 1);
-        result.dayWeather.windDirection = std::stod(dayWeather.substr(0, dayWeather.find(';')));
-        dayWeather = dayWeather.substr(dayWeather.find(';') + 1);
-        result.dayWeather.windSpeed = std::stod(dayWeather);
+        result.dayWeather = retrieveWeather(server, dayWeatherRequest);
 
         std::string eveningWeatherRequest = date;
         eveningWeatherRequest.append(";21:00");
-        std::string eveningWeather = server.GetWeather(eveningWeatherRequest);
-        result.eveningWeather.temperature = std::stod(eveningWeather.substr(0, eveningWeather.find(';')));
-        eveningWeather = eveningWeather.substr(eveningWeather.find(';') + 1);
-        result.eveningWeather.windDirection = std::stod(eveningWeather.substr(0, eveningWeather.find(';')));
-        eveningWeather = eveningWeather.substr(eveningWeather.find(';') + 1);
-        result.eveningWeather.windSpeed = std::stod(eveningWeather);
+        result.eveningWeather = retrieveWeather(server, eveningWeatherRequest);
         return result;
+    }
+private:
+    static Weather retrieveWeather(IWeatherServer& server, std::string& weatherRequest)
+    {
+        Weather weather;
+        std::string weatherString = server.GetWeather(weatherRequest);
+        weather.temperature = std::stod(weatherString.substr(0, weatherString.find(';')));
+        weatherString = weatherString.substr(weatherString.find(';') + 1);
+        weather.windDirection = std::stod(weatherString.substr(0, weatherString.find(';')));
+        weatherString = weatherString.substr(weatherString.find(';') + 1);
+        weather.windSpeed = std::stod(weatherString);
+        return weather;
     }
 };
 
