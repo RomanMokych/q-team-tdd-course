@@ -245,3 +245,15 @@ TEST(WeatherClient, GetMinimumTemperature)
     WeatherClient client;
     EXPECT_EQ(-20, client.GetMinimumTemperature(stubServer, "02.09.2018"));
 }
+
+TEST(WeatherClient, GetMaximumTemperature)
+{
+    WeatherServerStub stubServer;
+    stubServer.SetWeatherForDate("50;0;0", "02.09.2018;03:00");
+    stubServer.SetWeatherForDate("-20;0;0", "02.09.2018;09:00");
+    stubServer.SetWeatherForDate("0;0;0", "02.09.2018;15:00");
+    stubServer.SetWeatherForDate("10;0;0", "02.09.2018;21:00");
+
+    WeatherClient client;
+    EXPECT_EQ(50, client.GetMaximumTemperature(stubServer, "02.09.2018"));
+}
