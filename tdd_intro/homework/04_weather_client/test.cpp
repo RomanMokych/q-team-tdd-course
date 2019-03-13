@@ -78,3 +78,27 @@ public:
  *  Add several client's requests
  *
  */
+
+class FakeWatherServer : public IWeatherServer
+{
+public:
+    virtual ~FakeWatherServer() { }
+
+    virtual std::string GetWeather(const std::string& request)
+    {
+        return " ";
+    }
+};
+
+
+TEST(WatherServerTest, wather_server_empty_request_emtpy_response)
+{
+    FakeWatherServer server;
+
+
+    const std::string request("");
+    const std::string responce("");
+
+
+    EXPECT_EQ(server.GetWeather(request), responce);
+}
