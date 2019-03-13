@@ -86,6 +86,10 @@ public:
 
     virtual std::string GetWeather(const std::string& request)
     {
+        if(request == "02.09.2018;03:00")
+        {
+            return "20;181;5.1";
+        }
         return request;
     }
 };
