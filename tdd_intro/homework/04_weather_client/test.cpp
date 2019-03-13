@@ -159,6 +159,11 @@ public:
         temperature = std::stoi(responseComponents[0].c_str());
         windDirection = std::stoul(responseComponents[1].c_str());
         windSpeed = std::stod(responseComponents[2].c_str());
+
+        if(windDirection > 359)
+        {
+            throw std::invalid_argument("Wind direction not in range.");
+        }
     }
 
 private:
