@@ -160,7 +160,7 @@ public:
 
         }
 
-         return temperatureSum / kAvailableWeatherTime.size();
+        return temperatureSum / kAvailableWeatherTime.size();
     }
 
     virtual double GetMinimumTemperature(IWeatherServer& server, const std::string& date)
@@ -193,7 +193,17 @@ public:
 
     virtual double GetAverageWindDirection(IWeatherServer& server, const std::string& date)
     {
-        return 0.0;
+        double windDirectionSum = 0.0;
+
+        for(auto time : kAvailableWeatherTime)
+        {
+            std::string weatherResponse = server.GetWeather(date + ";" + time);
+            WeatherResponseParser responseParser(weatherResponse);
+            windDirectionSum += responseParser.windDirection;
+
+        }
+
+        return windDirectionSum / kAvailableWeatherTime.size();
     }
 
     virtual double GetMaximumWindSpeed(IWeatherServer& server, const std::string& date)
@@ -319,5 +329,5 @@ TEST(WeatherClient, GetAverageWindDirection)
     stubServer.SetWeatherForDate("0;90;0", "02.09.2018;21:00");
 
     WeatherClient client;
-    EXPECT_EQ(127.5, client.GetAverageTemperature(stubServer, "02.09.2018"));
+    EXPECT_EQ(127.5, client.GetAverageWindDirection(stubServer, "02.09.2018"));
 }
