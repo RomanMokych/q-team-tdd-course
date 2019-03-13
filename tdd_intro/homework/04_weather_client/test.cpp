@@ -124,7 +124,7 @@ class WeatherResponseParser
 public:
     WeatherResponseParser(std::string weatherResponse)
     {
-
+        throw std::runtime_error("Invalid response format.");
     }
 };
 
