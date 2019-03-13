@@ -121,27 +121,6 @@ public:
     }
 };
 
-class WeatherResponseParser
-{
-public:
-    WeatherResponseParser(std::string weatherResponse):
-        temperature(0),
-        windDirection(0),
-        windSpeed(0)
-    {
-        std::vector<std::string> responseComponents;
-        if(responseComponents.size() != 3)
-        {
-            throw std::runtime_error("Invalid response format.");
-        }
-    }
-
-private:
-    short temperature;
-    unsigned short windDirection;
-    double windSpeed;
-};
-
 void splitStringsBySeparator(const std::string& targetString, const std::string& separator, std::vector<std::string>& components)
 {
     if(targetString.empty())
@@ -160,6 +139,29 @@ void splitStringsBySeparator(const std::string& targetString, const std::string&
         ++iter;
     }
 }
+
+class WeatherResponseParser
+{
+public:
+    WeatherResponseParser(std::string weatherResponse):
+        temperature(0),
+        windDirection(0),
+        windSpeed(0)
+    {
+        std::vector<std::string> responseComponents;
+        splitStringsBySeparator(weatherResponse, ";", responseComponents);
+
+        if(responseComponents.size() != 3)
+        {
+            throw std::runtime_error("Invalid response format.");
+        }
+    }
+
+private:
+    short temperature;
+    unsigned short windDirection;
+    double windSpeed;
+};
 
 // Tests and todo list:
 
@@ -184,6 +186,7 @@ TEST(WeatherResponseParser, Validate_response)
 {
     EXPECT_THROW(WeatherResponseParser parser(""), std::runtime_error);
     EXPECT_THROW(WeatherResponseParser parser("wtf_response"), std::runtime_error);
+    EXPECT_THROW(WeatherResponseParser parser("w;t;f"), std::runtime_error);
 }
 
 TEST(Utils, Split_strings_by_separator)
