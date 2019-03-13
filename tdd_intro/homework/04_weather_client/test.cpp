@@ -47,6 +47,8 @@ IMPORTANT:
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
+#include <time.h>
+
 class IWeatherServer
 {
 public:
@@ -86,6 +88,13 @@ public:
 
     virtual std::string GetWeather(const std::string& request)
     {
+
+        if(request.empty())
+        {
+            return "";
+        }
+
+
         if(request == "02.09.2018;03:00")
         {
             return "20;181;5.1";
@@ -94,6 +103,12 @@ public:
         {
             return "23;204;4.9";
         }
+
+        if(request[11] == '1' && request[12] == '0')
+        {
+            return "invalid request";
+        }
+
         return request;
     }
 };
