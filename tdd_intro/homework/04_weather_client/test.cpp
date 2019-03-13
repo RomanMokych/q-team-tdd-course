@@ -88,6 +88,11 @@ class FakeWatherServer : public IWeatherServer
 {
 
 public:
+    FakeWatherServer()
+    {
+        loadWatherDB();
+    }
+
     virtual ~FakeWatherServer() { }
 
     virtual std::string GetWeather(const std::string& request)
@@ -108,20 +113,7 @@ public:
             return s_invalid_request;
         }
 
-        if(request == "02.09.2018;03:00")
-        {
-            return "20;181;5.1";
-        }
-        else if(request == "31.08.2018;09:00")
-        {
-            return "23;204;4.9";
-        }
-        else if(request == "02.09.2018;21:00")
-        {
-            return  "27;299;4.0";
-        }
-
-        return request;
+        return m_wather_db[request];
     }
 
 private:
@@ -138,6 +130,28 @@ private:
 
         return false;
     }
+
+    void loadWatherDB()
+    {
+        m_wather_db["31.08.2018;03:00"] = "20;181;5.1";
+        m_wather_db["31.08.2018;09:00"] = "23;204;4.9";
+        m_wather_db["31.08.2018;15:00"] = "33;193;4.3";
+        m_wather_db["31.08.2018;21:00"] = "26;179;4.5";
+
+        m_wather_db["01.09.2018;03:00"] = "19;176;4.2";
+        m_wather_db["01.09.2018;09:00"] = "22;131;4.1";
+        m_wather_db["01.09.2018;15:00"] = "31;109;4.0";
+        m_wather_db["01.09.2018;21:00"] = "24;127;4.1";
+
+        m_wather_db["02.09.2018;03:00"] = "21;158;3.8";
+        m_wather_db["02.09.2018;09:00"] = "25;201;3.5";
+        m_wather_db["02.09.2018;15:00"] = "34;258;3.7";
+        m_wather_db["02.09.2018;21:00"] = "27;299;4.0";
+
+    }
+
+private:
+    std::map<std::string, std::string> m_wather_db;
 };
 
 class FakeWatherClient : public IWeatherClient
@@ -183,7 +197,7 @@ TEST(WatherServerTest, wather_server_check_valid_request_format)
     FakeWatherServer server;
 
     const std::string request("02.09.2018;03:00");
-    const std::string response("20;181;5.1");
+    const std::string response("21;158;3.8");
 
 
     EXPECT_EQ(server.GetWeather(request), response);
