@@ -194,11 +194,15 @@ private:
     std::vector<std::string> getAllDataForDay(IWeatherServer& server, const std::string& date)
     {
         const std::string timePoint1 = "03:00";
-        const std::string timePoint2 = "21:00";
+        const std::string timePoint2 = "09:00";
+        const std::string timePoint3 = "15:00";
+        const std::string timePoint4 = "21:00";
 
         std::vector<std::string> result;
         result.push_back(server.GetWeather(date + ";" + timePoint1));
         result.push_back(server.GetWeather(date + ";" + timePoint2));
+        result.push_back(server.GetWeather(date + ";" + timePoint3));
+        result.push_back(server.GetWeather(date + ";" + timePoint4));
 
         return result;
     }
