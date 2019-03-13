@@ -196,7 +196,7 @@ TEST(WeatherRetriever, retrieve_weather_for_31_08)
     EXPECT_EQ(expected, actual);
 }
 
-TEST(WeatherClient, av_for_31_08_is25_point_5)
+TEST(WeatherClient, av_temp_for_31_08_is25_point_5)
 {
     std::string day = "31.08.2018";
     WeatherServer server;
