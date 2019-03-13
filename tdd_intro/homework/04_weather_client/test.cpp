@@ -103,6 +103,11 @@ public:
             return s_invalid_request;
         }
 
+        if(!isTimeValid(request))
+        {
+            return s_invalid_request;
+        }
+
         if(request == "02.09.2018;03:00")
         {
             return "20;181;5.1";
@@ -110,11 +115,6 @@ public:
         else if(request == "31.08.2018;09:00")
         {
             return "23;204;4.9";
-        }
-
-        if(!isTimeValid(request))
-        {
-            return s_invalid_request;
         }
 
         return request;
