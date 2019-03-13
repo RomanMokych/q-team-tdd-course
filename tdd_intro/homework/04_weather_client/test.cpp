@@ -225,6 +225,15 @@ TEST(WeatherRetriever, retrieve_weather_for_31_08)
     EXPECT_EQ(expected, actual);
 }
 
+TEST(WeatherRetriever, retrieve_weather_for_invalid_data)
+{
+    std::string day = "123123213";
+    WeatherServer server;
+    OneDayWeather expected = {{}, {}, {}, {}};
+    OneDayWeather actual = WeatherRetriever::getOneDayWeather(server, day);
+    EXPECT_EQ(expected, actual);
+}
+
 TEST(WeatherClient, av_temp_for_31_08_is25_point_5)
 {
     std::string day = "31.08.2018";
