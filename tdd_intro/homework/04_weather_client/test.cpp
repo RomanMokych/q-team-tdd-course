@@ -171,7 +171,15 @@ public:
     }
     virtual double GetMinimumTemperature(IWeatherServer& server, const std::string& date)
     {
-        return 0;
+        OneDayWeather allDayWeather = WeatherRetriever::getOneDayWeather(server, date);
+        double result = allDayWeather.nightWeather.temperature;
+        if (result > allDayWeather.morningWeather.temperature)
+            result = allDayWeather.morningWeather.temperature;
+        if (result > allDayWeather.dayWeather.temperature)
+            result = allDayWeather.dayWeather.temperature;
+        if (result > allDayWeather.eveningWeather.temperature)
+            result = allDayWeather.eveningWeather.temperature;
+        return result;
     }
     virtual double GetMaximumTemperature(IWeatherServer& server, const std::string& date)
     {
