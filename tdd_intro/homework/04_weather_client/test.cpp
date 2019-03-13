@@ -107,48 +107,10 @@ public:
     }
 };
 
-// Implement this interface
-class IWeatherClient
-{
-public:
-    virtual ~IWeatherClient() { }
-    virtual double GetAverageTemperature(IWeatherServer& server, const std::string& date) = 0;
-    virtual double GetMinimumTemperature(IWeatherServer& server, const std::string& date) = 0;
-    virtual double GetMaximumTemperature(IWeatherServer& server, const std::string& date) = 0;
-    virtual double GetAverageWindDirection(IWeatherServer& server, const std::string& date) = 0;
-    virtual double GetMaximumWindSpeed(IWeatherServer& server, const std::string& date) = 0;
-};
-
-class WeatherClient : public IWeatherClient
-{
-public:
-    virtual ~WeatherClient() { }
-    virtual double GetAverageTemperature(IWeatherServer& server, const std::string& date)
-    {
-        return 0;
-    }
-    virtual double GetMinimumTemperature(IWeatherServer& server, const std::string& date)
-    {
-        return 0;
-    }
-    virtual double GetMaximumTemperature(IWeatherServer& server, const std::string& date)
-    {
-        return 0;
-    }
-    virtual double GetAverageWindDirection(IWeatherServer& server, const std::string& date)
-    {
-        return 0;
-    }
-    virtual double GetMaximumWindSpeed(IWeatherServer& server, const std::string& date)
-    {
-        return 0;
-    }
-};
-
 class WeatherRetriever
 {
 public:
-    static OneDayWeather getOneDayWeather(IWeatherServer& server, std::string& date)
+    static OneDayWeather getOneDayWeather(IWeatherServer& server, const std::string& date)
     {
         OneDayWeather result;
         std::string nightWeatherRequest = date;
@@ -179,6 +141,49 @@ private:
         weatherString = weatherString.substr(weatherString.find(';') + 1);
         weather.windSpeed = std::stod(weatherString);
         return weather;
+    }
+};
+
+// Implement this interface
+class IWeatherClient
+{
+public:
+    virtual ~IWeatherClient() { }
+    virtual double GetAverageTemperature(IWeatherServer& server, const std::string& date) = 0;
+    virtual double GetMinimumTemperature(IWeatherServer& server, const std::string& date) = 0;
+    virtual double GetMaximumTemperature(IWeatherServer& server, const std::string& date) = 0;
+    virtual double GetAverageWindDirection(IWeatherServer& server, const std::string& date) = 0;
+    virtual double GetMaximumWindSpeed(IWeatherServer& server, const std::string& date) = 0;
+};
+
+class WeatherClient : public IWeatherClient
+{
+public:
+    virtual ~WeatherClient() { }
+    virtual double GetAverageTemperature(IWeatherServer& server, const std::string& date)
+    {
+        OneDayWeather allDayWeather = WeatherRetriever::getOneDayWeather(server, date);
+        double averageTemperature = (allDayWeather.morningWeather.temperature +
+                                     allDayWeather.dayWeather.temperature +
+                                     allDayWeather.eveningWeather.temperature +
+                                     allDayWeather.nightWeather.temperature) / 4;
+        return averageTemperature;
+    }
+    virtual double GetMinimumTemperature(IWeatherServer& server, const std::string& date)
+    {
+        return 0;
+    }
+    virtual double GetMaximumTemperature(IWeatherServer& server, const std::string& date)
+    {
+        return 0;
+    }
+    virtual double GetAverageWindDirection(IWeatherServer& server, const std::string& date)
+    {
+        return 0;
+    }
+    virtual double GetMaximumWindSpeed(IWeatherServer& server, const std::string& date)
+    {
+        return 0;
     }
 };
 
