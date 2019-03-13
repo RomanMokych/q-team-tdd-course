@@ -82,6 +82,7 @@ public:
  */
 
 const static std::string s_invalid_request = "invalid request";
+const static std::string s_example_request = "02.09.2018;03:00";
 
 class FakeWatherServer : public IWeatherServer
 {
@@ -95,6 +96,11 @@ public:
         if(request.empty())
         {
             return "";
+        }
+
+        if(request.size() != s_example_request.size())
+        {
+            return s_invalid_request;
         }
 
         if(request == "02.09.2018;03:00")
