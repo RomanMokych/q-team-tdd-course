@@ -157,6 +157,7 @@ public:
         }
 
         temperature = std::stoi(responseComponents[0].c_str());
+        windDirection = std::stoi(responseComponents[1].c_str());
     }
 
 private:
