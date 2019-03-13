@@ -176,8 +176,7 @@ public:
     }
     virtual double GetMaximumWindSpeed(IWeatherServer& server, const std::string& date)
     {
-        std::string response = server.GetWeather(date);
-        const double maximumWindSpeed = atof(response.substr(7, 3).c_str());
+        const double maximumWindSpeed = 0;
         return maximumWindSpeed;
     }
 };
@@ -246,8 +245,10 @@ TEST(WatherServerTest, wather_client_request_MaximumWindSpeed_for_date_02_09_201
     FakeWatherServer server;
     FakeWatherClient client;
 
-    const std::string date("02.09.2018;21:00" );
+    const std::string date("02.09.2018" );
     const double response = 4.0;
 
     EXPECT_EQ(client.GetMaximumWindSpeed(server, date), response);
 }
+
+
