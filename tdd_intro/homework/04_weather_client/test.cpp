@@ -157,7 +157,7 @@ public:
         }
 
         temperature = std::stoi(responseComponents[0].c_str());
-        windDirection = std::stoi(responseComponents[1].c_str());
+        windDirection = std::stoul(responseComponents[1].c_str());
         windSpeed = std::stod(responseComponents[2].c_str());
     }
 
@@ -195,7 +195,8 @@ TEST(WeatherResponseParser, Validate_response)
     EXPECT_THROW(WeatherResponseParser parser("20;t;f"), std::invalid_argument);
     EXPECT_THROW(WeatherResponseParser parser("20;180;f"), std::invalid_argument);
 
-
+    // validate wind direction range
+    EXPECT_THROW(WeatherResponseParser parser("20;700;20.5"), std::invalid_argument);
 }
 
 TEST(Utils, Split_strings_by_separator)
