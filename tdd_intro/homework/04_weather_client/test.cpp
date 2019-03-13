@@ -136,7 +136,31 @@ private:
     }
 };
 
-
+class FakeWatherClient : public IWeatherClient
+{
+public:
+    virtual ~FakeWatherClient() { }
+    virtual double GetAverageTemperature(IWeatherServer& server, const std::string& date)
+    {
+        return 0.0;
+    }
+    virtual double GetMinimumTemperature(IWeatherServer& server, const std::string& date)
+    {
+        return 0.0;
+    }
+    virtual double GetMaximumTemperature(IWeatherServer& server, const std::string& date)
+    {
+        return 0.0;
+    };
+    virtual double GetAverageWindDirection(IWeatherServer& server, const std::string& date)
+    {
+        return 0.0;
+    };
+    virtual double GetMaximumWindSpeed(IWeatherServer& server, const std::string& date)
+    {
+        return 0.0;
+    };
+};
 TEST(WatherServerTest, wather_server_empty_request_emtpy_response)
 {
     FakeWatherServer server;
@@ -195,4 +219,15 @@ TEST(WatherServerTest, wather_server_request_bad_request_length)
     const std::string request("31");
 
     EXPECT_EQ(server.GetWeather(request), s_invalid_request);
+}
+
+TEST(WatherServerTest, wather_client_request_MaximumWindSpeed)
+{
+    FakeWatherServer server;
+    FakeWatherClient client;
+
+    const std::string date("31.08.2018;11:00");
+    const double response = 5.1;
+
+    EXPECT_EQ(client.GetMaximumWindSpeed(server, date), response);
 }
