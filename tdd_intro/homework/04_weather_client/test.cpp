@@ -211,7 +211,15 @@ public:
     }
     virtual double GetAverageWindDirection(IWeatherServer& server, const std::string& date)
     {
-        return 0.0;
+        auto dayData = getAllDataForDay(server, date);
+        double sum = 0;
+
+        for(auto it : dayData)
+        {
+            sum += parseWindDirection(it);
+        }
+
+        return sum > 0 ? sum/dayData.size() : 0;
     }
     virtual double GetMaximumWindSpeed(IWeatherServer& server, const std::string& date)
     {
@@ -234,6 +242,11 @@ private:
     double parseWindSpeed(const std::string& response)
     {
         return atof(response.substr(7, 3).c_str());
+    }
+
+    double parseWindDirection(const std::string& response)
+    {
+        return atof(response.substr(3, 3).c_str());
     }
 
     double parseTemperature(const std::string& response)
@@ -411,7 +424,7 @@ TEST(WatherServerTest, AverageWindDirection_for_date_31_08_2018__is__189_25)
     FakeWatherServer server;
     FakeWatherClient client;
 
-    const std::string date("31.09.2018" );
+    const std::string date("31.08.2018" );
     const double response = 189.25;
 
     EXPECT_EQ(client.GetAverageWindDirection(server, date), response);
