@@ -353,5 +353,5 @@ TEST(WatherServerTest, wather_client_request_MinTemp_for_date_01_09_2018__expect
     const std::string date("01.09.2018" );
     const double response = 19;
 
-    EXPECT_EQ(client.GetMaximumTemperature(server, date), response);
+    EXPECT_EQ(client.GetMinimumTemperature(server, date), response);
 }
