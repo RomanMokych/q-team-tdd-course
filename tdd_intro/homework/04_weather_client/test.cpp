@@ -104,12 +104,23 @@ public:
             return "23;204;4.9";
         }
 
-        if(request[11] == '1' && request[12] == '0')
+        if(!isTimeValid(request))
         {
             return "invalid request";
         }
 
         return request;
+    }
+
+private:
+    bool isTimeValid(const std::string& request)
+    {
+        if(request[11] == '1' && request[12] == '0')
+        {
+            return false;
+        }
+
+        return true;
     }
 };
 
