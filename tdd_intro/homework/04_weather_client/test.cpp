@@ -122,11 +122,26 @@ public:
 class WeatherResponseParser
 {
 public:
-    WeatherResponseParser(std::string weatherResponse)
+    WeatherResponseParser(std::string weatherResponse):
+        temperature(0),
+        windDirection(0),
+        windSpeed(0)
     {
+
+
         throw std::runtime_error("Invalid response format.");
     }
+
+private:
+    short temperature;
+    unsigned short windDirection;
+    double windSpeed;
 };
+
+void splitStringsBySeparator(const std::string& targetString, const std::string& separator, std::vector<std::string>& components)
+{
+
+}
 
 // Tests and todo list:
 
@@ -147,9 +162,18 @@ TEST(WeatherServerStub, Responses_with_stub_data)
     EXPECT_EQ("", stubServer.GetWeather("not_stub_request"));
 }
 
-TEST(WeatherResponseParser, Invalid_response_throws_exception)
+TEST(WeatherResponseParser, Validate_response)
 {
     EXPECT_THROW(WeatherResponseParser parser("wtf_response"), std::runtime_error);
+}
+
+TEST(Utils, Split_strings_by_separator)
+{
+    std::vector<std::string> actualResult;
+    splitStringsBySeparator("1;2;3", ";", actualResult);
+    std::vector<std::string> expectedResult = {"1", "2", "3"};
+
+    EXPECT_EQ(expectedResult, actualResult);
 }
 
 
