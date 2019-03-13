@@ -266,3 +266,15 @@ TEST(WeatherClient, GetMaximumTemperature)
     WeatherClient client;
     EXPECT_EQ(50, client.GetMaximumTemperature(stubServer, "02.09.2018"));
 }
+
+TEST(WeatherClient, GetMaximumWindSpeed)
+{
+    WeatherServerStub stubServer;
+    stubServer.SetWeatherForDate("0;0;15.2", "02.09.2018;03:00");
+    stubServer.SetWeatherForDate("0;0;0", "02.09.2018;09:00");
+    stubServer.SetWeatherForDate("0;0;15.3", "02.09.2018;15:00");
+    stubServer.SetWeatherForDate("0;0;12.5", "02.09.2018;21:00");
+
+    WeatherClient client;
+    EXPECT_EQ(15.3, client.GetMaximumWindSpeed(stubServer, "02.09.2018"));
+}
