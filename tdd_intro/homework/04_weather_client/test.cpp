@@ -204,7 +204,15 @@ public:
     }
     virtual double GetMaximumWindSpeed(IWeatherServer& server, const std::string& date)
     {
-        return 0;
+        OneDayWeather allDayWeather = WeatherRetriever::getOneDayWeather(server, date);
+        double result = allDayWeather.nightWeather.windSpeed;
+        if (result < allDayWeather.morningWeather.windSpeed)
+            result = allDayWeather.morningWeather.windSpeed;
+        if (result < allDayWeather.dayWeather.windSpeed)
+            result = allDayWeather.dayWeather.windSpeed;
+        if (result < allDayWeather.eveningWeather.windSpeed)
+            result = allDayWeather.eveningWeather.windSpeed;
+        return result;
     }
 };
 
