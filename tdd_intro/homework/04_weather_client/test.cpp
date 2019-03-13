@@ -47,6 +47,8 @@ IMPORTANT:
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
+#include <regex>
+
 class IWeatherServer
 {
 public:
@@ -140,7 +142,16 @@ private:
 
 void splitStringsBySeparator(const std::string& targetString, const std::string& separator, std::vector<std::string>& components)
 {
+    std::regex rgx(separator);
 
+    std::sregex_token_iterator iter(targetString.begin(), targetString.end(), rgx, -1);
+    std::sregex_token_iterator end;
+
+    while(iter != end)
+    {
+        components.push_back(*iter);
+        ++iter;
+    }
 }
 
 // Tests and todo list:
