@@ -169,3 +169,12 @@ TEST(WatherServerTest, wather_server_request_bad_time_10_00)
 
     EXPECT_EQ(server.GetWeather(request), s_invalid_request);
 }
+
+TEST(WatherServerTest, wather_server_request_bad_time_11_00)
+{
+    FakeWatherServer server;
+
+    const std::string request("31.08.2018;11:00");
+
+    EXPECT_EQ(server.GetWeather(request), s_invalid_request);
+}
