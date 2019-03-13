@@ -57,6 +57,12 @@ public:
 
 class WeatherServerStub : public IWeatherServer
 {
+public:
+    void SetWeatherForDate(const std::string& whather, const std::string& date)
+    {
+
+    }
+
     virtual std::string GetWeather(const std::string& request)
     {
         return "";
@@ -77,6 +83,7 @@ public:
 
 class WeatherClient : public IWeatherClient
 {
+public:
     virtual double GetAverageTemperature(IWeatherServer& server, const std::string& date)
     {
         return 0.0;
@@ -104,3 +111,14 @@ class WeatherClient : public IWeatherClient
 };
 
 // Tests and todo list:
+
+TEST(WeatherServerStub, Responses_with_stub_data)
+{
+    WeatherServerStub stubServer;
+
+    std::string expectedResponse = "some_weather";
+    std::string weatherDate = "30.09.1992";
+
+    stubServer.SetWeatherForDate(expectedResponse, "30.09.1992");
+    EXPECT_EQ(expectedResponse, stubServer.GetWeather(weatherDate));
+}
