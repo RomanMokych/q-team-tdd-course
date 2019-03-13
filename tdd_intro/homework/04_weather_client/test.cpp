@@ -122,6 +122,10 @@ private:
         {
             return false;
         }
+        else if(request[11] == '1' && request[12] == '1')
+        {
+            return false;
+        }
 
         return true;
     }
