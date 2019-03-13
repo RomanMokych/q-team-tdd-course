@@ -317,7 +317,7 @@ TEST(WatherServerTest, wather_server_request_bad_request_length)
     EXPECT_EQ(server.GetWeather(request), s_invalid_request);
 }
 
-TEST(WatherServerTest, wather_client_request_MaximumWindSpeed_for_date_02_09_2018__expected_4)
+TEST(WatherServerTest, MaximumWindSpeed_for_date_02_09_2018__expected_4)
 {
     FakeWatherServer server;
     FakeWatherClient client;
@@ -328,7 +328,7 @@ TEST(WatherServerTest, wather_client_request_MaximumWindSpeed_for_date_02_09_201
     EXPECT_EQ(client.GetMaximumWindSpeed(server, date), response);
 }
 
-TEST(WatherServerTest, wather_client_request_MaximumWindSpeed_for_date_31_08_2018__expected_5_1)
+TEST(WatherServerTest, MaximumWindSpeed_for_date_31_08_2018__expected_5_1)
 {
     FakeWatherServer server;
     FakeWatherClient client;
@@ -339,7 +339,7 @@ TEST(WatherServerTest, wather_client_request_MaximumWindSpeed_for_date_31_08_201
     EXPECT_EQ(client.GetMaximumWindSpeed(server, date), response);
 }
 
-TEST(WatherServerTest, wather_client_request_MaximumWindSpeed_for_date_01_09_2018__expected_4_2)
+TEST(WatherServerTest, MaximumWindSpeed_for_date_01_09_2018__expected_4_2)
 {
     FakeWatherServer server;
     FakeWatherClient client;
@@ -351,7 +351,7 @@ TEST(WatherServerTest, wather_client_request_MaximumWindSpeed_for_date_01_09_201
 }
 
 
-TEST(WatherServerTest, wather_client_request_MaximumTemp_for_date_31_08_2018__expected_33)
+TEST(WatherServerTest, MaximumTemp_for_date_31_08_2018__expected_33)
 {
     FakeWatherServer server;
     FakeWatherClient client;
@@ -362,7 +362,7 @@ TEST(WatherServerTest, wather_client_request_MaximumTemp_for_date_31_08_2018__ex
     EXPECT_EQ(client.GetMaximumTemperature(server, date), response);
 }
 
-TEST(WatherServerTest, wather_client_request_MaximumTemp_for_date_01_09_2018__expected_31)
+TEST(WatherServerTest, MaximumTemp_for_date_01_09_2018__expected_31)
 {
     FakeWatherServer server;
     FakeWatherClient client;
@@ -373,7 +373,7 @@ TEST(WatherServerTest, wather_client_request_MaximumTemp_for_date_01_09_2018__ex
     EXPECT_EQ(client.GetMaximumTemperature(server, date), response);
 }
 
-TEST(WatherServerTest, wather_client_request_MinTemp_for_date_01_09_2018__expected_19)
+TEST(WatherServerTest, MinTemp_for_date_01_09_2018__expected_19)
 {
     FakeWatherServer server;
     FakeWatherClient client;
@@ -384,7 +384,7 @@ TEST(WatherServerTest, wather_client_request_MinTemp_for_date_01_09_2018__expect
     EXPECT_EQ(client.GetMinimumTemperature(server, date), response);
 }
 
-TEST(WatherServerTest, wather_client_request_MinTemp_for_date_02_09_2018__expected_21)
+TEST(WatherServerTest, MinTemp_for_date_02_09_2018__expected_21)
 {
     FakeWatherServer server;
     FakeWatherClient client;
@@ -395,7 +395,7 @@ TEST(WatherServerTest, wather_client_request_MinTemp_for_date_02_09_2018__expect
     EXPECT_EQ(client.GetMinimumTemperature(server, date), response);
 }
 
-TEST(WatherServerTest, wather_client_request_AverageTemperature_for_date_01_09_2018__expected_21)
+TEST(WatherServerTest, AverageTemperature_for_date_01_09_2018__expected_21)
 {
     FakeWatherServer server;
     FakeWatherClient client;
