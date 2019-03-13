@@ -97,7 +97,6 @@ public:
             return "";
         }
 
-
         if(request == "02.09.2018;03:00")
         {
             return "20;181;5.1";
@@ -119,7 +118,7 @@ private:
     bool isTimeValid(const std::string& request)
     {
         int hours = atoi(request.substr(11, 2).c_str());
-        if(hours == 3 ||
+        if(     hours == 3 ||
                 hours == 9 ||
                 hours == 15 ||
                 hours == 21)
@@ -179,6 +178,15 @@ TEST(WatherServerTest, wather_server_request_bad_time_11_00)
     FakeWatherServer server;
 
     const std::string request("31.08.2018;11:00");
+
+    EXPECT_EQ(server.GetWeather(request), s_invalid_request);
+}
+
+TEST(WatherServerTest, wather_server_request_bad_request_length)
+{
+    FakeWatherServer server;
+
+    const std::string request("31");
 
     EXPECT_EQ(server.GetWeather(request), s_invalid_request);
 }
