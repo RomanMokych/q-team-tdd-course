@@ -142,6 +142,11 @@ private:
 
 void splitStringsBySeparator(const std::string& targetString, const std::string& separator, std::vector<std::string>& components)
 {
+    if(targetString.empty())
+    {
+        return;
+    }
+
     std::regex rgx(separator);
 
     std::sregex_token_iterator iter(targetString.begin(), targetString.end(), rgx, -1);
