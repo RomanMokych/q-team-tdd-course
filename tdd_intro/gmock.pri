@@ -1,6 +1,6 @@
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../../3rd_party/gmock/release/ -lgmock
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../../3rd_party/gmock/debug/ -lgmock
-else:unix: LIBS += -L$$OUT_PWD/../../3rd_party/gmock/ -lgmock
+else:unix: LIBS += -L$$OUT_PWD/../../3rd_party/gmock/ -lgmock -pthread
 
 INCLUDEPATH += $$PWD/3rd_party/gmock/include
 INCLUDEPATH += $$PWD/3rd_party/gtest/googletest/include
