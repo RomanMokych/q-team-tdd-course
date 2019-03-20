@@ -78,6 +78,11 @@ public:
         m_ingredientsProvider.AddCoffee(gramm/2);
     }
 
+    void MakeCappuccino(int gramm)
+    {
+
+    }
+
 private:
     ISourceOfIngredients& m_ingredientsProvider;
 };
@@ -129,5 +134,5 @@ TEST(CoffeeMachine, make_big_cappuccino_test)
     EXPECT_CALL(ingredientsProvicer, AddCoffee(cup_size/3)).WillOnce(testing::Return());
     EXPECT_CALL(ingredientsProvicer, AddMilkFoam(cup_size/3)).WillOnce(testing::Return());
 
-    coffeeMachine.MakeAmericano(cup_size);
+    coffeeMachine.MakeCappuccino(cup_size);
 }
