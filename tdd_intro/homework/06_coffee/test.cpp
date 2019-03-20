@@ -71,6 +71,11 @@ public:
         m_ingredientsProvider.SetCupSize(LITTLE_SIZE);
     }
 
+    void MakeAmericano()
+    {
+
+    }
+
 private:
     ISourceOfIngredients& m_ingredientsProvider;
 };
@@ -91,4 +96,16 @@ TEST(CoffeeMachite, expected_SetCupSize_100_for_MakeLittleEmptyCup_call)
 
     EXPECT_CALL(ingrediensProvicer, SetCupSize(CoffeeMachite::LITTLE_SIZE)).WillOnce(testing::Return());
     coffeeMachine.MakeLittleEmptyCup();
+}
+
+TEST(CoffeeMachine, make_americano_test)
+{
+     //americano: water & coffee 1:2 or 1:3. Water temp 60C
+
+    MockIngredientsProvider ingrediensProvicer;
+    CoffeeMachite coffeeMachine(ingrediensProvicer);
+
+    const size_t cup_size = CoffeeMachite::LITTLE_SIZE;
+    EXPECT_CALL(ingrediensProvicer, SetCupSize(cup_size)).WillOnce(testing::Return());
+    EXPECT_CALL(ingrediensProvicer, AddWater(cup_size/2, 60)).WillOnce(testing::Return());
 }
