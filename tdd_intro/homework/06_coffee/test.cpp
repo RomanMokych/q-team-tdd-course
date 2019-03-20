@@ -158,3 +158,20 @@ TEST(CoffeeMachine, CappuccinoSmall)
 
     coffeeMachine.GetCappuccino(CoffeeCupSize::Small);
 }
+
+TEST(CoffeeMachine, CappuccinoBig)
+{
+    MockSourceOfIngredients sourceOfIngredientsMock;
+    CoffeeMachine coffeeMachine(&sourceOfIngredientsMock);
+
+    int expectedCupSize = 140;
+    EXPECT_CALL(sourceOfIngredientsMock, SetCupSize(expectedCupSize)).Times(1);
+    EXPECT_CALL(sourceOfIngredientsMock, AddWater(0, 80)).Times(1);
+    EXPECT_CALL(sourceOfIngredientsMock, AddCoffee(expectedCupSize * 1/3)).Times(1);
+    EXPECT_CALL(sourceOfIngredientsMock, AddMilk(expectedCupSize * 1/3)).Times(1);
+    EXPECT_CALL(sourceOfIngredientsMock, AddMilkFoam(expectedCupSize * 1/3)).Times(1);
+    EXPECT_CALL(sourceOfIngredientsMock, AddChocolate(_)).Times(0);
+    EXPECT_CALL(sourceOfIngredientsMock, AddCream(_)).Times(0);
+
+    coffeeMachine.GetCappuccino(CoffeeCupSize::Big);
+}
