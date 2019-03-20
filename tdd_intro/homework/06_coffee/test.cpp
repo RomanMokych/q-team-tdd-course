@@ -61,8 +61,7 @@ public:
     }
     void produceEmptyCup(CupSize size)
     {
-        int cupSize = size;
-        m_source.SetCupSize(cupSize);
+        m_source.SetCupSize(size);
     }
 private:
     ISourceOfIngredients& m_source;
