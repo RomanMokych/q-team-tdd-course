@@ -61,7 +61,10 @@ public:
     }
     void produceEmptyCup(CupSize size)
     {
-        m_source.SetCupSize(140);
+        if(size == CupSize::BIG)
+            m_source.SetCupSize(140);
+        else
+            m_source.SetCupSize(100);
     }
 private:
     ISourceOfIngredients& m_source;
