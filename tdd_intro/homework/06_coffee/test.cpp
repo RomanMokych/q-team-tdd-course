@@ -71,11 +71,11 @@ public:
         m_ingredientsProvider.SetCupSize(LITTLE_SIZE);
     }
 
-    void MakeAmericano()
+    void MakeAmericano(int gramm)
     {
-        m_ingredientsProvider.SetCupSize(LITTLE_SIZE);
-        m_ingredientsProvider.AddWater(LITTLE_SIZE/2, 60);
-        m_ingredientsProvider.AddCoffee(LITTLE_SIZE/2);
+        m_ingredientsProvider.SetCupSize(gramm);
+        m_ingredientsProvider.AddWater(gramm/2, 60);
+        m_ingredientsProvider.AddCoffee(gramm/2);
     }
 
 private:
@@ -112,5 +112,22 @@ TEST(CoffeeMachine, make_americano_test)
     EXPECT_CALL(ingredientsProvicer, AddWater(cup_size/2, 60)).WillOnce(testing::Return());
     EXPECT_CALL(ingredientsProvicer, AddCoffee(cup_size/2)).WillOnce(testing::Return());
 
-    coffeeMachine.MakeAmericano();
+    coffeeMachine.MakeAmericano(cup_size);
+}
+
+TEST(CoffeeMachine, make_big_cappuccino_test)
+{
+    //cappuccino - milk & coffee & milk foam 1:3, 1:3, 1:3. Water temp 80C
+
+    MockIngredientsProvider ingredientsProvicer;
+    CoffeeMachite coffeeMachine(ingredientsProvicer);
+
+    const size_t cup_size = CoffeeMachite::BIG_SIZE;
+    EXPECT_CALL(ingredientsProvicer, SetCupSize(cup_size)).WillOnce(testing::Return());
+    EXPECT_CALL(ingredientsProvicer, AddWater(cup_size, 80)).WillOnce(testing::Return());
+    EXPECT_CALL(ingredientsProvicer, AddMilk(cup_size/3)).WillOnce(testing::Return());
+    EXPECT_CALL(ingredientsProvicer, AddCoffee(cup_size/3)).WillOnce(testing::Return());
+    EXPECT_CALL(ingredientsProvicer, AddMilkFoam(cup_size/3)).WillOnce(testing::Return());
+
+    coffeeMachine.MakeAmericano(cup_size);
 }
