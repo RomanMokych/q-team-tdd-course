@@ -96,6 +96,11 @@ public:
         m_ingredientsProvider.AddMilkFoam(gramm/4);
     }
 
+    void MakeMarochino(int gramm)
+    {
+
+    }
+
 private:
     ISourceOfIngredients& m_ingredientsProvider;
 };
@@ -184,4 +189,22 @@ TEST(CoffeeMachine, make_big_latte_test)
     coffeeMachine.MakeLatte(cup_size);
 }
 
+
+TEST(CoffeeMachine, make_big_marochino_test)
+{
+    //marochino - chocolate & coffee & milk foam, 1:4, 1:4, 1:4 and 1:4 is empty
+
+    MockIngredientsProvider ingredientsProvicer;
+    CoffeeMachite coffeeMachine(ingredientsProvicer);
+
+    const size_t cup_size = CoffeeMachite::BIG_SIZE;
+    EXPECT_CALL(ingredientsProvicer, SetCupSize(cup_size)).WillOnce(testing::Return());
+    EXPECT_CALL(ingredientsProvicer, AddChocolate(cup_size/4)).WillOnce(testing::Return());
+    EXPECT_CALL(ingredientsProvicer, AddCoffee(cup_size/4)).WillOnce(testing::Return());
+    EXPECT_CALL(ingredientsProvicer, AddMilkFoam(cup_size/4)).WillOnce(testing::Return());
+
+    //EXPECT_CALL(ingredientsProvicer, AddWater(_, _)).Times(0);
+
+    coffeeMachine.MakeMarochino(cup_size);
+}
 
