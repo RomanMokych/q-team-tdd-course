@@ -87,6 +87,11 @@ public:
         m_ingredientsProvider.AddMilkFoam(gramm/3);
     }
 
+    void MakeLatte(int gramm)
+    {
+
+    }
+
 private:
     ISourceOfIngredients& m_ingredientsProvider;
 };
@@ -157,3 +162,22 @@ TEST(CoffeeMachine, make_little_cappuccino_test)
 
     coffeeMachine.MakeCappuccino(cup_size);
 }
+
+
+TEST(CoffeeMachine, make_little_big_test)
+{
+    //latte - milk & coffee & milk foam 1:4, 1:2, 1:4. Water temp 90C
+
+    MockIngredientsProvider ingredientsProvicer;
+    CoffeeMachite coffeeMachine(ingredientsProvicer);
+
+    const size_t cup_size = CoffeeMachite::BIG_SIZE;
+    EXPECT_CALL(ingredientsProvicer, SetCupSize(cup_size)).WillOnce(testing::Return());
+    EXPECT_CALL(ingredientsProvicer, AddWater(cup_size, 90)).WillOnce(testing::Return());
+    EXPECT_CALL(ingredientsProvicer, AddMilk(cup_size/4)).WillOnce(testing::Return());
+    EXPECT_CALL(ingredientsProvicer, AddCoffee(cup_size/2)).WillOnce(testing::Return());
+    EXPECT_CALL(ingredientsProvicer, AddMilkFoam(cup_size/4)).WillOnce(testing::Return());
+    coffeeMachine.MakeLatte(cup_size);
+}
+
+
