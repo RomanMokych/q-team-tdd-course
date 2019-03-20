@@ -59,12 +59,22 @@ public:
         m_sourceOfIngredients(sourceOfIngredients)
     {}
 
-    void getAmericano(const CoffeeCupSize cupSize)
+    void GetAmericano(const CoffeeCupSize cupSize)
     {
-        m_sourceOfIngredients->SetCupSize(100);
-        m_sourceOfIngredients->AddCoffee(100 * 1/3);
-        m_sourceOfIngredients->AddWater(100 * 2/3, 60);
+        int cupSizeGramm = GetCupSizeInGramms(cupSize);
+
+        m_sourceOfIngredients->SetCupSize(cupSizeGramm);
+        m_sourceOfIngredients->AddCoffee(cupSizeGramm * 1/3);
+        m_sourceOfIngredients->AddWater(cupSizeGramm * 2/3, 60);
     }
+
+private:
+
+    int GetCupSizeInGramms(const CoffeeCupSize cupSize)
+    {
+        return cupSize == CoffeeCupSize::Small ? 100 : 140;
+    }
+
 private:
     ISourceOfIngredients* m_sourceOfIngredients;
 };
@@ -78,6 +88,6 @@ TEST(CoffeeMachine, getSmallAmericano)
     EXPECT_CALL(sourceOfIngredientsMock, AddWater(100*2/3, 60)).WillOnce(Return());
     EXPECT_CALL(sourceOfIngredientsMock, AddCoffee(100*1/3)).WillOnce(Return());
 
-    coffeeMachine.getAmericano(CoffeeCupSize::Small);
+    coffeeMachine.GetAmericano(CoffeeCupSize::Small);
 }
 
