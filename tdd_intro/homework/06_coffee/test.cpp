@@ -79,6 +79,13 @@ private:
     ISourceOfIngredients* m_sourceOfIngredients;
 };
 
+// TESTS LIST and PLAN
+// - big/small americano
+// - add ability to set sugar
+// - add tests for methods that must not be called (on this step for americano)
+// - add test for other coffee types
+// - try to avoid code duplications
+
 TEST(CoffeeMachine, getSmallAmericano)
 {
     MockSourceOfIngredients sourceOfIngredientsMock;
@@ -87,6 +94,7 @@ TEST(CoffeeMachine, getSmallAmericano)
     EXPECT_CALL(sourceOfIngredientsMock, SetCupSize(100)).WillOnce(Return());
     EXPECT_CALL(sourceOfIngredientsMock, AddWater(100*2/3, 60)).WillOnce(Return());
     EXPECT_CALL(sourceOfIngredientsMock, AddCoffee(100*1/3)).WillOnce(Return());
+
 
     coffeeMachine.GetAmericano(CoffeeCupSize::Small);
 }
