@@ -76,6 +76,10 @@ public:
     }
     void produceCappuccino(CupSize size)
     {
+        m_source.SetCupSize(size);
+        m_source.AddMilk(size/3);
+        m_source.AddCoffee(size/3);
+        m_source.AddMilkFoam(size/3);
     }
 private:
     ISourceOfIngredients& m_source;
