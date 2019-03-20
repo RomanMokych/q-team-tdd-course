@@ -80,7 +80,11 @@ public:
 
     void MakeCappuccino(int gramm)
     {
-
+       m_ingredientsProvider.SetCupSize(gramm);
+        m_ingredientsProvider.AddWater(gramm, 80);
+        m_ingredientsProvider.AddMilk(gramm/3);
+        m_ingredientsProvider.AddCoffee(gramm/3);
+        m_ingredientsProvider.AddMilkFoam(gramm/3);
     }
 
 private:
