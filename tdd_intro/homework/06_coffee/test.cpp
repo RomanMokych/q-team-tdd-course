@@ -74,6 +74,9 @@ public:
         m_source.AddCoffee(size*2/3);
         m_source.AddWater(size/3, 60);
     }
+    void produceCappuccino(CupSize size)
+    {
+    }
 private:
     ISourceOfIngredients& m_source;
 };
@@ -142,4 +145,18 @@ TEST(CoffeeMachine, ProduceLittleAmericano)
     EXPECT_CALL(source, AddWater(cupSize/3, 60)).WillOnce(Return());
 
     machine.produceAmericano(CupSize::LITTLE);
+}
+
+TEST(CoffeeMachine, ProduceBigCappuccino)
+{
+    MockSourceOfIngredients source;
+    CoffeeMachine machine(source);
+
+    int cupSize = 140;
+    EXPECT_CALL(source, SetCupSize(cupSize)).WillOnce(Return());
+    EXPECT_CALL(source, AddMilk(cupSize/3)).WillOnce(Return());
+    EXPECT_CALL(source, AddCoffee(cupSize/3)).WillOnce(Return());
+    EXPECT_CALL(source, AddMilkFoam(cupSize/3)).WillOnce(Return());
+
+    machine.produceCappuccino(CupSize::BIG);
 }
