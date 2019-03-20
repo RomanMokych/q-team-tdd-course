@@ -123,9 +123,10 @@ TEST(CoffeeMachine, ProduceBigAmericano)
     MockSourceOfIngredients source;
     CoffeeMachine machine(source);
 
-    EXPECT_CALL(source, SetCupSize(140)).WillOnce(Return());
-    EXPECT_CALL(source, AddCoffee(140*2/3)).WillOnce(Return());
-    EXPECT_CALL(source, AddWater(140/3, 60)).WillOnce(Return());
+    int cupSize = 140;
+    EXPECT_CALL(source, SetCupSize(cupSize)).WillOnce(Return());
+    EXPECT_CALL(source, AddCoffee(cupSize*2/3)).WillOnce(Return());
+    EXPECT_CALL(source, AddWater(cupSize/3, 60)).WillOnce(Return());
 
     machine.produceAmericano(CupSize::BIG);
 }
