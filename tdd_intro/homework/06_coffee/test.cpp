@@ -140,3 +140,20 @@ TEST(CoffeeMachine, make_big_cappuccino_test)
 
     coffeeMachine.MakeCappuccino(cup_size);
 }
+
+TEST(CoffeeMachine, make_little_cappuccino_test)
+{
+    //cappuccino - milk & coffee & milk foam 1:3, 1:3, 1:3. Water temp 80C
+
+    MockIngredientsProvider ingredientsProvicer;
+    CoffeeMachite coffeeMachine(ingredientsProvicer);
+
+    const size_t cup_size = CoffeeMachite::LITTLE_SIZE;
+    EXPECT_CALL(ingredientsProvicer, SetCupSize(cup_size)).WillOnce(testing::Return());
+    EXPECT_CALL(ingredientsProvicer, AddWater(cup_size, 80)).WillOnce(testing::Return());
+    EXPECT_CALL(ingredientsProvicer, AddMilk(cup_size/3)).WillOnce(testing::Return());
+    EXPECT_CALL(ingredientsProvicer, AddCoffee(cup_size/3)).WillOnce(testing::Return());
+    EXPECT_CALL(ingredientsProvicer, AddMilkFoam(cup_size/3)).WillOnce(testing::Return());
+
+    coffeeMachine.MakeCappuccino(cup_size);
+}
