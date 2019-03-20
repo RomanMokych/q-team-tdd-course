@@ -47,8 +47,8 @@ public:
 };
 
 enum CupSize{
-    BIG,
-    LITTLE
+    BIG = 140,
+    LITTLE = 100
 };
 
 class CoffeeMachine
@@ -61,16 +61,7 @@ public:
     }
     void produceEmptyCup(CupSize size)
     {
-        int cupSize;
-        switch(size)
-        {
-        case CupSize::BIG:
-            cupSize = 140;
-            break;
-        case CupSize::LITTLE:
-            cupSize = 100;
-            break;
-        }
+        int cupSize = size;
         m_source.SetCupSize(cupSize);
     }
 private:
