@@ -99,6 +99,11 @@ public:
         m_sourceOfIngredients->AddMilkFoam(cupSizeGramm * 1/4);
     }
 
+    void GetMarochino(const CoffeeCupSize cupSize)
+    {
+
+    }
+
 private:
 
     int GetCupSizeInGramms(const CoffeeCupSize cupSize)
@@ -219,4 +224,21 @@ TEST(CoffeeMachine, LatteBig)
     EXPECT_CALL(sourceOfIngredientsMock, AddCream(_)).Times(0);
 
     coffeeMachine.GetLatte(CoffeeCupSize::Big);
+}
+
+TEST(CoffeeMachine, MarochinoSmall)
+{
+    MockSourceOfIngredients sourceOfIngredientsMock;
+    CoffeeMachine coffeeMachine(&sourceOfIngredientsMock);
+
+    int expectedCupSize = 100;
+    EXPECT_CALL(sourceOfIngredientsMock, SetCupSize(expectedCupSize)).Times(1);
+    EXPECT_CALL(sourceOfIngredientsMock, AddWater(_, _)).Times(0);
+    EXPECT_CALL(sourceOfIngredientsMock, AddCoffee(expectedCupSize * 1/4)).Times(1);
+    EXPECT_CALL(sourceOfIngredientsMock, AddMilk(_)).Times(0);
+    EXPECT_CALL(sourceOfIngredientsMock, AddMilkFoam(expectedCupSize * 1/4)).Times(1);
+    EXPECT_CALL(sourceOfIngredientsMock, AddChocolate(expectedCupSize * 1/4)).Times(1);
+    EXPECT_CALL(sourceOfIngredientsMock, AddCream(_)).Times(0);
+
+    coffeeMachine.GetMarochino(CoffeeCupSize::Small);
 }
