@@ -47,20 +47,27 @@ public:
 class CoffeeMachite
 {
 public:
-    CoffeeMachite(ISourceOfIngredients& ingrediensProvider):
-        m_ingrediensProvider(ingrediensProvider)
+    enum CUP_SIZE
+    {
+        LITTLE_SIZE = 100,
+        BIG_SIZE = 140,
+    };
+
+public:
+    CoffeeMachite(ISourceOfIngredients& ingredientsProvider):
+        m_ingredientsProvider(ingredientsProvider)
     {
 
     }
 
 public:
-    void MakeBigEmptyCup(uint32_t size)
+    void MakeBigEmptyCup()
     {
-        m_ingrediensProvider.SetCupSize(140);
+        m_ingredientsProvider.SetCupSize(BIG_SIZE);
     }
 
 private:
-    ISourceOfIngredients& m_ingrediensProvider;
+    ISourceOfIngredients& m_ingredientsProvider;
 };
 
 TEST(CoffeeMachite, expected_SetCupSize_140_for_MakeBigEmptyCup_call)
@@ -68,7 +75,7 @@ TEST(CoffeeMachite, expected_SetCupSize_140_for_MakeBigEmptyCup_call)
     MockIngredientsProvider ingrediensProvicer;
     CoffeeMachite coffeeMachine(ingrediensProvicer);
 
-    EXPECT_CALL(ingrediensProvicer, SetCupSize(140)).WillOnce(testing::Return());
-    coffeeMachine.MakeBigEmptyCup(140);
+    EXPECT_CALL(ingrediensProvicer, SetCupSize(CoffeeMachite::BIG_SIZE)).WillOnce(testing::Return());
+    coffeeMachine.MakeBigEmptyCup();
 
 }
