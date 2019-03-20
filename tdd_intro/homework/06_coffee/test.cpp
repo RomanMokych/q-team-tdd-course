@@ -66,6 +66,11 @@ public:
         m_ingredientsProvider.SetCupSize(BIG_SIZE);
     }
 
+    void MakeLittleEmptyCup()
+    {
+        m_ingredientsProvider.SetCupSize(BIG_SIZE);
+    }
+
 private:
     ISourceOfIngredients& m_ingredientsProvider;
 };
@@ -77,5 +82,13 @@ TEST(CoffeeMachite, expected_SetCupSize_140_for_MakeBigEmptyCup_call)
 
     EXPECT_CALL(ingrediensProvicer, SetCupSize(CoffeeMachite::BIG_SIZE)).WillOnce(testing::Return());
     coffeeMachine.MakeBigEmptyCup();
+}
 
+TEST(CoffeeMachite, expected_SetCupSize_100_for_MakeLittleEmptyCup_call)
+{
+    MockIngredientsProvider ingrediensProvicer;
+    CoffeeMachite coffeeMachine(ingrediensProvicer);
+
+    EXPECT_CALL(ingrediensProvicer, SetCupSize(CoffeeMachite::LITTLE_SIZE)).WillOnce(testing::Return());
+    coffeeMachine.MakeLittleEmptyCup();
 }
