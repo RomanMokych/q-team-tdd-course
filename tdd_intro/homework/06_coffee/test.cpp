@@ -48,8 +48,8 @@ public:
 
 enum class CoffeeCupSize
 {
-    Small = 100,
-    Big = 140
+    Small,
+    Big
 };
 
 class CoffeeMachine
@@ -61,7 +61,9 @@ public:
 
     void getAmericano(const CoffeeCupSize cupSize)
     {
-
+        m_sourceOfIngredients->SetCupSize(100);
+        m_sourceOfIngredients->AddCoffee(100 * 1/3);
+        m_sourceOfIngredients->AddWater(100 * 2/3, 60);
     }
 private:
     ISourceOfIngredients* m_sourceOfIngredients;
