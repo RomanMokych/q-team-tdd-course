@@ -199,3 +199,17 @@ TEST(CoffeeMachine, ProduceBigLatte)
 
     machine.produceLatte(CupSize::BIG);
 }
+
+TEST(CoffeeMachine, ProduceLittleLatte)
+{
+    MockSourceOfIngredients source;
+    CoffeeMachine machine(source);
+
+    int cupSize = 100;
+    EXPECT_CALL(source, SetCupSize(cupSize)).WillOnce(Return());
+    EXPECT_CALL(source, AddMilk(cupSize/4)).WillOnce(Return());
+    EXPECT_CALL(source, AddCoffee(cupSize/2)).WillOnce(Return());
+    EXPECT_CALL(source, AddMilkFoam(cupSize/4)).WillOnce(Return());
+
+    machine.produceLatte(CupSize::LITTLE);
+}
