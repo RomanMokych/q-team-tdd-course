@@ -17,6 +17,8 @@ Implement worked coffee machine using ISourceOfIngredients to controll the proce
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
+using namespace testing;
+
 class ISourceOfIngredients
 {
 public:
@@ -70,6 +72,6 @@ TEST(CoffeeMachine, ProduceBigEmptyCup)
     MockSourceOfIngredients source;
     CoffeeMachine machine(source);
 
-    EXPECT_CALL(source, SetCupSize(140)).WillOnce(testing::Return());
+    EXPECT_CALL(source, SetCupSize(140)).WillOnce(Return());
     machine.produceEmptyCup(CupSize::BIG);
 }
