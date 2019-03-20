@@ -65,6 +65,8 @@ public:
     }
     void produceCoffee(CupSize size)
     {
+        m_source.SetCupSize(size);
+        m_source.AddCoffee(size);
     }
 private:
     ISourceOfIngredients& m_source;
