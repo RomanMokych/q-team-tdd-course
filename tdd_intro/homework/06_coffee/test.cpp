@@ -94,7 +94,10 @@ TEST(CoffeeMachine, getSmallAmericano)
     EXPECT_CALL(sourceOfIngredientsMock, SetCupSize(100)).WillOnce(Return());
     EXPECT_CALL(sourceOfIngredientsMock, AddWater(100*2/3, 60)).WillOnce(Return());
     EXPECT_CALL(sourceOfIngredientsMock, AddCoffee(100*1/3)).WillOnce(Return());
-
+    EXPECT_CALL(sourceOfIngredientsMock, AddMilk(_)).Times(0);
+    EXPECT_CALL(sourceOfIngredientsMock, AddMilkFoam(_)).Times(0);
+    EXPECT_CALL(sourceOfIngredientsMock, AddChocolate(_)).Times(0);
+    EXPECT_CALL(sourceOfIngredientsMock, AddCream(_)).Times(0);
 
     coffeeMachine.GetAmericano(CoffeeCupSize::Small);
 }
