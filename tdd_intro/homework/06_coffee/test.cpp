@@ -81,21 +81,21 @@ private:
     ISourceOfIngredients& m_ingredientsProvider;
 };
 
-TEST(CoffeeMachite, expected_SetCupSize_140_for_MakeBigEmptyCup_call)
+TEST(CoffeeMachine, expected_SetCupSize_140_for_MakeBigEmptyCup_call)
 {
-    MockIngredientsProvider ingrediensProvicer;
-    CoffeeMachite coffeeMachine(ingrediensProvicer);
+    MockIngredientsProvider ingredientsProvicer;
+    CoffeeMachite coffeeMachine(ingredientsProvicer);
 
-    EXPECT_CALL(ingrediensProvicer, SetCupSize(CoffeeMachite::BIG_SIZE)).WillOnce(testing::Return());
+    EXPECT_CALL(ingredientsProvicer, SetCupSize(CoffeeMachite::BIG_SIZE)).WillOnce(testing::Return());
     coffeeMachine.MakeBigEmptyCup();
 }
 
-TEST(CoffeeMachite, expected_SetCupSize_100_for_MakeLittleEmptyCup_call)
+TEST(CoffeeMachine, expected_SetCupSize_100_for_MakeLittleEmptyCup_call)
 {
-    MockIngredientsProvider ingrediensProvicer;
-    CoffeeMachite coffeeMachine(ingrediensProvicer);
+    MockIngredientsProvider ingredientsProvicer;
+    CoffeeMachite coffeeMachine(ingredientsProvicer);
 
-    EXPECT_CALL(ingrediensProvicer, SetCupSize(CoffeeMachite::LITTLE_SIZE)).WillOnce(testing::Return());
+    EXPECT_CALL(ingredientsProvicer, SetCupSize(CoffeeMachite::LITTLE_SIZE)).WillOnce(testing::Return());
     coffeeMachine.MakeLittleEmptyCup();
 }
 
@@ -103,12 +103,12 @@ TEST(CoffeeMachine, make_americano_test)
 {
      //americano: water & coffee 1:2 or 1:3. Water temp 60C
 
-    MockIngredientsProvider ingrediensProvicer;
-    CoffeeMachite coffeeMachine(ingrediensProvicer);
+    MockIngredientsProvider ingredientsProvicer;
+    CoffeeMachite coffeeMachine(ingredientsProvicer);
 
     const size_t cup_size = CoffeeMachite::LITTLE_SIZE;
-    EXPECT_CALL(ingrediensProvicer, SetCupSize(cup_size)).WillOnce(testing::Return());
-    EXPECT_CALL(ingrediensProvicer, AddWater(cup_size/2, 60)).WillOnce(testing::Return());
+    EXPECT_CALL(ingredientsProvicer, SetCupSize(cup_size)).WillOnce(testing::Return());
+    EXPECT_CALL(ingredientsProvicer, AddWater(cup_size/2, 60)).WillOnce(testing::Return());
 
     coffeeMachine.MakeAmericano();
 }
