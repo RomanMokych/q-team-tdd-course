@@ -75,6 +75,7 @@ public:
     {
         m_ingredientsProvider.SetCupSize(LITTLE_SIZE);
         m_ingredientsProvider.AddWater(LITTLE_SIZE/2, 60);
+        m_ingredientsProvider.AddCoffee(LITTLE_SIZE/2);
     }
 
 private:
