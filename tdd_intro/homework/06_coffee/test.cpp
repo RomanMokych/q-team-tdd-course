@@ -30,3 +30,42 @@ public:
     virtual void AddChocolate(int gram) = 0;
     virtual void AddCream(int gram) = 0;
 };
+
+class MockIngredientsProvider : public ISourceOfIngredients
+{
+public:
+    MOCK_METHOD1(SetCupSize, void(int));
+    MOCK_METHOD2(AddWater, void(int, int));
+    MOCK_METHOD1(AddSugar, void(int));
+    MOCK_METHOD1(AddCoffee, void(int));
+    MOCK_METHOD1(AddMilk, void(int));
+    MOCK_METHOD1(AddMilkFoam, void(int));
+    MOCK_METHOD1(AddChocolate, void(int));
+    MOCK_METHOD1(AddCream, void(int));
+};
+
+class CoffeeMachite
+{
+public:
+    CoffeeMachite(ISourceOfIngredients&)
+    {
+
+    }
+
+public:
+    void MakeBigEmptyCup(uint32_t size)
+    {
+
+    }
+
+};
+
+TEST(CoffeeMachite, expected_SetCupSize_140_for_MakeBigEmptyCup_call)
+{
+    MockIngredientsProvider ingrediensProvicer;
+    CoffeeMachite coffeeMachine(ingrediensProvicer);
+
+    EXPECT_CALL(ingrediensProvicer, SetCupSize(140)).WillOnce(testing::Return());
+    coffeeMachine.MakeBigEmptyCup(140);
+
+}
