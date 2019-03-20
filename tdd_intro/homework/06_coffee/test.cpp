@@ -89,7 +89,11 @@ public:
 
     void MakeLatte(int gramm)
     {
-
+        m_ingredientsProvider.SetCupSize(gramm);
+        m_ingredientsProvider.AddWater(gramm, 90);
+        m_ingredientsProvider.AddMilk(gramm/4);
+        m_ingredientsProvider.AddCoffee(gramm/2);
+        m_ingredientsProvider.AddMilkFoam(gramm/4);
     }
 
 private:
