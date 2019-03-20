@@ -109,6 +109,7 @@ TEST(CoffeeMachine, make_americano_test)
     const size_t cup_size = CoffeeMachite::LITTLE_SIZE;
     EXPECT_CALL(ingredientsProvicer, SetCupSize(cup_size)).WillOnce(testing::Return());
     EXPECT_CALL(ingredientsProvicer, AddWater(cup_size/2, 60)).WillOnce(testing::Return());
+    EXPECT_CALL(ingredientsProvicer, AddCoffee(cup_size/2)).WillOnce(testing::Return());
 
     coffeeMachine.MakeAmericano();
 }
