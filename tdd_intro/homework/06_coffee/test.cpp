@@ -17,6 +17,8 @@ Implement worked coffee machine using ISourceOfIngredients to controll the proce
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 
+using namespace testing;
+
 class ISourceOfIngredients
 {
 public:
@@ -35,7 +37,7 @@ class MockSourceOfIngredients : public ISourceOfIngredients
 {
 public:
     MOCK_METHOD1(SetCupSize, void(int));
-    MOCK_METHOD1(AddWater, void(int));
+    MOCK_METHOD2(AddWater, void(int, int));
     MOCK_METHOD1(AddSugar, void(int));
     MOCK_METHOD1(AddCoffee, void(int));
     MOCK_METHOD1(AddMilk, void(int));
@@ -44,16 +46,36 @@ public:
     MOCK_METHOD1(AddCream, void(int));
 };
 
-class CoffeMachine
+enum class CoffeeCupSize
+{
+    Small = 100,
+    Big = 140
+};
+
+class CoffeeMachine
 {
 public:
-    CoffeMachine(ISourceOfIngredients* sourceOfIngredients):
+    CoffeeMachine(ISourceOfIngredients* sourceOfIngredients):
         m_sourceOfIngredients(sourceOfIngredients)
     {}
 
+    void getAmericano(const CoffeeCupSize cupSize)
+    {
+
+    }
 private:
     ISourceOfIngredients* m_sourceOfIngredients;
 };
 
+TEST(CoffeeMachine, getSmallAmericano)
+{
+    MockSourceOfIngredients sourceOfIngredientsMock;
+    CoffeeMachine coffeeMachine(&sourceOfIngredientsMock);
 
+    EXPECT_CALL(sourceOfIngredientsMock, SetCupSize(100)).WillOnce(Return());
+    EXPECT_CALL(sourceOfIngredientsMock, AddWater(100*2/3, 60)).WillOnce(Return());
+    EXPECT_CALL(sourceOfIngredientsMock, AddCoffee(100*1/3)).WillOnce(Return());
+
+    coffeeMachine.getAmericano(CoffeeCupSize::Small);
+}
 
