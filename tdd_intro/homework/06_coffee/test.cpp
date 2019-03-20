@@ -113,9 +113,10 @@ TEST(CoffeeMachine, getSmallAmericano)
     MockSourceOfIngredients sourceOfIngredientsMock;
     CoffeeMachine coffeeMachine(&sourceOfIngredientsMock);
 
-    EXPECT_CALL(sourceOfIngredientsMock, SetCupSize(100)).WillOnce(Return());
-    EXPECT_CALL(sourceOfIngredientsMock, AddWater(100*2/3, 60)).WillOnce(Return());
-    EXPECT_CALL(sourceOfIngredientsMock, AddCoffee(100*1/3)).WillOnce(Return());
+    int expectedCupSize = 100;
+    EXPECT_CALL(sourceOfIngredientsMock, SetCupSize(expectedCupSize)).Times(1);
+    EXPECT_CALL(sourceOfIngredientsMock, AddWater(expectedCupSize * 2/3, 60)).Times(1);
+    EXPECT_CALL(sourceOfIngredientsMock, AddCoffee(expectedCupSize * 1/3)).Times(1);
     EXPECT_CALL(sourceOfIngredientsMock, AddMilk(_)).Times(0);
     EXPECT_CALL(sourceOfIngredientsMock, AddMilkFoam(_)).Times(0);
     EXPECT_CALL(sourceOfIngredientsMock, AddChocolate(_)).Times(0);
@@ -129,9 +130,10 @@ TEST(CoffeeMachine, getBigAmericano)
     MockSourceOfIngredients sourceOfIngredientsMock;
     CoffeeMachine coffeeMachine(&sourceOfIngredientsMock);
 
-    EXPECT_CALL(sourceOfIngredientsMock, SetCupSize(140)).WillOnce(Return());
-    EXPECT_CALL(sourceOfIngredientsMock, AddWater(140*3/4, 60)).WillOnce(Return());
-    EXPECT_CALL(sourceOfIngredientsMock, AddCoffee(140*1/4)).WillOnce(Return());
+    int expectedCupSize = 140;
+    EXPECT_CALL(sourceOfIngredientsMock, SetCupSize(expectedCupSize)).Times(1);
+    EXPECT_CALL(sourceOfIngredientsMock, AddWater(expectedCupSize * 3/4, 60)).Times(1);
+    EXPECT_CALL(sourceOfIngredientsMock, AddCoffee(expectedCupSize * 1/4)).Times(1);
     EXPECT_CALL(sourceOfIngredientsMock, AddMilk(_)).Times(0);
     EXPECT_CALL(sourceOfIngredientsMock, AddMilkFoam(_)).Times(0);
     EXPECT_CALL(sourceOfIngredientsMock, AddChocolate(_)).Times(0);
@@ -145,11 +147,12 @@ TEST(CoffeeMachine, CappuccinoSmall)
     MockSourceOfIngredients sourceOfIngredientsMock;
     CoffeeMachine coffeeMachine(&sourceOfIngredientsMock);
 
-    EXPECT_CALL(sourceOfIngredientsMock, SetCupSize(100)).Times(1);
+    int expectedCupSize = 100;
+    EXPECT_CALL(sourceOfIngredientsMock, SetCupSize(expectedCupSize)).Times(1);
     EXPECT_CALL(sourceOfIngredientsMock, AddWater(0, 80)).Times(1);
-    EXPECT_CALL(sourceOfIngredientsMock, AddCoffee(100 * 1/3)).Times(1);
-    EXPECT_CALL(sourceOfIngredientsMock, AddMilk(100 * 1/3)).Times(1);
-    EXPECT_CALL(sourceOfIngredientsMock, AddMilkFoam(100 * 1/3)).Times(1);
+    EXPECT_CALL(sourceOfIngredientsMock, AddCoffee(expectedCupSize * 1/3)).Times(1);
+    EXPECT_CALL(sourceOfIngredientsMock, AddMilk(expectedCupSize * 1/3)).Times(1);
+    EXPECT_CALL(sourceOfIngredientsMock, AddMilkFoam(expectedCupSize * 1/3)).Times(1);
     EXPECT_CALL(sourceOfIngredientsMock, AddChocolate(_)).Times(0);
     EXPECT_CALL(sourceOfIngredientsMock, AddCream(_)).Times(0);
 
