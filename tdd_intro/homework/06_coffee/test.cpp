@@ -64,8 +64,17 @@ public:
         int cupSizeGramm = GetCupSizeInGramms(cupSize);
 
         m_sourceOfIngredients->SetCupSize(cupSizeGramm);
-        m_sourceOfIngredients->AddCoffee(cupSizeGramm * 1/3);
-        m_sourceOfIngredients->AddWater(cupSizeGramm * 2/3, 60);
+
+        if(cupSize == CoffeeCupSize::Small)
+        {
+            m_sourceOfIngredients->AddCoffee(cupSizeGramm * 1/3);
+            m_sourceOfIngredients->AddWater(cupSizeGramm * 2/3, 60);
+        }
+        else if(cupSize == CoffeeCupSize::Big)
+        {
+            m_sourceOfIngredients->AddCoffee(cupSizeGramm * 1/4);
+            m_sourceOfIngredients->AddWater(cupSizeGramm * 3/4, 60);
+        }
     }
 
 private:
@@ -81,10 +90,12 @@ private:
 
 // TESTS LIST and PLAN
 // - big/small americano
-// - add ability to set sugar
 // - add tests for methods that must not be called (on this step for americano)
 // - add test for other coffee types
+// - add ability to set sugar
 // - try to avoid code duplications
+// - create some kind of "coffee" obeject
+
 
 TEST(CoffeeMachine, getSmallAmericano)
 {
@@ -100,5 +111,21 @@ TEST(CoffeeMachine, getSmallAmericano)
     EXPECT_CALL(sourceOfIngredientsMock, AddCream(_)).Times(0);
 
     coffeeMachine.GetAmericano(CoffeeCupSize::Small);
+}
+
+TEST(CoffeeMachine, getBigAmericano)
+{
+    MockSourceOfIngredients sourceOfIngredientsMock;
+    CoffeeMachine coffeeMachine(&sourceOfIngredientsMock);
+
+    EXPECT_CALL(sourceOfIngredientsMock, SetCupSize(140)).WillOnce(Return());
+    EXPECT_CALL(sourceOfIngredientsMock, AddWater(140*3/4, 60)).WillOnce(Return());
+    EXPECT_CALL(sourceOfIngredientsMock, AddCoffee(140*1/4)).WillOnce(Return());
+    EXPECT_CALL(sourceOfIngredientsMock, AddMilk(_)).Times(0);
+    EXPECT_CALL(sourceOfIngredientsMock, AddMilkFoam(_)).Times(0);
+    EXPECT_CALL(sourceOfIngredientsMock, AddChocolate(_)).Times(0);
+    EXPECT_CALL(sourceOfIngredientsMock, AddCream(_)).Times(0);
+
+    coffeeMachine.GetAmericano(CoffeeCupSize::Big);
 }
 
