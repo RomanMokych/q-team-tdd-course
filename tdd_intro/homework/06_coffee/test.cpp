@@ -90,7 +90,13 @@ public:
 
     void GetLatte(const CoffeeCupSize cupSize)
     {
+        int cupSizeGramm = GetCupSizeInGramms(cupSize);
 
+        m_sourceOfIngredients->SetCupSize(cupSizeGramm);
+        m_sourceOfIngredients->AddWater(0, 90);
+        m_sourceOfIngredients->AddMilk(cupSizeGramm * 1/4);
+        m_sourceOfIngredients->AddCoffee(cupSizeGramm * 1/2);
+        m_sourceOfIngredients->AddMilkFoam(cupSizeGramm * 1/4);
     }
 
 private:
