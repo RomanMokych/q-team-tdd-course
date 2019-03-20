@@ -168,7 +168,7 @@ TEST(CoffeeMachine, make_little_cappuccino_test)
 }
 
 
-TEST(CoffeeMachine, make_little_big_test)
+TEST(CoffeeMachine, make_big_latte_test)
 {
     //latte - milk & coffee & milk foam 1:4, 1:2, 1:4. Water temp 90C
 
