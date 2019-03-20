@@ -30,3 +30,43 @@ public:
     virtual void AddChocolate(int gram) = 0;
     virtual void AddCream(int gram) = 0;
 };
+
+class MockSourceOfIngredients : public ISourceOfIngredients
+{
+public:
+    MOCK_METHOD1(SetCupSize, void(int));
+    MOCK_METHOD2(AddWater, void(int, int));
+    MOCK_METHOD1(AddSugar, void(int));
+    MOCK_METHOD1(AddCoffee, void(int));
+    MOCK_METHOD1(AddMilk, void(int));
+    MOCK_METHOD1(AddMilkFoam, void(int));
+    MOCK_METHOD1(AddChocolate, void(int));
+    MOCK_METHOD1(AddCream, void(int));
+};
+
+enum CupSize{
+    BIG,
+    LITTLE
+};
+
+class CoffeeMachine
+{
+public:
+    CoffeeMachine(ISourceOfIngredients& source)
+    {
+
+    }
+    void produceEmptyCup(CupSize size)
+    {
+
+    }
+};
+
+TEST(CoffeeMachine, ProduceBigEmptyCup)
+{
+    MockSourceOfIngredients source;
+    CoffeeMachine machine(source);
+
+    EXPECT_CALL(source, SetCupSize(140)).WillOnce(testing::Return());
+    machine.produceEmptyCup(CupSize::BIG);
+}
