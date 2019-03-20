@@ -98,7 +98,10 @@ public:
 
     void MakeMarochino(int gramm)
     {
-
+        m_ingredientsProvider.SetCupSize(gramm);
+        m_ingredientsProvider.AddChocolate(gramm/4);
+        m_ingredientsProvider.AddCoffee(gramm/4);
+        m_ingredientsProvider.AddMilk(gramm/4);
     }
 
 private:
@@ -201,7 +204,7 @@ TEST(CoffeeMachine, make_big_marochino_test)
     EXPECT_CALL(ingredientsProvicer, SetCupSize(cup_size)).WillOnce(testing::Return());
     EXPECT_CALL(ingredientsProvicer, AddChocolate(cup_size/4)).WillOnce(testing::Return());
     EXPECT_CALL(ingredientsProvicer, AddCoffee(cup_size/4)).WillOnce(testing::Return());
-    EXPECT_CALL(ingredientsProvicer, AddMilkFoam(cup_size/4)).WillOnce(testing::Return());
+    EXPECT_CALL(ingredientsProvicer, AddMilk(cup_size/4)).WillOnce(testing::Return());
 
     //EXPECT_CALL(ingredientsProvicer, AddWater(_, _)).Times(0);
 
