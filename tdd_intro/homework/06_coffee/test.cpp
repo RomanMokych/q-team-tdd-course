@@ -30,3 +30,30 @@ public:
     virtual void AddChocolate(int gram) = 0;
     virtual void AddCream(int gram) = 0;
 };
+
+class MockSourceOfIngredients : public ISourceOfIngredients
+{
+public:
+    MOCK_METHOD1(SetCupSize, void(int));
+    MOCK_METHOD1(AddWater, void(int));
+    MOCK_METHOD1(AddSugar, void(int));
+    MOCK_METHOD1(AddCoffee, void(int));
+    MOCK_METHOD1(AddMilk, void(int));
+    MOCK_METHOD1(AddMilkFoam, void(int));
+    MOCK_METHOD1(AddChocolate, void(int));
+    MOCK_METHOD1(AddCream, void(int));
+};
+
+class CoffeMachine
+{
+public:
+    CoffeMachine(ISourceOfIngredients* sourceOfIngredients):
+        m_sourceOfIngredients(sourceOfIngredients)
+    {}
+
+private:
+    ISourceOfIngredients* m_sourceOfIngredients;
+};
+
+
+
