@@ -53,13 +53,16 @@ class CoffeeMachine
 {
 public:
     CoffeeMachine(ISourceOfIngredients& source)
+        : m_source(source)
     {
 
     }
     void produceEmptyCup(CupSize size)
     {
-
+        m_source.SetCupSize(140);
     }
+private:
+    ISourceOfIngredients& m_source;
 };
 
 TEST(CoffeeMachine, ProduceBigEmptyCup)
