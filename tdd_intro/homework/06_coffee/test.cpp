@@ -47,7 +47,8 @@ public:
 class CoffeeMachite
 {
 public:
-    CoffeeMachite(ISourceOfIngredients&)
+    CoffeeMachite(ISourceOfIngredients& ingrediensProvider):
+        m_ingrediensProvider(ingrediensProvider)
     {
 
     }
@@ -55,9 +56,11 @@ public:
 public:
     void MakeBigEmptyCup(uint32_t size)
     {
-
+        m_ingrediensProvider.SetCupSize(140);
     }
 
+private:
+    ISourceOfIngredients& m_ingrediensProvider;
 };
 
 TEST(CoffeeMachite, expected_SetCupSize_140_for_MakeBigEmptyCup_call)
