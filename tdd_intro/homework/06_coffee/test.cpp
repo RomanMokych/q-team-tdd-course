@@ -68,7 +68,7 @@ public:
 
     void MakeLittleEmptyCup()
     {
-        m_ingredientsProvider.SetCupSize(BIG_SIZE);
+        m_ingredientsProvider.SetCupSize(LITTLE_SIZE);
     }
 
 private:
