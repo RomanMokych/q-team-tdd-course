@@ -73,7 +73,8 @@ public:
 
     void MakeAmericano()
     {
-
+        m_ingredientsProvider.SetCupSize(LITTLE_SIZE);
+        m_ingredientsProvider.AddWater(LITTLE_SIZE/2, 60);
     }
 
 private:
@@ -108,4 +109,6 @@ TEST(CoffeeMachine, make_americano_test)
     const size_t cup_size = CoffeeMachite::LITTLE_SIZE;
     EXPECT_CALL(ingrediensProvicer, SetCupSize(cup_size)).WillOnce(testing::Return());
     EXPECT_CALL(ingrediensProvicer, AddWater(cup_size/2, 60)).WillOnce(testing::Return());
+
+    coffeeMachine.MakeAmericano();
 }
