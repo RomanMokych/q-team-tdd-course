@@ -70,6 +70,9 @@ public:
     }
     void produceAmericano(CupSize size)
     {
+        m_source.SetCupSize(size);
+        m_source.AddCoffee(size*2/3);
+        m_source.AddWater(size/3, 60);
     }
 private:
     ISourceOfIngredients& m_source;
