@@ -90,6 +90,10 @@ public:
     }
     void produceMarochino(CupSize size)
     {
+        m_source.SetCupSize(size);
+        m_source.AddChocolate(size/4);
+        m_source.AddCoffee(size/4);
+        m_source.AddMilkFoam(size/4);
     }
 private:
     ISourceOfIngredients& m_source;
