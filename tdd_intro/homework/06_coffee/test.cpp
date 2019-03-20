@@ -79,7 +79,13 @@ public:
 
     void GetCappuccino(const CoffeeCupSize cupSize)
     {
+        int cupSizeGramm = GetCupSizeInGramms(cupSize);
 
+        m_sourceOfIngredients->SetCupSize(cupSizeGramm);
+        m_sourceOfIngredients->AddWater(0, 80);
+        m_sourceOfIngredients->AddMilk(cupSizeGramm * 1/3);
+        m_sourceOfIngredients->AddCoffee(cupSizeGramm * 1/3);
+        m_sourceOfIngredients->AddMilkFoam(cupSizeGramm * 1/3);
     }
 
 private:
@@ -142,8 +148,8 @@ TEST(CoffeeMachine, CappuccinoSmall)
     EXPECT_CALL(sourceOfIngredientsMock, SetCupSize(100)).Times(1);
     EXPECT_CALL(sourceOfIngredientsMock, AddWater(0, 80)).Times(1);
     EXPECT_CALL(sourceOfIngredientsMock, AddCoffee(100 * 1/3)).Times(1);
-    EXPECT_CALL(sourceOfIngredientsMock, AddMilk(100 * 1/3)).Times(0);
-    EXPECT_CALL(sourceOfIngredientsMock, AddMilkFoam(100 * 1/3)).Times(0);
+    EXPECT_CALL(sourceOfIngredientsMock, AddMilk(100 * 1/3)).Times(1);
+    EXPECT_CALL(sourceOfIngredientsMock, AddMilkFoam(100 * 1/3)).Times(1);
     EXPECT_CALL(sourceOfIngredientsMock, AddChocolate(_)).Times(0);
     EXPECT_CALL(sourceOfIngredientsMock, AddCream(_)).Times(0);
 
